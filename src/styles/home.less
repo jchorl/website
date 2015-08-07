@@ -1,3 +1,5 @@
+@import "main.less";
+
 #hero {
   background-image: url("/hero.jpg");
   height: 100vh;
@@ -7,5 +9,43 @@
   .shade {
     background-color: rgba(0,0,0,0.25);
     height: 100vh;
+
+    .home-content {
+      padding-top: @nav-height;
+      height: ~"calc(100% - @{nav-height})";
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      #game {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0,0,0,0.4);
+
+        #game-button {
+          border-radius: .55em;
+          width: 200px;
+          height: 35px;
+          transition-duration: .4s;
+          background-color: transparent;
+          border: 1px solid white;
+          color: white;
+          margin: 10px;
+          font-size: 14px;
+
+          &:focus {
+            outline: 0;
+          }
+
+          &:hover {
+            color: #4a4a4a;
+            background: white;
+          }
+        }
+      }
+    }
   }
 }
