@@ -33,6 +33,7 @@ $(function() {
 		$("#nav").css("background-color", "rgba(0, 0, 0, 255)");
 	}
 
+	// fade nav bar
 	var fadeDist = $("#hero").height();
 	$(document).scroll(function() {
 		var scrolledDist = $(document).scrollTop();
