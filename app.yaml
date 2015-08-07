@@ -1,0 +1,64 @@
+application: website
+version: 1
+runtime: go
+api_version: go1
+
+handlers:
+- url: /
+  static_files: dest/index.html
+  upload: dest/index.html
+
+- url: /(style.css|script.js)
+  static_files: dest/\1
+  upload: dest/(style.css|script.js)
+
+skip_files:
+- ^(.*/)?\.DS_Store$
+- ^node_modules/(.*)
+- ^gulpfile\.js$
+- ^package\.json$
+- ^src/(.*)
+#
+#handlers:
+#- url: /api/logs
+#  script: server.handlers.log_handler.app
+#  login: admin
+#
+#- url: /api/heartbeat
+#  script: server.handlers.heartbeat_handler.app
+#  login: admin
+#
+#- url: /api/song(/.*)?
+#  script: server.handlers.song_handler.app
+#
+#- url: /api/place(/.*)?
+#  script: server.handlers.place_handler.app
+#
+#- url: /api/euler(/.*)?
+#  script: server.handlers.euler_handler.app
+#
+#- url: /admin
+#  static_files: admin/index.html
+#  upload: admin/index.html
+#  login: required
+#
+#- url: /admin/(.*)
+#  static_files: admin/\1
+#  upload: admin/.*
+#  login: required
+#
+#- url: /(js|css|views|fonts|img)/(.*)
+#  static_files: public/\1/\2
+#  upload: public/(js|css|views|fonts|img)/.*
+#
+#- url: /sitemap.xml
+#  static_files: public/sitemap.xml
+#  upload: public/sitemap.xml
+#
+#- url: /.*
+#  static_files: public/index.html
+#  upload: public/index.html
+#
+#libraries:
+#- name: webapp2
+#  version: "2.5.2"

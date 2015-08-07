@@ -1,0 +1,11 @@
+{
+  "name": "website",
+  "version": "4.0.0",
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-concat": "*",
+    "gulp-less": "*",
+    "gulp-minify-css": "*",
+    "gulp-uglify": "*"
+  }
+}
