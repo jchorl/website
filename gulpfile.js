@@ -22,6 +22,8 @@ gulp.task('compileStyles', function() {
 gulp.task('copy', function() {
 	gulp.src('src/index.html')
 		.pipe(gulp.dest('dest'));
+	gulp.src('src/imgs/*')
+		.pipe(gulp.dest('dest'));
 });
 
 gulp.task('default', ['compileScripts', 'compileStyles', 'copy', 'watch']);

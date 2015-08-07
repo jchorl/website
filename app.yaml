@@ -7,10 +7,9 @@ handlers:
 - url: /
   static_files: dest/index.html
   upload: dest/index.html
-
-- url: /(style.css|script.js)
+- url: /(.*\.(css|js|jpg))$
   static_files: dest/\1
-  upload: dest/(style.css|script.js)
+  upload: dest/.*\.(css|js|jpg)$
 
 skip_files:
 - ^(.*/)?\.DS_Store$

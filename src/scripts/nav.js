@@ -1,3 +1,4 @@
+// execute when page is done loading
 $(function() {
 	var firstNameEl = $("#first-name"),
 		lastNameEl = $("#last-name"),
@@ -26,5 +27,20 @@ $(function() {
 		}, time);
 	}
 
+	// type name
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
+	if ($(document).scrollTop() !== 0) {
+		$("#nav").css("background-color", "rgba(0, 0, 0, 255)");
+	}
+
+	var fadeDist = $("#hero").height();
+	$(document).scroll(function() {
+		var scrolledDist = $(document).scrollTop();
+		if (scrolledDist <= fadeDist) {
+			var fractionFade = scrolledDist / fadeDist;
+			var scaledFade = 2 * fractionFade;
+			var newColor = "rgba(0, 0, 0, " + scaledFade + ")";
+			$("#nav").css("background-color", newColor);
+		}
+	});
 });
