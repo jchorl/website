@@ -7,7 +7,7 @@ var uglify = require('gulp-uglify');
 gulp.task('compileScripts', function() {
 	gulp.src('src/scripts/*.js')
 		.pipe(concat('script.js'))
-		//.pipe(uglify())
+		.pipe(uglify())
 		.pipe(gulp.dest('dest'));
 });
 
