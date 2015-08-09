@@ -1,15 +1,70 @@
-@resume-gray: #e2e2e2;
+@import "main.less";
+@resume-light-gray: #e2e2e2;
+@resume-dark-gray: #8a8a8a;
+@resume-background: #f8f8f8;
+@resume-skill-label-active: #5bc0de;
+@resume-skill-usage-active: rgba(91, 192, 222, 0.3);
 
 #resume {
-  background-color: @resume-gray;
+  background-color: @resume-light-gray;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
+  #resume-sidebar-container {
+    width: ~"calc((100% - " @container-max-width ~") / 2)";
+    position: fixed;
+    left: 0;
+    top: @nav-height;
+    height: ~"calc(100% - " @nav-height ~")";
+
+    //TODO: only displays for > 1650px wide
+    #resume-sidebar {
+      border: 1px solid black;
+      margin-top: 20px;
+      width: 220px;
+      position: absolute;
+      right: 5px;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: @resume-background;
+
+      .skills-title {
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .sidebar-section {
+        margin: 0;
+        font-weight: 500;
+        font-size: 18px;
+      }
+
+      .skill-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+
+        .skill {
+          border: 1px solid black;
+          margin: 2px;
+          padding: 1px 3px;
+          color: white;
+          background-color: @resume-dark-gray;
+
+          &.active {
+            background-color: @resume-skill-label-active;
+          }
+        }
+      }
+    }
+  }
+
   .resume-container {
     border: 1px solid black;
+    background-color: @resume-background;
 
     .resume-content {
       width: 80%;
@@ -96,13 +151,17 @@
           padding-top:5px;
         }
 
+        .usage.active {
+          background-color: @resume-skill-usage-active;
+        }
+
         &.section-work {
           .co-first-row {
             margin-right: 0;
             margin-left: 0;
             height: 25px;
 
-            .company {
+            .company-link {
               float: left;
               font-weight:bold;
               font-size: 16px;

@@ -40,7 +40,6 @@ $(function() {
 		if (scrolledDist <= fadeDist) {
 			var fractionFade = scrolledDist / fadeDist;
 			var scaledFade = fractionFade * 0.9;
-			console.log(scaledFade);
 			var newColor = "rgba(0, 0, 0, " + scaledFade + ")";
 			$("#nav").css("background-color", newColor);
 		}
