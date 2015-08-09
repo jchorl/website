@@ -1,8 +1,20 @@
 @nav-height: 80px;
 
+.clear {
+  clear: both;
+}
+
 body {
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
+
+  .container {
+    box-sizing: border-box;
+
+    @media(min-width: 1200px) {
+      width: 1200px;
+    }
+  }
 }
 
 #content {

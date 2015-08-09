@@ -30,7 +30,7 @@ $(function() {
 	// type name
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
 	if ($(document).scrollTop() !== 0) {
-		$("#nav").css("background-color", "rgba(0, 0, 0, 255)");
+		$("#nav").css("background-color", "rgba(0, 0, 0, 0.9)");
 	}
 
 	// fade nav bar
@@ -39,7 +39,8 @@ $(function() {
 		var scrolledDist = $(document).scrollTop();
 		if (scrolledDist <= fadeDist) {
 			var fractionFade = scrolledDist / fadeDist;
-			var scaledFade = 2 * fractionFade;
+			var scaledFade = fractionFade * 0.9;
+			console.log(scaledFade);
 			var newColor = "rgba(0, 0, 0, " + scaledFade + ")";
 			$("#nav").css("background-color", newColor);
 		}
