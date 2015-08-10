@@ -12,18 +12,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   #resume-sidebar-container {
     width: ~"calc((100% - " @container-max-width ~") / 2)";
-    position: fixed;
+    position: absolute;
     left: 0;
-    top: @nav-height;
     height: ~"calc(100% - " @nav-height ~")";
 
     //TODO: only displays for > 1650px wide
     #resume-sidebar {
+      opacity: 0;
       border: 1px solid black;
-      margin-top: 20px;
       width: 220px;
       position: absolute;
       right: 5px;

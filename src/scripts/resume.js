@@ -1,4 +1,9 @@
 $(function() {
+	var sidebarEl = $('#resume-sidebar');
+	var sidebarContainerEl = $('#resume-sidebar-container');
+	var resumeContainerTopOffset = $('#resume-container').offset().top;
+	var beginFadeSidebarThreshold = 100;
+	var navBarHeight = 80;
 	var skillsEls = $('[skills]');
 	var labelEls = [];
 	var usageEls = [];
@@ -16,6 +21,7 @@ $(function() {
 		return hasAttr($(this), 'usage');
 	});
 
+	// add hover listeners
 	labelEls.hover(function() {
 		var el = $(this);
 		el.addClass('active');
@@ -50,5 +56,23 @@ $(function() {
 			el.removeClass('active');
 		});
 		activeEls = [];
-	})
+	});
+
+	if ($(document).scrollTop() > resumeContainerTopOffset - navBarHeight - beginFadeSidebarThreshold) {
+			sidebarEl.css('opacity', 1);
+	}
+
+	$(document).scroll(function() {
+		var scrolledDist = $(document).scrollTop();
+		if (scrolledDist >= resumeContainerTopOffset - navBarHeight - 5) {
+			sidebarContainerEl.css('position', 'fixed').css('top', navBarHeight + 5 + 'px');
+			sidebarEl.css('opacity', 1);
+		} else if (scrolledDist >= resumeContainerTopOffset - beginFadeSidebarThreshold - navBarHeight) {
+			sidebarContainerEl.css('position', 'absolute').css('top', 'auto');
+			var fractionFade = 1 - (resumeContainerTopOffset - scrolledDist - navBarHeight) / beginFadeSidebarThreshold;
+			sidebarEl.css('opacity', fractionFade);
+		} else {
+			sidebarEl.css('opacity', 0);
+		}
+	});
 });

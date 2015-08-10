@@ -29,6 +29,7 @@ $(function() {
 
 	// type name
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
+
 	if ($(document).scrollTop() !== 0) {
 		$("#nav").css("background-color", "rgba(0, 0, 0, 0.9)");
 	}
