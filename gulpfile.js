@@ -20,7 +20,7 @@ gulp.task('compileStyles', function() {
 });
 
 gulp.task('copy', function() {
-	gulp.src('src/index.html')
+	gulp.src('src/templates/*')
 		.pipe(gulp.dest('dest'));
 	gulp.src('src/imgs/*')
 		.pipe(gulp.dest('dest'));
@@ -30,5 +30,5 @@ gulp.task('default', ['compileScripts', 'compileStyles', 'copy', 'watch']);
 gulp.task('watch', function() {
 	gulp.watch('src/scripts/**/*.*', ['compileScripts']);
 	gulp.watch('src/styles/**/*.*', ['compileStyles']);
-	gulp.watch('src/index.html', ['copy']);
+	gulp.watch('src/templates/*.*', ['copy']);
 });

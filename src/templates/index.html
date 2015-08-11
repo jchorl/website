@@ -1,0 +1,21 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        {{template "head" .}}
+    </head>
+    <body>
+        <nav id="nav">
+            {{template "nav" .}}
+        </nav>
+        <div id="content">
+            <section id="home">
+                {{template "home" .}}
+            </section>
+            <section id="resume">
+                {{template "resume" .}}
+            </section>
+        </div>
+    </body>
+</html>
+{{end}}
