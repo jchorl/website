@@ -1,8 +1,4 @@
 $(function() {
-	var sidebarEl = $('#sidebar');
-	var sidebarHeight = sidebarEl.outerHeight();
-	var sidebarContainerTop = $('#sidebar-container').offset().top;
-	var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
 	var fadeThreshold = 100;
 	var navBarHeight = $('#nav').outerHeight();
 	var skillsEls = $('[skills]');
@@ -60,8 +56,11 @@ $(function() {
 	});
 
 	$(document).scroll(function() {
-		// TODO: these values can change if the window size changes. when to refresh them?
 		var scrolledDist = $(document).scrollTop();
+		var sidebarEl = $('#sidebar');
+		var sidebarHeight = sidebarEl.outerHeight();
+		var sidebarContainerTop = $('#sidebar-container').offset().top;
+		var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
 		var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
 		var topFadeThreshold = topFloatThreshold - fadeThreshold;
 		var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
