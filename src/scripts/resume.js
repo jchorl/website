@@ -1,9 +1,10 @@
 $(function() {
-	var sidebarEl = $('#resume-sidebar');
-	var sidebarContainerEl = $('#resume-sidebar-container');
-	var resumeContainerTopOffset = $('#resume-container').offset().top;
-	var beginFadeSidebarThreshold = 100;
-	var navBarHeight = 80;
+	var sidebarEl = $('#sidebar');
+	var sidebarHeight = sidebarEl.outerHeight();
+	var sidebarContainerTop = $('#sidebar-container').offset().top;
+	var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
+	var fadeThreshold = 100;
+	var navBarHeight = $('#nav').outerHeight();
 	var skillsEls = $('[skills]');
 	var labelEls = [];
 	var usageEls = [];
@@ -58,21 +59,31 @@ $(function() {
 		activeEls = [];
 	});
 
-	if ($(document).scrollTop() > resumeContainerTopOffset - navBarHeight - beginFadeSidebarThreshold) {
-			sidebarEl.css('opacity', 1);
-	}
-
 	$(document).scroll(function() {
+		// TODO: these values can change if the window size changes. when to refresh them?
 		var scrolledDist = $(document).scrollTop();
-		if (scrolledDist >= resumeContainerTopOffset - navBarHeight - 5) {
-			sidebarContainerEl.css('position', 'fixed').css('top', navBarHeight + 5 + 'px');
-			sidebarEl.css('opacity', 1);
-		} else if (scrolledDist >= resumeContainerTopOffset - beginFadeSidebarThreshold - navBarHeight) {
-			sidebarContainerEl.css('position', 'absolute').css('top', 'auto');
-			var fractionFade = 1 - (resumeContainerTopOffset - scrolledDist - navBarHeight) / beginFadeSidebarThreshold;
-			sidebarEl.css('opacity', fractionFade);
-		} else {
+		var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
+		var topFadeThreshold = topFloatThreshold - fadeThreshold;
+		var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
+		var bottomFadeThreshold = bottomFloatThreshold + fadeThreshold;
+		if (scrolledDist < topFadeThreshold || scrolledDist >= bottomFadeThreshold) {
+			sidebarEl.removeClass('floated');
+			sidebarEl.removeClass('bottom');
 			sidebarEl.css('opacity', 0);
+		} else if (scrolledDist >= topFadeThreshold && scrolledDist < topFloatThreshold) {
+			var fractionFade = 1 - (topFloatThreshold - scrolledDist) / fadeThreshold;
+			sidebarEl.css('opacity', fractionFade);
+			sidebarEl.removeClass('floated');
+			sidebarEl.removeClass('bottom');
+		} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFloatThreshold) {
+			sidebarEl.removeClass('bottom');
+			sidebarEl.addClass('floated');
+			sidebarEl.css('opacity', '');
+		} else if (scrolledDist >= bottomFloatThreshold && scrolledDist < bottomFadeThreshold) {
+			var fractionFade = (bottomFadeThreshold - scrolledDist) / fadeThreshold;
+			sidebarEl.css('opacity', fractionFade);
+			sidebarEl.removeClass('floated');
+			sidebarEl.addClass('bottom');
 		}
 	});
 });
