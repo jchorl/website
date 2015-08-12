@@ -6,6 +6,7 @@
 <div class="skill" label skills="java">Java</div>
 <div class="skill" label skills="py">Python</div>
 <div class="skill" label skills="go">Go</div>
+<div class="skill" label skills="less">Less</div>
 {{end}}
 
 {{define "frameworks"}}
@@ -25,7 +26,6 @@
 <div class="skill" label skills="mac">Mac</div>
 <div class="skill" label skills="ij">IntelliJ</div>
 <div class="skill" label skills="ecl">Eclipse</div>
-<div class="skill" label skills="p4">Perforce</div>
 {{end}}
 
 {{define "resume"}}
@@ -74,10 +74,28 @@
                     </div>
                 </div>
             </div>
+            <div id="skills-bar">
+                <div class="bracket">[</div>
+                <div class="skills-container-holder">
+                    <div class="skills-container">
+                        <h4 class="skills-bar-section">Languages:</h4>
+                        {{template "languages" .}}
+                    </div>
+                    <div class="skills-container">
+                        <h4 class="skills-bar-section">Frameworks:</h4>
+                        {{template "frameworks" .}}
+                    </div>
+                    <div class="skills-container">
+                        <h4 class="skills-bar-section">Tools:</h4>
+                        {{template "tools" .}}
+                    </div>
+                </div>
+                <div class="bracket">]</div>
+            </div>
             <div class="section section-work">
                 <h2 class="section-title"><i class="fa fa-briefcase"></i> Work Experience</h2>
                 <div class="subsection">
-                    <div class="symphony usage" usage skills="js sql git vi css html java lin ij aws ang bs jq mac">
+                    <div class="symphony usage" usage skills="js sql git vi css html java lin ij aws ang bs jq mac less">
                         <div class="co-first-row">
                             <a href="http://www.symphonycommerce.com" target="_blank" class="company-link">
                                 <span class="company-img-wrapper"><img src="logo_symphony.png" class="company-img" alt="symphony logo"></span>
@@ -156,7 +174,7 @@
                 <div class="subsection">
                     <i>More projects at <a href="http://joshchorlton.com/Projects" class="link">joshchorlton.com</a>. All code available at <a class="link" href="http://github.com/jchorl">github.com/jchorl</a>.</i><br>
                     <ul>
-                        <li class="usage" usage skills="html css js bs jq git vi lin mac go appe"><b>Personal Website</b><span class="date">2014-2015</span>
+                        <li class="usage" usage skills="html css js bs jq git vi lin mac go appe less"><b>Personal Website</b><span class="date">2014-2015</span>
                             <ul>
                                 <li>Designed to be completely responsive and mobile-friendly</li>
                             </ul>
