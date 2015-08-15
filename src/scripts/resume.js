@@ -57,32 +57,44 @@ $(function() {
 
 	$(document).scroll(function() {
 		var scrolledDist = $(document).scrollTop();
-		var sidebarEl = $('#sidebar');
-		var sidebarHeight = sidebarEl.outerHeight();
-		var sidebarContainerTop = $('#sidebar-container').offset().top;
-		var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
-		var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
-		var topFadeThreshold = topFloatThreshold - fadeThreshold;
-		var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
-		var bottomFadeThreshold = bottomFloatThreshold + fadeThreshold;
-		if (scrolledDist < topFadeThreshold || scrolledDist >= bottomFadeThreshold) {
-			sidebarEl.removeClass('floated');
-			sidebarEl.removeClass('bottom');
-			sidebarEl.css('opacity', 0);
-		} else if (scrolledDist >= topFadeThreshold && scrolledDist < topFloatThreshold) {
-			var fractionFade = 1 - (topFloatThreshold - scrolledDist) / fadeThreshold;
-			sidebarEl.css('opacity', fractionFade);
-			sidebarEl.removeClass('floated');
-			sidebarEl.removeClass('bottom');
-		} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFloatThreshold) {
-			sidebarEl.removeClass('bottom');
-			sidebarEl.addClass('floated');
-			sidebarEl.css('opacity', '');
-		} else if (scrolledDist >= bottomFloatThreshold && scrolledDist < bottomFadeThreshold) {
-			var fractionFade = (bottomFadeThreshold - scrolledDist) / fadeThreshold;
-			sidebarEl.css('opacity', fractionFade);
-			sidebarEl.removeClass('floated');
-			sidebarEl.addClass('bottom');
+		var width = $(document).width();
+		if (width > 1650) {
+			var sidebarEl = $('#sidebar');
+			var sidebarHeight = sidebarEl.outerHeight();
+			var sidebarContainerTop = $('#sidebar-container').offset().top;
+			var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
+			var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
+			var topFadeThreshold = topFloatThreshold - fadeThreshold;
+			var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
+			var bottomFadeThreshold = bottomFloatThreshold + fadeThreshold;
+			if (scrolledDist < topFadeThreshold || scrolledDist >= bottomFadeThreshold) {
+				sidebarEl.removeClass('floated');
+				sidebarEl.removeClass('bottom');
+				sidebarEl.css('opacity', 0);
+			} else if (scrolledDist >= topFadeThreshold && scrolledDist < topFloatThreshold) {
+				var fractionFade = 1 - (topFloatThreshold - scrolledDist) / fadeThreshold;
+				sidebarEl.css('opacity', fractionFade);
+				sidebarEl.removeClass('floated');
+				sidebarEl.removeClass('bottom');
+			} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFloatThreshold) {
+				sidebarEl.removeClass('bottom');
+				sidebarEl.addClass('floated');
+				sidebarEl.css('opacity', '');
+			} else if (scrolledDist >= bottomFloatThreshold && scrolledDist < bottomFadeThreshold) {
+				var fractionFade = (bottomFadeThreshold - scrolledDist) / fadeThreshold;
+				sidebarEl.css('opacity', fractionFade);
+				sidebarEl.removeClass('floated');
+				sidebarEl.addClass('bottom');
+			}
+		} else {
+			var skillsBarEl = $('#skills-bar-wrapper');
+			var resumeHeaderBar = $('.resume-header-bar');
+			var topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBar.outerHeight() - navBarHeight;;
+			if (scrolledDist < topFloatThreshold) {
+				skillsBarEl.removeClass('floated');
+			} else {
+				skillsBarEl.addClass('floated');
+			}
 		}
 	});
 });

@@ -31,7 +31,7 @@ $(function() {
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
 
 	if ($(document).scrollTop() !== 0) {
-		$("#nav").css("background-color", "rgba(0, 0, 0, 0.9)");
+		$("#nav").css("background-color", "rgba(0, 0, 0, 0.95)");
 	}
 
 	// fade nav bar
@@ -40,7 +40,7 @@ $(function() {
 		var scrolledDist = $(document).scrollTop();
 		if (scrolledDist <= fadeDist) {
 			var fractionFade = scrolledDist / fadeDist;
-			var scaledFade = fractionFade * 0.9;
+			var scaledFade = fractionFade * 0.95;
 			var newColor = "rgba(0, 0, 0, " + scaledFade + ")";
 			$("#nav").css("background-color", newColor);
 		}

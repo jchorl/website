@@ -8,17 +8,17 @@
 #resume {
   background-color: @resume-light-gray;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  .flex;
+  .direction(column);
+  .justify-content(center);
+  .align-items(center);
   position: relative;
 
   #resume-sidebar-container {
     width: 100%;
     position: relative;
-    display: flex;
-    justify-content: center;
+    .flex;
+    .justify-content(center);
 
     .skill {
       border: 1px solid black;
@@ -81,7 +81,7 @@
             }
 
             .skill-container {
-              display: flex;
+              .flex;
               flex-wrap: wrap;
               margin-bottom: 10px;
             }
@@ -160,9 +160,9 @@
 
         #skills-bar-wrapper {
           #skills-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            .flex;
+            .justify-content(center);
+            .align-items(center);
             margin: 0 auto;
             padding: 10px 0;
 
@@ -174,8 +174,8 @@
 
             .skills-container-holder {
               .skills-container {
-                display: flex;
-                align-items: center;
+                .flex;
+                .align-items(center);
 
                 .skills-bar-section {
                   margin: 0 10px 0 0;

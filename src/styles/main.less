@@ -5,6 +5,31 @@
   clear: both;
 }
 
+.flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.direction(@direction) {
+  -webkit-flex-direction: @direction;
+  flex-direction: @direction;
+}
+
+.justify-content(@justify) {
+  -webkit-justify-content: @justify;
+  justify-content: @justify;
+}
+
+.align-items(@alignment) {
+  -webkit-align-items: @alignment;
+  align-items: @alignment;
+}
+
+.align-content(@alignment) {
+  -webkit-align-content: @alignment;
+  align-content: @alignment;
+}
+
 body {
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;

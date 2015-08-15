@@ -13,18 +13,18 @@
   .shade {
     background-color: rgba(0,0,0,0.25);
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    .flex;
+    .direction(column);
+    .justify-content(center);
+    .align-items(center);
 
     .home-content {
       padding-top: @nav-height;
       height: ~"calc(100% - @{nav-height})";
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      .flex;
+      .direction(column);
+      .justify-content(center);
+      .align-items(center);
       @media(max-width: (@game-min-width - 1)), (max-height: (@game-min-height - 1)) {
         margin: 20px;
       }
@@ -48,10 +48,10 @@
         display: none;
 
         @media(min-width: @game-min-width) and (min-height: @game-min-height) {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+          .flex;
+          .direction(column);
+          .justify-content(center);
+          .align-items(center);
           border-top: none;
 
           #game-button {
