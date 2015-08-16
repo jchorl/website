@@ -1,5 +1,13 @@
 $(function() {
+	var documentEl = $(document);
 	var fadeThreshold = 100;
+	var sidebarEl = $('#sidebar');
+	var sidebarContainer= $('#sidebar-container');
+	var skillsBarWrapperEl = $('#skills-bar-wrapper');
+	var skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
+	var resumeHeaderBar = $('.resume-header-bar');
+	var projectsSection = $('.projects-section');
+
 	var navBarHeight = $('#nav').outerHeight();
 	var skillsEls = $('[skills]');
 	var labelEls = [];
@@ -18,51 +26,72 @@ $(function() {
 		return hasAttr($(this), 'usage');
 	});
 
-	// add hover listeners
-	labelEls.hover(function() {
-		var el = $(this);
-		el.addClass('active');
-		var skill = el.attr('skills');
-		usageEls.filter(function() {
-			return $(this).attr('skills').indexOf(skill) > -1;
-		}).each(function() {
-			activeEls.push($(this));
-			$(this).addClass('active');
-		});
-	}, function() {
-		$(this).removeClass('active');
-		activeEls.forEach(function(el) {
-			el.removeClass('active');
-		});
-		activeEls = [];
+	if (documentEl.width() >= 750) {
+		addHoverListeners();
+		$(window).scroll(handleScroll);
+	}
+
+	$(window).resize(function() {
+		if (documentEl.width() >= 750) {
+			addHoverListeners();
+			$(window).scroll(handleScroll);
+		} else {
+			removeHoverListeners();
+			$(window).off('scroll', handleScroll);
+		}
 	});
 
-	usageEls.hover(function() {
-		var el = $(this);
-		el.addClass('active');
-		var skills = el.attr('skills').split(' ');
-		labelEls.filter(function() {
-			return skills.indexOf($(this).attr('skills')) > -1;
-		}).each(function() {
-			activeEls.push($(this));
-			$(this).addClass('active');
-		});
-	}, function() {
-		$(this).removeClass('active');
-		activeEls.forEach(function(el) {
-			el.removeClass('active');
-		});
-		activeEls = [];
-	});
+	function removeHoverListeners() {
+		labelEls.unbind('mouseenter mouseleave');
+		usageEls.unbind('mouseenter mouseleave');
+	}
 
-	$(document).scroll(function() {
-		var scrolledDist = $(document).scrollTop();
-		var width = $(document).width();
+	function addHoverListeners() {
+		// add hover listeners
+		labelEls.hover(function() {
+			var el = $(this);
+			el.addClass('active');
+			var skill = el.attr('skills');
+			usageEls.filter(function() {
+				return $(this).attr('skills').indexOf(skill) > -1;
+			}).each(function() {
+				activeEls.push($(this));
+				$(this).addClass('active');
+			});
+		}, function() {
+			$(this).removeClass('active');
+			activeEls.forEach(function(el) {
+				el.removeClass('active');
+			});
+			activeEls = [];
+		});
+
+		usageEls.hover(function() {
+			var el = $(this);
+			el.addClass('active');
+			var skills = el.attr('skills').split(' ');
+			labelEls.filter(function() {
+				return skills.indexOf($(this).attr('skills')) > -1;
+			}).each(function() {
+				activeEls.push($(this));
+				$(this).addClass('active');
+			});
+		}, function() {
+			$(this).removeClass('active');
+			activeEls.forEach(function(el) {
+				el.removeClass('active');
+			});
+			activeEls = [];
+		});
+	}
+
+	function handleScroll() {
+		var scrolledDist = documentEl.scrollTop();
+		var width = documentEl.width();
 		if (width > 1650) {
-			var sidebarEl = $('#sidebar');
 			var sidebarHeight = sidebarEl.outerHeight();
-			var sidebarContainerTop = $('#sidebar-container').offset().top;
-			var sidebarContainerBottom = sidebarContainerTop + $('#sidebar-container').outerHeight();
+			var sidebarContainerTop = sidebarContainer.offset().top;
+			var sidebarContainerBottom = sidebarContainerTop + sidebarContainer.outerHeight();
 			var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
 			var topFadeThreshold = topFloatThreshold - fadeThreshold;
 			var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
@@ -87,11 +116,7 @@ $(function() {
 				sidebarEl.addClass('bottom');
 			}
 		} else {
-			var skillsBarWrapperEl = $('#skills-bar-wrapper');
-			var skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
-			var resumeHeaderBar = $('.resume-header-bar');
 			var topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBar.outerHeight() - navBarHeight;;
-			var projectsSection = $('.projects-section');
 			var bottomFadeThreshold = projectsSection.offset().top + projectsSection.outerHeight() - navBarHeight;
 			var bottomFloatThreshold = bottomFadeThreshold + fadeThreshold;
 			if (scrolledDist < topFloatThreshold) {
@@ -113,5 +138,5 @@ $(function() {
 				skillsBarWrapperEl.removeClass('floated');
 			}
 		}
-	});
+	}
 });

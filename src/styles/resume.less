@@ -4,6 +4,7 @@
 @resume-background: #f8f8f8;
 @resume-skill-label-active: #5bc0de;
 @resume-skill-usage-active: rgba(91, 192, 222, 0.3);
+@resume-expand-width: 750px;
 
 #resume {
   background-color: @resume-light-gray;
@@ -123,32 +124,50 @@
         }
 
         .resume-header-bar {
-          text-align: right;
-          border-bottom: 1px solid black;
+          @media(min-width: @resume-expand-width) {
+            text-align: right;
+            border-bottom: 1px solid black;
+          }
 
           .contact-info, .name-school {
-            display: inline-block;
-            margin: 20px 0 10px;
+            text-align: center;
+
+            @media(min-width: @resume-expand-width) {
+              display: inline-block;
+              margin: 20px 0 10px;
+            }
           }
 
           .name-school {
-            text-align: right;
-
             .name {
               margin: 0;
               font-size: 40px;
               font-weight: 500;
               line-height: 42px;
             }
-            .school {
+
+            @media(min-width: @resume-expand-width) {
+              text-align: right;
             }
           }
 
           .contact-info {
-            border-left: 1px solid black;
-            padding-left: 10px;
-            margin-right: 100px;
-            text-align: left;
+            @media(min-width: @resume-expand-width) {
+              text-align: left;
+            }
+          }
+
+          .contact-info {
+            @media(min-width: @resume-expand-width) {
+              border-left: 1px solid black;
+              padding-left: 10px;
+              margin-right: 10px;
+              text-align: left;
+            }
+
+            @media(min-width: 992px) {
+              margin-right: 100px;
+            }
 
             .contact-icon {
               width: 14px;
@@ -159,6 +178,8 @@
         }
 
         #skills-bar-wrapper-wrapper {
+          display: none;
+
           #skills-bar-wrapper {
             #skills-bar {
               .flex;
@@ -197,6 +218,10 @@
                 width: 80%;
               }
             }
+          }
+
+          @media(min-width: @resume-expand-width) {
+            display: block;
           }
 
           @media(min-width: 1650px) {
