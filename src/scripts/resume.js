@@ -91,12 +91,26 @@ $(function() {
 			var skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
 			var resumeHeaderBar = $('.resume-header-bar');
 			var topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBar.outerHeight() - navBarHeight;;
+			var projectsSection = $('.projects-section');
+			var bottomFadeThreshold = projectsSection.offset().top + projectsSection.outerHeight() - navBarHeight;
+			var bottomFloatThreshold = bottomFadeThreshold + fadeThreshold;
 			if (scrolledDist < topFloatThreshold) {
+				skillsBarWrapperEl.css('opacity', 1);
 				skillsBarWrapperWrapperEl.css('height', 'auto');
 				skillsBarWrapperEl.removeClass('floated');
-			} else {
+			} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFadeThreshold) {
+				skillsBarWrapperEl.css('opacity', 1);
 				skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
 				skillsBarWrapperEl.addClass('floated');
+			} else if (scrolledDist >= bottomFadeThreshold && scrolledDist < bottomFloatThreshold) {
+				var fractionFade = (bottomFloatThreshold - scrolledDist) / fadeThreshold;
+				skillsBarWrapperEl.css('opacity', fractionFade);
+				skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
+				skillsBarWrapperEl.addClass('floated');
+			} else if (scrolledDist >= bottomFloatThreshold) {
+				skillsBarWrapperEl.css('opacity', 1);
+				skillsBarWrapperWrapperEl.css('height', 'auto');
+				skillsBarWrapperEl.removeClass('floated');
 			}
 		}
 	});
