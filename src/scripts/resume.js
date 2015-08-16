@@ -87,13 +87,16 @@ $(function() {
 				sidebarEl.addClass('bottom');
 			}
 		} else {
-			var skillsBarEl = $('#skills-bar-wrapper');
+			var skillsBarWrapperEl = $('#skills-bar-wrapper');
+			var skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
 			var resumeHeaderBar = $('.resume-header-bar');
 			var topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBar.outerHeight() - navBarHeight;;
 			if (scrolledDist < topFloatThreshold) {
-				skillsBarEl.removeClass('floated');
+				skillsBarWrapperWrapperEl.css('height', 'auto');
+				skillsBarWrapperEl.removeClass('floated');
 			} else {
-				skillsBarEl.addClass('floated');
+				skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
+				skillsBarWrapperEl.addClass('floated');
 			}
 		}
 	});

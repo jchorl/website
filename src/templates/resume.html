@@ -74,24 +74,26 @@
                     </div>
                 </div>
             </div>
-            <div id="skills-bar-wrapper">
-                <div id="skills-bar">
-                    <div class="bracket">[</div>
-                    <div class="skills-container-holder">
-                        <div class="skills-container">
-                            <h4 class="skills-bar-section">Languages:</h4>
-                            {{template "languages" .}}
+            <div id="skills-bar-wrapper-wrapper">
+                <div id="skills-bar-wrapper">
+                    <div id="skills-bar">
+                        <div class="bracket">[</div>
+                        <div class="skills-container-holder">
+                            <div class="skills-container">
+                                <h4 class="skills-bar-section">Languages:</h4>
+                                {{template "languages" .}}
+                            </div>
+                            <div class="skills-container">
+                                <h4 class="skills-bar-section">Frameworks:</h4>
+                                {{template "frameworks" .}}
+                            </div>
+                            <div class="skills-container">
+                                <h4 class="skills-bar-section">Tools:</h4>
+                                {{template "tools" .}}
+                            </div>
                         </div>
-                        <div class="skills-container">
-                            <h4 class="skills-bar-section">Frameworks:</h4>
-                            {{template "frameworks" .}}
-                        </div>
-                        <div class="skills-container">
-                            <h4 class="skills-bar-section">Tools:</h4>
-                            {{template "tools" .}}
-                        </div>
+                        <div class="bracket">]</div>
                     </div>
-                    <div class="bracket">]</div>
                 </div>
             </div>
             <div class="section section-work">
