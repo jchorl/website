@@ -1,0 +1,62 @@
+{{define "projects"}}
+<div class="slant"></div>
+<div class="container">
+    <h1 class="section-heading">Projects</h1>
+</div>
+<div class="container projects-container">
+    <div class="project website">
+        <!-- TODO: make repo and update link -->
+        <a target="_blank" href="https://github.com/jchorl/website">
+            <h3>Personal Website</h3>
+            <i class="fa fa-github icon"></i>
+            <div class="description">
+                I wrote my website from scratch, and the only javascript library I use is jQuery. In fact, the only other library I use is font-awesome. My website is hosted on Google App Engine, from a server I wrote in Go. The single page is actually a few files stitched together using Go's <code>html/template</code> package. The songs and places in the about section are stored in a database and cached server side, retrieved via API call.
+            </div>
+        </a>
+    </div>
+    <div class="project euler">
+        <a target="_blank" href="https://github.com/jchorl/Euler">
+        <h3>Project Euler</h3>
+        <i class="fa fa-github icon"></i>
+        <div class="description">
+            Project Euler is a website that contains many interesting math problems that can be solved computationally. While the first few problems can be brute-forced, many require thinking and are actually quite time consuming. Being in both the engineering and math faculties, I enjoy these challenges. I have solved a bunch of them.
+        </div>
+        </a>
+    </div>
+    <div class="project minesweeper">
+        <a target="_blank" href="https://github.com/jchorl/Minesweeper">
+        <h3>Minesweeper</h3>
+        <i class="fa fa-github icon"></i>
+        <div class="description">
+            I wrote Minesweeper in Java for a school project with a partner. This was done as a culminating assignment and combined multiple core CS concepts such as polymorphism/inheritance, GUIs (<code>Swing</code>), layouts (<code>GridBagLayout</code>), UML, and testing.
+        </div>
+    </div>
+    <div class="project getstuffdone">
+        <a target="_blank" href="https://github.com/jchorl/GetStuffDone">
+        <h3>GetStuffDone</h3>
+        <i class="fa fa-github icon"></i>
+        <div class="description">
+            A ToDo app written for Android to keep track of a prioritized ToDo list. I implemented this using a SQLite database. This was my first exposure to mobile development, which introduced me to the activity lifecycle and responsive development.
+        </div>
+        </a>
+    </div>
+    <div class="project tetris">
+        <a target="_blank" href="https://github.com/jchorl/Tetris">
+        <h3>Tetris</h3>
+        <i class="fa fa-github icon"></i>
+        <div class="description">
+            Tetris written in Java, with many options such as board size and game speed.
+        </div>
+        </a>
+    </div>
+    <div class="project snakeandroid">
+        <a target="_blank" href="https://github.com/jchorl/SnakeAndroid">
+        <h3>SnakeAndroid</h3>
+        <i class="fa fa-github icon"></i>
+        <div class="description">
+            Snake written for Android. Timeless game, bringing back fond memories. Disclaimer: this is inferior to Snake on old Nokias. Developing an Android game taught me about threading, as I needed to update the game and UI asynchronously. I also delved further into layout development with a dynamically changing UI.
+        </div>
+        </a>
+    </div>
+</div>
+{{end}}

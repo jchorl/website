@@ -30,9 +30,39 @@
   align-content: @alignment;
 }
 
+.flex-wrap(@wrap) {
+  -webkit-flex-wrap: @wrap;
+  flex-wrap: @wrap;
+}
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+  -moz-transition:    @transition;
+  -ms-transition:     @transition;
+  -o-transition:      @transition;
+}
+
+.filter(@filter) {
+  -webkit-filter: @filter;
+  filter: @filter;
+}
+
 body {
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
+
+  .section-heading {
+    margin: 0;
+    font-size: 30px;
+    padding: 20px;
+
+    &::before {
+      content: "< ";
+    }
+    &::after {
+      content: " />";
+    }
+  }
 
   .container {
     box-sizing: border-box;
