@@ -1,13 +1,11 @@
 @import "main.less";
-@resume-light-gray: #e2e2e2;
-@resume-dark-gray: #8a8a8a;
-@resume-background: #f8f8f8;
+
 @resume-skill-label-active: #5bc0de;
 @resume-skill-usage-active: rgba(91, 192, 222, 0.3);
 @resume-expand-width: 750px;
 
 #resume {
-  background-color: @resume-light-gray;
+  background-color: @background-gray;
   padding: 20px 20px 80px;
   .flex;
   .direction(column);
@@ -26,7 +24,7 @@
       margin: 2px 3px;
       padding: 1px 5px;
       color: white;
-      background-color: @resume-dark-gray;
+      background-color: @dark-gray;
 
       &.active {
         background-color: @resume-skill-label-active;
@@ -56,7 +54,7 @@
             width: 220px;
             padding: 10px;
             box-sizing: border-box;
-            background-color: @resume-background;
+            background-color: @light-gray;
 
             &.floated {
               position: fixed;
@@ -78,7 +76,6 @@
             .sidebar-section {
               margin: 0;
               font-weight: 500;
-              font-size: 18px;
             }
 
             .skill-container {
@@ -93,7 +90,7 @@
 
     .resume-container {
       border: 1px solid black;
-      background-color: @resume-background;
+      background-color: @light-gray;
 
       .resume-content {
         width: 80%;
@@ -214,7 +211,7 @@
               left: 0;
 
               #skills-bar {
-                background-color: @resume-background;
+                background-color: @light-gray;
                 width: 80%;
               }
             }
@@ -263,7 +260,6 @@
               .company-link {
                 float: left;
                 font-weight:bold;
-                font-size: 16px;
                 line-height: 25px;
 
                 .company-name {

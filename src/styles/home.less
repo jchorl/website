@@ -37,7 +37,6 @@
 
       #welcome-box {
         padding: 15px 10px;
-        font-size: 18px;
 
         @media(max-width: (@game-min-width - 1)), (max-height: (@game-min-height - 1)) {
           text-align: center;
@@ -47,32 +46,16 @@
       #game {
         display: none;
 
+        #game-button {
+          .button-colors(transparent, white, white, #3a3a3a);
+        }
+
         @media(min-width: @game-min-width) and (min-height: @game-min-height) {
           .flex;
           .direction(column);
           .justify-content(center);
           .align-items(center);
           border-top: none;
-
-          #game-button {
-            width: 200px;
-            height: 35px;
-            transition-duration: .4s;
-            background-color: transparent;
-            border: 1px solid white;
-            margin: 10px;
-            font-size: 14px;
-            color: inherit;
-
-            &:focus {
-              outline: 0;
-            }
-
-            &:hover {
-              color: #3a3a3a;
-              background: white;
-            }
-          }
         }
       }
     }

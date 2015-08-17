@@ -1,5 +1,9 @@
 @nav-height: 80px;
 @container-max-width: 1200px;
+@background-gray: #e2e2e2;
+@dark-gray: #8a8a8a;
+@light-gray: #f8f8f8;
+@background-blue: #43B4DC;
 
 .clear {
   clear: both;
@@ -47,9 +51,40 @@
   filter: @filter;
 }
 
+.button-colors(@normal-background, @normal-text, @highlite-background, @hightlite-text) {
+  color: @normal-text;
+  background-color: @normal-background;
+  border-color: @normal-text;
+
+  &:hover {
+    color: @hightlite-text;
+    background-color: @highlite-background;
+  }
+}
+
 body {
   font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: 0;
+  overflow-x: hidden;
+
+  @media(min-width: 992px) {
+    font-size: 18px;
+  }
+
+  button {
+    width: 200px;
+    height: 35px;
+    transition-duration: .4s;
+    border: 1px solid white;
+    margin: 10px;
+    font-size: 14px;
+    color: inherit;
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+  }
 
   .section-heading {
     margin: 0;
