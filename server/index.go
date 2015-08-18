@@ -2,7 +2,6 @@ package server
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -13,7 +12,6 @@ func init() {
 var templates = template.Must(template.ParseGlob("dest/*.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	log.Print("indexHandler")
 	songs := getSongs(r)
 	data := struct {
 		FirstSongLink string

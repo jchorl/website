@@ -4,31 +4,58 @@ var less = require('gulp-less');
 var minifyCSS = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 
-gulp.task('compileScripts', function() {
-	gulp.src('src/scripts/*.js')
+gulp.task('compilePublicScripts', function() {
+	gulp.src('src/public/scripts/*.js')
 		.pipe(concat('script.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dest'));
 });
 
-gulp.task('compileStyles', function() {
-	gulp.src('src/styles/*.less')
+gulp.task('compilePublicStyles', function() {
+	gulp.src('src/public/styles/*.less')
 		.pipe(less())
 		.pipe(concat('style.css'))
 		.pipe(minifyCSS())
 		.pipe(gulp.dest('dest'));
 });
 
-gulp.task('copy', function() {
-	gulp.src('src/templates/*')
+gulp.task('copyPublic', function() {
+	gulp.src('src/public/templates/*')
 		.pipe(gulp.dest('dest'));
-	gulp.src('src/imgs/*')
+	gulp.src('src/public/imgs/*')
 		.pipe(gulp.dest('dest'));
 });
 
-gulp.task('default', ['compileScripts', 'compileStyles', 'copy', 'watch']);
-gulp.task('watch', function() {
-	gulp.watch('src/scripts/**/*.*', ['compileScripts']);
-	gulp.watch('src/styles/**/*.*', ['compileStyles']);
-	gulp.watch('src/templates/*.*', ['copy']);
+gulp.task('watchPublic', function() {
+	gulp.watch('src/public/scripts/**/*.*', ['compilePublicScripts']);
+	gulp.watch('src/public/styles/**/*.*', ['compilePublicStyles']);
+	gulp.watch('src/public/templates/*.*', ['copyPublic']);
 });
+
+gulp.task('compileAdminScripts', function() {
+	gulp.src('src/admin/scripts/*.js')
+		.pipe(concat('admin.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('dest'));
+});
+
+gulp.task('compileAdminStyles', function() {
+	gulp.src('src/admin/styles/*.less')
+		.pipe(less())
+		.pipe(concat('admin.css'))
+		.pipe(minifyCSS())
+		.pipe(gulp.dest('dest'));
+});
+
+gulp.task('copyAdmin', function() {
+	gulp.src('src/admin/templates/*')
+		.pipe(gulp.dest('dest'));
+});
+
+gulp.task('watchAdmin', function() {
+	gulp.watch('src/admin/scripts/**/*.*', ['compileAdminScripts']);
+	gulp.watch('src/admin/styles/**/*.*', ['compileAdminStyles']);
+	gulp.watch('src/admin/templates/*.*', ['copyAdmin']);
+});
+gulp.task('default', ['compilePublicScripts', 'compilePublicStyles', 'copyPublic', 'watchPublic']);
+gulp.task('admin', ['compileAdminScripts', 'compileAdminStyles', 'copyAdmin', 'watchAdmin']);
