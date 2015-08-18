@@ -10,12 +10,15 @@ function dropMarkers(){
 };
 
 function initMap() {
-	locations.forEach(function(loc) {
-		markers.push(new google.maps.Marker({
-			draggable:false,
-			animation: google.maps.Animation.DROP,
-			position: new google.maps.LatLng(loc.lat, loc.lon)
-		}));
+	$.getJSON('api/location', function(resp) {
+		locations = resp;
+		locations.forEach(function(loc) {
+			markers.push(new google.maps.Marker({
+				draggable:false,
+				animation: google.maps.Animation.DROP,
+				position: new google.maps.LatLng(loc.Lat, loc.Long)
+			}));
+		});
 	});
 	var mapOptions = {
 		zoom: 3,
