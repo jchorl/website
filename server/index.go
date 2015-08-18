@@ -7,9 +7,12 @@ import (
 
 func init() {
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/admin", adminHandler)
 }
 
-var templates = template.Must(template.ParseGlob("dest/*.html"))
+// TODO: get proper template files
+var publicTemplates = template.Must(template.ParseGlob("dest/*.html"))
+var adminTemplates = template.Must(template.ParseGlob("dest/*.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	songs := getSongs(r)
@@ -20,9 +23,16 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		songs[0].Link,
 		songs[1:],
 	}
-	err := templates.ExecuteTemplate(w, "index", data)
+	err := publicTemplates.ExecuteTemplate(w, "index", data)
 	if err != nil {
-		log.Printf("%s\n", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+}
+
+func adminHandler(w http.ResponseWriter, r *http.Request) {
+	err := adminTemplates.ExecuteTemplate(w, "admin", nil)
+	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

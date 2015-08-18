@@ -6,7 +6,7 @@ var uglify = require('gulp-uglify');
 
 gulp.task('compilePublicScripts', function() {
 	gulp.src('src/public/scripts/*.js')
-		.pipe(concat('script.js'))
+		.pipe(concat('public.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('dest'));
 });
@@ -14,13 +14,14 @@ gulp.task('compilePublicScripts', function() {
 gulp.task('compilePublicStyles', function() {
 	gulp.src('src/public/styles/*.less')
 		.pipe(less())
-		.pipe(concat('style.css'))
+		.pipe(concat('public.css'))
 		.pipe(minifyCSS())
 		.pipe(gulp.dest('dest'));
 });
 
 gulp.task('copyPublic', function() {
 	gulp.src('src/public/templates/*')
+		.pipe(concat('index.html'))
 		.pipe(gulp.dest('dest'));
 	gulp.src('src/public/imgs/*')
 		.pipe(gulp.dest('dest'));
@@ -49,6 +50,7 @@ gulp.task('compileAdminStyles', function() {
 
 gulp.task('copyAdmin', function() {
 	gulp.src('src/admin/templates/*')
+		.pipe(concat('admin.html'))
 		.pipe(gulp.dest('dest'));
 });
 
