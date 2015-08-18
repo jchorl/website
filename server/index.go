@@ -2,6 +2,7 @@ package server
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -12,9 +13,18 @@ func init() {
 var templates = template.Must(template.ParseGlob("dest/*.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	log.Print("indexHandler")
 	songs := getSongs(r)
-	err := templates.ExecuteTemplate(w, "index", nil)
+	data := struct {
+		FirstSongLink string
+		OtherSongs    []Song
+	}{
+		songs[0].Link,
+		songs[1:],
+	}
+	err := templates.ExecuteTemplate(w, "index", data)
 	if err != nil {
+		log.Printf("%s\n", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

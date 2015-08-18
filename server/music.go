@@ -8,9 +8,9 @@ import (
 )
 
 type Song struct {
-	Name   string
+	Title  string
 	Artist string
-	Id     int
+	Link   string
 	Order  int
 }
 
@@ -38,7 +38,7 @@ func newSong(w http.ResponseWriter, r *http.Request) {
 
 func getSongs(r *http.Request) []Song {
 	c := appengine.NewContext(r)
-	query := datastore.NewQuery("Song").Order("Order")
+	query := datastore.NewQuery("Song").Order("-Order")
 
 	var songs []Song
 	query.GetAll(c, &songs)
