@@ -4,6 +4,11 @@ runtime: go
 api_version: go1
 
 handlers:
+- url: /api/location/new
+  script: _go_app
+  login: admin
+- url: /api/location
+  script: _go_app
 - url: /
   script: _go_app
 - url: /(.*\.(css|js|jpg|png))$
