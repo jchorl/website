@@ -10,12 +10,18 @@ func init() {
 	http.HandleFunc("/admin", adminHandler)
 }
 
-// TODO: get proper template files
-var publicTemplates = template.Must(template.ParseGlob("dest/*.html"))
-var adminTemplates = template.Must(template.ParseGlob("dest/*.html"))
+func handleErr(err error, w http.ResponseWriter) {
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		panic(err)
+	}
+}
+
+var publicTemplates = template.Must(template.ParseFiles("dest/index.html"))
+var adminTemplates = template.Must(template.ParseFiles("dest/admin.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	songs := getSongs(r)
+	_, songs := getSongs(w, r)
 	data := struct {
 		FirstSongLink string
 		OtherSongs    []Song
@@ -31,7 +37,20 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
-	err := adminTemplates.ExecuteTemplate(w, "admin", nil)
+	locationKeys, locations := getLocations(w, r)
+	songKeys, songs := getSongs(w, r)
+	data := struct {
+		Songs        []Song
+		SongKeys     []int64
+		Locations    []Location
+		LocationKeys []int64
+	}{
+		songs,
+		songKeys,
+		locations,
+		locationKeys,
+	}
+	err := adminTemplates.ExecuteTemplate(w, "admin", data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

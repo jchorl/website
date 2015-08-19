@@ -1,0 +1,26 @@
+{{define "locations"}}
+<table class="location-table">
+    <tr>
+        <th>Key</th>
+        <th>Name</th>
+        <th>Lat</th>
+        <th>Long</th>
+        <th>Order</th>
+        <th>Actions</th>
+    </tr>
+    {{range $index, $elem := .Locations}}
+    <tr>
+        <form action="/api/location/update" method="put">
+            <td><input type="number" name="Key" readonly="true" value="{{index $.LocationKeys $index}}"></input></td>
+            <td><input type="text" name="Name" value="{{$elem.Name}}"></input></td>
+            <td><input type="text" name="Lat" value="{{$elem.Lat}}"></input></td>
+            <td><input type="text" name="Long" value="{{$elem.Long}}"></input></td>
+            <td><input type="number" name="Order" value="{{$elem.Order}}"></input></td>
+            <td><input type="submit" value="Update"></input></td>
+        </form>
+    </tr>
+    </form>
+    {{end}}
+</table>
+{{end}}
+

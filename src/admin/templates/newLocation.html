@@ -1,0 +1,9 @@
+{{define "newLocation"}}
+<form action="/api/location/new" method="post">
+    Name: <input type="text" name="Name"></input><br>
+    Lat: <input type="text" name="Lat"></input><br>
+    Long: <input type="text" name="Long"></input><br>
+    Order: <input type="number" name="Order"></input><br>
+    <input type="submit" value="Submit"></input>
+</form>
+{{end}}

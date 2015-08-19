@@ -3,8 +3,8 @@ package server
 import (
 	"appengine"
 	"appengine/datastore"
-	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type Song struct {
@@ -15,32 +15,45 @@ type Song struct {
 }
 
 func init() {
-	http.HandleFunc("/api/music/new", newSong)
+	http.HandleFunc("/api/music/new", handleNewSong)
+	http.HandleFunc("/api/music/update", handleUpdateSong)
 }
 
-func newSong(w http.ResponseWriter, r *http.Request) {
+func parseSongForm(w http.ResponseWriter, r *http.Request) Song {
+	order, err := strconv.Atoi(r.FormValue("Order"))
+	handleErr(err, w)
+	return Song{r.FormValue("Title"), r.FormValue("Artist"), r.FormValue("Link"), order}
+}
+
+func handleNewSong(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	decoder := json.NewDecoder(r.Body)
-	var song Song
-	err := decoder.Decode(&song)
+	song := parseSongForm(w, r)
 
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	_, err = datastore.Put(c, datastore.NewIncompleteKey(c, "Song", nil), &song)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	_, err := datastore.Put(c, datastore.NewIncompleteKey(c, "Song", nil), &song)
+	handleErr(err, w)
 }
 
-func getSongs(r *http.Request) []Song {
+func handleUpdateSong(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	song := parseSongForm(w, r)
+	key, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
+	handleErr(err, w)
+
+	_, err = datastore.Put(c, datastore.NewKey(c, "Song", "", key, nil), &song)
+	handleErr(err, w)
+}
+
+func getSongs(w http.ResponseWriter, r *http.Request) ([]int64, []Song) {
 	c := appengine.NewContext(r)
 	query := datastore.NewQuery("Song").Order("-Order")
 
 	var songs []Song
-	query.GetAll(c, &songs)
-	return songs
+	keys, err := query.GetAll(c, &songs)
+	handleErr(err, w)
+
+	intKeys := make([]int64, len(keys))
+	for index, elem := range keys {
+		intKeys[index] = elem.IntID()
+	}
+	return intKeys, songs
 }
