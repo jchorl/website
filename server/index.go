@@ -22,17 +22,7 @@ var adminTemplates = template.Must(template.ParseFiles("dest/admin.html"))
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	_, songs := getSongs(w, r)
-	data := struct {
-		FirstSongLink string
-		OtherSongs    []Song
-	}{}
-	if len(songs) > 0 {
-		data.FirstSongLink = songs[0].Link
-		if len(songs) > 1 {
-			data.OtherSongs = songs[1:]
-		}
-	}
-	err := publicTemplates.ExecuteTemplate(w, "index", data)
+	err := publicTemplates.ExecuteTemplate(w, "index", songs)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
