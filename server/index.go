@@ -25,9 +25,12 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	data := struct {
 		FirstSongLink string
 		OtherSongs    []Song
-	}{
-		songs[0].Link,
-		songs[1:],
+	}{}
+	if len(songs) > 0 {
+		data.FirstSongLink = songs[0].Link
+		if len(songs) > 1 {
+			data.OtherSongs = songs[1:]
+		}
 	}
 	err := publicTemplates.ExecuteTemplate(w, "index", data)
 	if err != nil {
