@@ -35,11 +35,15 @@ func handleNewSong(w http.ResponseWriter, r *http.Request) {
 
 func handleUpdateSong(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	song := parseSongForm(w, r)
-	key, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
+	keyInt, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
+	key := datastore.NewKey(c, "Song", "", keyInt, nil)
 	handleErr(err, w)
-
-	_, err = datastore.Put(c, datastore.NewKey(c, "Song", "", key, nil), &song)
+	if r.FormValue("Action") == "Delete" {
+		err = datastore.Delete(c, key)
+	} else if r.FormValue("Action") == "Update" {
+		song := parseSongForm(w, r)
+		_, err = datastore.Put(c, key, &song)
+	}
 	handleErr(err, w)
 }
 

@@ -41,11 +41,15 @@ func handleNewLocation(w http.ResponseWriter, r *http.Request) {
 
 func handleUpdateLocation(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	loc := parseLocationForm(w, r)
-	key, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
+	keyInt, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
+	key := datastore.NewKey(c, "Location", "", keyInt, nil)
 	handleErr(err, w)
-
-	_, err = datastore.Put(c, datastore.NewKey(c, "Location", "", key, nil), &loc)
+	if r.FormValue("Action") == "Delete" {
+		err = datastore.Delete(c, key)
+	} else if r.FormValue("Action") == "Update" {
+		loc := parseLocationForm(w, r)
+		_, err = datastore.Put(c, key, &loc)
+	}
 	handleErr(err, w)
 }
 
