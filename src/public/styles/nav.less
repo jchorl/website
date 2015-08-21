@@ -4,46 +4,102 @@
   color: white;
   width: 100%;
   position: fixed;
-  height: @nav-height;
   top: 0;
   left: 0;
   .flex;
   .justify-content(space-between);
   .align-items(center);
   .align-content(flex-start);
+  .flex-wrap(wrap);
   z-index: 10;
+
+  @media(min-width: 768px) {
+    .flex-wrap(nowrap);
+    height: @nav-height;
+  }
 
   .nav-name {
     font-family: Consolas, monaco, monospace;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: 500;
     line-height: 26.3999996185303px;
-    margin: 0 10px 0 40px;
+    margin: 10px 10px 10px 40px;
+
+    @media(min-width: 768px) {
+      font-size: 24px;
+    }
+
+    #first-name, #last-name {
+      display: inline;
+
+      @media(min-width: 768px) {
+        display: block;
+      }
+    }
   }
 
-  .nav-sections {
-    margin: 0 40px 0 10px;
+  #nav-expand-button {
+    padding: 10px 20px;
+    cursor: pointer;
+
+    @media(min-width: 768px) {
+      display: none;
+    }
+  }
+
+  #nav-sections {
+    .flex-basis(100%);
+    .transition(max-height .5s cubic-bezier(0, 1, 0.5, 1));
+    max-height: 0;
+    overflow-y: hidden;
+
+    &.expanded {
+      max-height: 150px;
+    }
+
+    @media(min-width: 768px) {
+      margin: 0 40px 0 10px;
+      .flex-basis(auto);
+      display: block;
+      .transition(none);
+      max-height: none;
+    }
 
     .nav-list {
       list-style-type: none;
+      padding: 0;
+      margin: 0;
 
       li {
-        width: 85px;
-        line-height: 40px;
-        text-align: center;
+        width: ~"calc(100% - 40px)";
+        margin-left: 40px;
+        line-height: 30px;
+        text-align: left;
         display: inline-block;
+
+        @media(min-width: 768px) {
+          width: 85px;
+          margin-left: 0;
+          line-height: 40px;
+          text-align: center;
+        }
 
         a, a:link, a:visited, a:hover, a:active {
           color: inherit;
           text-decoration: none;
           font-weight: normal;
-          transition: font-size 0.2s ease;
           font-size: 16px;
 
+          @media(min-width: 768px) {
+            transition: font-size 0.2s ease;
+          }
+
           &:hover {
-            font-size: 17px;
+            @media(min-width: 768px) {
+              font-size: 17px;
+            }
           }
         }
       }

@@ -4,8 +4,11 @@ $(function() {
 		lastNameEl = $("#last-name"),
 		firstName = "Josh",
 		lastName = "Chorlton",
-		timeOut,
-	cursor = '_';
+		cursor = '_',
+		navExpandButton = $('#nav-expand-button'),
+		navSections = $('#nav-sections'),
+		navExpanded = false,
+		timeOut;
 
 	firstNameEl.text(cursor);
 
@@ -44,5 +47,27 @@ $(function() {
 			var newColor = "rgba(0, 0, 0, " + scaledFade + ")";
 			$("#nav").css("background-color", newColor);
 		}
+	});
+
+	function closeNav() {
+		navSections.removeClass('expanded');
+		navExpanded = false;
+	}
+
+	function openNav() {
+		navSections.addClass('expanded');
+		navExpanded = true;
+	}
+
+	// nav expand button
+	navExpandButton.click(function() {
+		if (navExpanded) {
+			closeNav();
+		} else {
+			openNav();
+		}
+	});
+	navSections.find('a').click(function() {
+		closeNav();
 	});
 });
