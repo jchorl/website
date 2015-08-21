@@ -4,21 +4,25 @@ var locations = [],
 
 function dropMarkers(){
 	removeMarkers();
-	markers.forEach(function(marker, i) {
-		setTimeout(addMarker(marker), i * 300);
-	});
+	if (markers) {
+		markers.forEach(function(marker, i) {
+			setTimeout(addMarker(marker), i * 300);
+		});
+	}
 };
 
 function initMap() {
 	$.getJSON('api/location', function(resp) {
 		locations = resp;
-		locations.forEach(function(loc) {
-			markers.push(new google.maps.Marker({
-				draggable:false,
-				animation: google.maps.Animation.DROP,
-				position: new google.maps.LatLng(loc.Lat, loc.Long)
-			}));
-		});
+		if (locations) {
+			locations.forEach(function(loc) {
+				markers.push(new google.maps.Marker({
+					draggable:false,
+					animation: google.maps.Animation.DROP,
+					position: new google.maps.LatLng(loc.Lat, loc.Long)
+				}));
+			});
+		}
 	});
 	var mapOptions = {
 		zoom: 3,
@@ -28,9 +32,11 @@ function initMap() {
 }
 
 function removeMarkers() {
-	markers.forEach(function(marker) {
-		marker.setMap(null);
-	});
+	if (markers) {
+		markers.forEach(function(marker) {
+			marker.setMap(null);
+		});
+	}
 }
 
 function addMarker(marker){

@@ -1,52 +1,76 @@
-$(function() {
-	var documentEl = $(document);
-	var fadeThreshold = 100;
-	var sidebarEl = $('#sidebar');
-	var sidebarContainer= $('#sidebar-container');
-	var skillsBarWrapperEl = $('#skills-bar-wrapper');
-	var skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
-	var resumeHeaderBar = $('.resume-header-bar');
-	var projectsSection = $('.projects-section');
+var documentEl;
+var width;
+var sidebarContainer= $('#sidebar-container');
+var sidebarEl;
+var skillsBarWrapperWrapperEl;
+var skillsBarWrapperEl;
+var resumeHeaderBar;
+var projectsSection;
+var navBarHeight;
+var skillsEls;
+var fadeThreshold = 100;
+var resumeHeaderBarHeight;
+var sidebarHeight;
+var sidebarContainerHeight;
+var sidebarContainerTop;
+var sidebarContainerBottom;
+var topFloatThreshold;
+var topFadeThreshold;
+var bottomFloatThreshold;
+var bottomFadeThreshold;
+var labelEls = [];
+var usageEls = [];
+var activeEls = [];
+var hoverListenersOn = false;
 
-	var navBarHeight = $('#nav').outerHeight();
-	var skillsEls = $('[skills]');
-	var labelEls = [];
-	var usageEls = [];
-	var activeEls = [];
+function hasAttr(attr, el) {
+	var check = el.attr(attr);
+	return typeof check !== typeof undefined && check !== false;
+}
 
-	function hasAttr(el, attr) {
-		var check = el.attr(attr);
-		return typeof check !== typeof undefined && check !== false;
-	}
-
+function partitionSkills() {
 	labelEls = skillsEls.filter(function() {
-		return hasAttr($(this), 'label');
+		return hasAttr('label', $(this));
 	});
 	usageEls = skillsEls.filter(function() {
-		return hasAttr($(this), 'usage');
+		return hasAttr('usage', $(this));
 	});
+}
 
-	if (documentEl.width() >= 750) {
-		addHoverListeners();
-		$(window).scroll(handleScroll);
-	}
+function setBigFixedVars() {
+	sidebarHeight = sidebarEl.outerHeight();
+	sidebarContainerHeight = sidebarContainer.outerHeight();
+}
 
-	$(window).resize(function() {
-		if (documentEl.width() >= 750) {
-			addHoverListeners();
-			$(window).scroll(handleScroll);
-		} else {
-			removeHoverListeners();
-			$(window).off('scroll', handleScroll);
-		}
-	});
+function setSmallFixedVars() {
+	resumeHeaderBarHeight = resumeHeaderBar.outerHeight();
+}
 
-	function removeHoverListeners() {
+function setBigVariableVars() {
+	sidebarContainerTop = sidebarContainer.offset().top;
+	sidebarContainerBottom = sidebarContainerTop + sidebarContainerHeight;
+	topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
+	topFadeThreshold = topFloatThreshold - fadeThreshold;
+	bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
+	bottomFadeThreshold = bottomFloatThreshold + fadeThreshold;
+}
+
+function setSmallVariableVars() {
+	topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBarHeight - navBarHeight;;
+	bottomFadeThreshold = projectsSection.offset().top + projectsSection.outerHeight() - navBarHeight;
+	bottomFloatThreshold = bottomFadeThreshold + fadeThreshold;
+}
+
+function removeHoverListeners() {
+	if (hoverListenersOn) {
 		labelEls.unbind('mouseenter mouseleave');
 		usageEls.unbind('mouseenter mouseleave');
+		hoverListenersOn = false;
 	}
+}
 
-	function addHoverListeners() {
+function addHoverListeners() {
+	if (!hoverListenersOn) {
 		// add hover listeners
 		labelEls.hover(function() {
 			var el = $(this);
@@ -83,60 +107,90 @@ $(function() {
 			});
 			activeEls = [];
 		});
+		hoverListenersOn = true;
 	}
+}
 
-	function handleScroll() {
-		var scrolledDist = documentEl.scrollTop();
-		var width = documentEl.width();
-		if (width > 1650) {
-			var sidebarHeight = sidebarEl.outerHeight();
-			var sidebarContainerTop = sidebarContainer.offset().top;
-			var sidebarContainerBottom = sidebarContainerTop + sidebarContainer.outerHeight();
-			var topFloatThreshold = sidebarContainerTop - navBarHeight - 5;
-			var topFadeThreshold = topFloatThreshold - fadeThreshold;
-			var bottomFloatThreshold = sidebarContainerBottom - sidebarHeight - navBarHeight - 5;
-			var bottomFadeThreshold = bottomFloatThreshold + fadeThreshold;
-			if (scrolledDist < topFadeThreshold || scrolledDist >= bottomFadeThreshold) {
-				sidebarEl.removeClass('floated');
-				sidebarEl.removeClass('bottom');
-				sidebarEl.css('opacity', 0);
-			} else if (scrolledDist >= topFadeThreshold && scrolledDist < topFloatThreshold) {
-				var fractionFade = 1 - (topFloatThreshold - scrolledDist) / fadeThreshold;
-				sidebarEl.css('opacity', fractionFade);
-				sidebarEl.removeClass('floated');
-				sidebarEl.removeClass('bottom');
-			} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFloatThreshold) {
-				sidebarEl.removeClass('bottom');
-				sidebarEl.addClass('floated');
-				sidebarEl.css('opacity', '');
-			} else if (scrolledDist >= bottomFloatThreshold && scrolledDist < bottomFadeThreshold) {
-				var fractionFade = (bottomFadeThreshold - scrolledDist) / fadeThreshold;
-				sidebarEl.css('opacity', fractionFade);
-				sidebarEl.removeClass('floated');
-				sidebarEl.addClass('bottom');
-			}
-		} else {
-			var topFloatThreshold = resumeHeaderBar.offset().top + resumeHeaderBar.outerHeight() - navBarHeight;;
-			var bottomFadeThreshold = projectsSection.offset().top + projectsSection.outerHeight() - navBarHeight;
-			var bottomFloatThreshold = bottomFadeThreshold + fadeThreshold;
-			if (scrolledDist < topFloatThreshold) {
-				skillsBarWrapperEl.css('opacity', 1);
-				skillsBarWrapperWrapperEl.css('height', 'auto');
-				skillsBarWrapperEl.removeClass('floated');
-			} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFadeThreshold) {
-				skillsBarWrapperEl.css('opacity', 1);
-				skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
-				skillsBarWrapperEl.addClass('floated');
-			} else if (scrolledDist >= bottomFadeThreshold && scrolledDist < bottomFloatThreshold) {
-				var fractionFade = (bottomFloatThreshold - scrolledDist) / fadeThreshold;
-				skillsBarWrapperEl.css('opacity', fractionFade);
-				skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
-				skillsBarWrapperEl.addClass('floated');
-			} else if (scrolledDist >= bottomFloatThreshold) {
-				skillsBarWrapperEl.css('opacity', 1);
-				skillsBarWrapperWrapperEl.css('height', 'auto');
-				skillsBarWrapperEl.removeClass('floated');
-			}
+function handleScroll() {
+	var scrolledDist = documentEl.scrollTop();
+	if (width >= 1650) {
+		setBigVariableVars();
+		if (scrolledDist < topFadeThreshold || scrolledDist >= bottomFadeThreshold) {
+			sidebarEl.removeClass('floated');
+			sidebarEl.removeClass('bottom');
+			sidebarEl.css('opacity', 0);
+		} else if (scrolledDist >= topFadeThreshold && scrolledDist < topFloatThreshold) {
+			var fractionFade = 1 - (topFloatThreshold - scrolledDist) / fadeThreshold;
+			sidebarEl.css('opacity', fractionFade);
+			sidebarEl.removeClass('floated');
+			sidebarEl.removeClass('bottom');
+		} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFloatThreshold) {
+			sidebarEl.removeClass('bottom');
+			sidebarEl.addClass('floated');
+			sidebarEl.css('opacity', '');
+		} else if (scrolledDist >= bottomFloatThreshold && scrolledDist < bottomFadeThreshold) {
+			var fractionFade = (bottomFadeThreshold - scrolledDist) / fadeThreshold;
+			sidebarEl.css('opacity', fractionFade);
+			sidebarEl.removeClass('floated');
+			sidebarEl.addClass('bottom');
+		}
+	} else {
+		setSmallVariableVars();
+		if (scrolledDist < topFloatThreshold || scrolledDist >= bottomFloatThreshold) {
+			skillsBarWrapperEl.css('opacity', 1);
+			skillsBarWrapperWrapperEl.css('height', 'auto');
+			skillsBarWrapperEl.removeClass('floated');
+		} else if (scrolledDist >= topFloatThreshold && scrolledDist < bottomFadeThreshold) {
+			skillsBarWrapperEl.css('opacity', 1);
+			skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
+			skillsBarWrapperEl.addClass('floated');
+		} else if (scrolledDist >= bottomFadeThreshold && scrolledDist < bottomFloatThreshold) {
+			var fractionFade = (bottomFloatThreshold - scrolledDist) / fadeThreshold;
+			skillsBarWrapperEl.css('opacity', fractionFade);
+			skillsBarWrapperWrapperEl.css('height', skillsBarWrapperEl.outerHeight());
+			skillsBarWrapperEl.addClass('floated');
 		}
 	}
+}
+
+$(function() {
+	documentEl = $(document);
+	width = $(window).width();
+	sidebarContainer= $('#sidebar-container');
+	sidebarEl = sidebarContainer.find('#sidebar');
+	skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
+	skillsBarWrapperEl = skillsBarWrapperWrapperEl.find('#skills-bar-wrapper');
+	resumeHeaderBar = $('#resume-header-bar');
+	projectsSection = $('#projects-section');
+
+	navBarHeight = $('#nav').outerHeight();
+	skillsEls = $('[skills]');
+
+	partitionSkills();
+
+	if (width >= 750) {
+		if (width >= 1650) {
+			setBigFixedVars();
+		} else {
+			setSmallFixedVars();
+		}
+		addHoverListeners();
+		$(window).scroll(handleScroll);
+	}
+
+	$(window).resize(function() {
+		width = $(window).width();
+		if (width >= 750) {
+			if (width >= 1650) {
+				setBigFixedVars();
+			} else {
+				setSmallFixedVars();
+			}
+			addHoverListeners();
+			$(window).scroll(handleScroll);
+		} else {
+			removeHoverListeners();
+			$(window).off('scroll', handleScroll);
+		}
+	});
 });
