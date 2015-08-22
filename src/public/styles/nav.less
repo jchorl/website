@@ -1,6 +1,7 @@
 @import "main.less";
 
 #nav {
+  background-color: rgba(0, 0, 0, 0.95);
   color: white;
   width: 100%;
   position: fixed;
@@ -92,13 +93,22 @@
           font-weight: normal;
           font-size: 16px;
 
+          &.active {
+            text-decoration: underline;
+
+            @media(min-width: 768px) {
+              font-size: 18px;
+              text-decoration: none;
+            }
+          }
+
           @media(min-width: 768px) {
             transition: font-size 0.2s ease;
           }
 
           &:hover {
             @media(min-width: 768px) {
-              font-size: 17px;
+              font-size: 18px;
             }
           }
         }

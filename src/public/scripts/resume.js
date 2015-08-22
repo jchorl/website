@@ -1,27 +1,28 @@
-var documentEl;
-var width;
-var sidebarContainer= $('#sidebar-container');
-var sidebarEl;
-var skillsBarWrapperWrapperEl;
-var skillsBarWrapperEl;
-var resumeHeaderBar;
-var projectsSection;
-var navBarHeight;
-var skillsEls;
-var fadeThreshold = 100;
-var resumeHeaderBarHeight;
-var sidebarHeight;
-var sidebarContainerHeight;
-var sidebarContainerTop;
-var sidebarContainerBottom;
-var topFloatThreshold;
-var topFadeThreshold;
-var bottomFloatThreshold;
-var bottomFadeThreshold;
-var labelEls = [];
-var usageEls = [];
-var activeEls = [];
-var hoverListenersOn = false;
+var documentEl,
+	windowEl,
+	width,
+	sidebarContainer= $('#sidebar-container'),
+	sidebarEl,
+	skillsBarWrapperWrapperEl,
+	skillsBarWrapperEl,
+	resumeHeaderBar,
+	projectsSection,
+	navBarHeight,
+	skillsEls,
+	fadeThreshold = 100,
+	resumeHeaderBarHeight,
+	sidebarHeight,
+	sidebarContainerHeight,
+	sidebarContainerTop,
+	sidebarContainerBottom,
+	topFloatThreshold,
+	topFadeThreshold,
+	bottomFloatThreshold,
+	bottomFadeThreshold,
+	labelEls = [],
+	usageEls = [],
+	activeEls = [],
+	hoverListenersOn = false;
 
 function hasAttr(attr, el) {
 	var check = el.attr(attr);
@@ -155,7 +156,8 @@ function handleScroll() {
 
 $(function() {
 	documentEl = $(document);
-	width = $(window).width();
+	windowEl = $(window);
+	width = windowEl.width();
 	sidebarContainer= $('#sidebar-container');
 	sidebarEl = sidebarContainer.find('#sidebar');
 	skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
@@ -175,11 +177,11 @@ $(function() {
 			setSmallFixedVars();
 		}
 		addHoverListeners();
-		$(window).scroll(handleScroll);
+		documentEl.scroll(handleScroll);
 	}
 
-	$(window).resize(function() {
-		width = $(window).width();
+	windowEl.resize(function() {
+		width = windowEl.width();
 		if (width >= 750) {
 			if (width >= 1650) {
 				setBigFixedVars();
@@ -187,10 +189,10 @@ $(function() {
 				setSmallFixedVars();
 			}
 			addHoverListeners();
-			$(window).scroll(handleScroll);
+			windowEl.scroll(handleScroll);
 		} else {
 			removeHoverListeners();
-			$(window).off('scroll', handleScroll);
+			windowEl.off('scroll', handleScroll);
 		}
 	});
 });
