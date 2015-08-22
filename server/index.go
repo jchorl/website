@@ -7,6 +7,7 @@ import (
 
 func init() {
 	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/resume", resumeHandler)
 	http.HandleFunc("/admin", adminHandler)
 }
 
@@ -27,6 +28,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func resumeHandler(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "#resume", http.StatusMovedPermanently)
 }
 
 func adminHandler(w http.ResponseWriter, r *http.Request) {
