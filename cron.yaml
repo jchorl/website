@@ -1,8 +1,0 @@
-#cron:
-#- description: weekly log delivery
-#  url: /api/logs
-#  schedule: every sunday 14:00
-#
-#- description: heartbeat check
-#  url: /api/heartbeat
-#  schedule: every 1 hours
