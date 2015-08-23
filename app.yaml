@@ -31,3 +31,4 @@ skip_files:
 - ^gulpfile\.js$
 - ^package\.json$
 - ^src/(.*)
+- ^.git/(.*)
