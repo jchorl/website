@@ -29,7 +29,7 @@
 {{end}}
 
 {{define "resume"}}
-<div class="container">
+<div id="resume-section-heading-wrapper" class="container">
     <h1 class="section-heading">Resume</h1>
 </div>
 <div id="resume-sidebar-container">
@@ -53,6 +53,9 @@
         </div>
     </div>
     <div id="resume-container" class="resume-container container">
+        <div class="print-button no-print">
+            <a href="javascript:if(window.print)window.print()"><i class="fa fa-print"></i> Print</a>
+        </div>
         <div class="resume-content">
             <div id="resume-header-bar">
                 <div class="name-school">
@@ -189,13 +192,13 @@
                                 <li>Used a plethora of data structures and parallelization</li>
                             </ul>
                         </li>
-                        <li class="usage" usage skills="java git ecl sql no-print"><b>Three Android apps</b><span class="date">2012 &mdash; 2014</span>
+                        <li class="usage no-print" usage skills="java git ecl sql no-print"><b>Three Android apps</b><span class="date">2012 &mdash; 2014</span>
                             <ul>
                                 <li>Developed a ToDo List app, Notes app, and Snake game</li>
                                 <li>Used SQLite database and threading</li>
                             </ul>
                         </li>
-                        <li class="usage" usage skills="java ecl mac no-print"><b>Java games</b><span class="date">2011 &mdash; 2013</span>
+                        <li class="usage no-print" usage skills="java ecl mac no-print"><b>Java games</b><span class="date">2011 &mdash; 2013</span>
                             <ul>
                                 <li>Developed Tetris, Minesweeper, and Snake using Swing</li>
                             </ul>

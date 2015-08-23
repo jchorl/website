@@ -1,0 +1,89 @@
+@media print {
+  #nav {
+    display: none;
+  }
+
+  section#home, section#projects, section#about {
+    display: none;
+  }
+
+  #resume {
+    padding: 0!important;
+
+    #resume-section-heading-wrapper {
+      display: none;
+    }
+
+    #resume-sidebar-container {
+      div.skill {
+        color: black;
+        background-color: white;
+      }
+
+      #resume-container {
+        border: none;
+
+        .no-print {
+          display: none;
+        }
+
+        .resume-content {
+          width: 100%;
+          margin: 0;
+          font-size: 14px;
+
+          #resume-header-bar {
+            text-align: right;
+            border-bottom: 1px solid black;
+
+            .contact-info, .name-school {
+              text-align: center;
+
+              display: inline-block;
+              margin: 0 0 10px;
+            }
+
+            .name-school {
+              text-align: right;
+              .name {
+                margin: 0;
+                font-size: 40px;
+                font-weight: 500;
+                line-height: 42px;
+              }
+            }
+
+            .contact-info {
+              text-align: left;
+            }
+
+            .contact-info {
+              border-left: 1px solid black;
+              padding-left: 10px;
+              margin-right: 10px;
+              text-align: left;
+
+              .contact-icon {
+                width: 14px;
+                text-align: center;
+              }
+            }
+          }
+
+          #skills-bar-wrapper-wrapper {
+            padding: 8px 0;
+            display: block;
+          }
+
+          .section.section-work {
+            margin-top: 0;
+
+            .section-title {
+              margin-top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
