@@ -1,15 +1,15 @@
-application: website
+application: gold-summer-11
 version: 1
 runtime: go
 api_version: go1
 
 handlers:
-- url: /api/location/new
+- url: /api/location/(new|update)
   script: _go_app
   login: admin
 - url: /api/location
   script: _go_app
-- url: /api/music/new
+- url: /api/music/(new|update)
   script: _go_app
   login: admin
 - url: /admin\.(js|css)$
