@@ -1,13 +1,13 @@
 $(function() {
 	var firstNameEl = $('#first-name'),
 		lastNameEl = $('#last-name'),
-		fadeDist = $('#hero').height(),
+		fadeDist = $('#hero').outerHeight(),
 		documentEl = $(document),
 		firstName = 'Josh',
 		lastName = 'Chorlton',
 		cursor = '_',
 		nav = $('#nav'),
-		navHeight = nav.height(),
+		navHeight = nav.outerHeight(),
 		navExpandButton = $('#nav-expand-button'),
 		navSections = $('#nav-sections'),
 		navExpanded = false,
@@ -39,16 +39,18 @@ $(function() {
 			var scaledFade = fractionFade * 0.95;
 			var newColor = 'rgba(0, 0, 0, ' + scaledFade + ')';
 			nav.css('background-color', newColor);
+		} else {
+			nav.css('background-color', 'rgba(0, 0, 0, 0.95)');
 		}
 	}
 
 	function navActive(){
 		var scrollPos = documentEl.scrollTop();
 		navSectionsLinks.each(function () {
-			var currLink = $(this);
-			var refElement = $(currLink.attr('href'));
-			var topPosition = refElement.position().top;
-			var height = refElement.height();
+			var currLink = $(this),
+			    refElement = $(currLink.attr('href')),
+			    topPosition = refElement.position().top,
+			    height = refElement.outerHeight();
 			if (topPosition <= scrollPos + navHeight && topPosition + height > scrollPos + navHeight) {
 				navSectionsLinks.removeClass('active');
 				currLink.addClass('active');
@@ -85,5 +87,5 @@ $(function() {
 	navExpandButton.click(handleExpandButtonClick);
 	navSections.find('a').click(closeNav);
 
-	setTimeout(navFade, 50);
+	setTimeout(navFade, 100);
 });

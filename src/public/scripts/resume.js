@@ -1,6 +1,7 @@
 var documentEl,
 	windowEl,
 	width,
+	nav,
 	sidebarContainer= $('#sidebar-container'),
 	sidebarEl,
 	skillsBarWrapperWrapperEl,
@@ -39,11 +40,13 @@ function partitionSkills() {
 }
 
 function setBigFixedVars() {
+	navBarHeight = nav.outerHeight();
 	sidebarHeight = sidebarEl.outerHeight();
 	sidebarContainerHeight = sidebarContainer.outerHeight();
 }
 
 function setSmallFixedVars() {
+	navBarHeight = nav.outerHeight();
 	resumeHeaderBarHeight = resumeHeaderBar.outerHeight();
 }
 
@@ -158,6 +161,7 @@ $(function() {
 	documentEl = $(document);
 	windowEl = $(window);
 	width = windowEl.width();
+	nav = $('#nav');
 	sidebarContainer= $('#sidebar-container');
 	sidebarEl = sidebarContainer.find('#sidebar');
 	skillsBarWrapperWrapperEl = $('#skills-bar-wrapper-wrapper');
@@ -165,20 +169,22 @@ $(function() {
 	resumeHeaderBar = $('#resume-header-bar');
 	projectsSection = $('#projects-section');
 
-	navBarHeight = $('#nav').outerHeight();
 	skillsEls = $('[skills]');
 
 	partitionSkills();
 
-	if (width >= 750) {
-		if (width >= 1650) {
-			setBigFixedVars();
-		} else {
-			setSmallFixedVars();
+	setTimeout(function() {
+		if (width >= 750) {
+			if (width >= 1650) {
+				setBigFixedVars();
+			} else {
+				setSmallFixedVars();
+			}
+			addHoverListeners();
+			documentEl.scroll(handleScroll);
+			handleScroll();
 		}
-		addHoverListeners();
-		documentEl.scroll(handleScroll);
-	}
+	}, 100);
 
 	windowEl.resize(function() {
 		width = windowEl.width();
