@@ -10,11 +10,19 @@
 }
 
 .flex {
+  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
 }
 
+.transform(@transform) {
+  -ms-transform: @transform;
+  -webkit-transform: @transform;
+  transform: @transform;
+}
+
 .direction(@direction) {
+  -ms-flex-direction: @direction;
   -webkit-flex-direction: @direction;
   flex-direction: @direction;
 }
@@ -46,9 +54,9 @@
 
 .transition(@transition) {
   -webkit-transition: @transition;
-  -moz-transition:    @transition;
-  -ms-transition:     @transition;
-  -o-transition:      @transition;
+  -moz-transition: @transition;
+  -ms-transition: @transition;
+  -o-transition: @transition;
 }
 
 .filter(@filter) {
