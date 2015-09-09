@@ -13,6 +13,10 @@
   .align-items(center);
   position: relative;
 
+  @media(min-width: 2000px) {
+    padding-bottom: 110px;
+  }
+
   #resume-sidebar-container {
     width: 100%;
     position: relative;
@@ -222,7 +226,11 @@
 
               #skills-bar {
                 background-color: @light-gray;
-                width: 80%;
+                width: 90%;
+
+                @media(min-width: 1200px) {
+                  width: 1000px;
+                }
               }
             }
           }

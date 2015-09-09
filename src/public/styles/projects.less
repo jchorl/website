@@ -10,6 +10,10 @@
   padding: 50px 20px;
   color: white;
 
+  @media(min-width: 2000px) {
+    padding-bottom: 70px;
+  }
+
   .slant {
     .transform(rotate(-2deg));
     height: 90px;
@@ -18,12 +22,24 @@
     left: -20px;
     background: inherit;
 
+    @media(min-width: 2000px) {
+      height: 120px;
+    }
+
     &.top {
       top: -40px;
+
+      @media(min-width: 2000px) {
+        top: -80px;
+      }
     }
 
     &.bottom {
       bottom: -50px;
+
+      @media(min-width: 2000px) {
+        bottom: -60px;
+      }
     }
   }
 
