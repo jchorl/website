@@ -8,6 +8,7 @@ import (
 func init() {
 	http.HandleFunc("/", indexHandler)
 	http.HandleFunc("/resume", resumeHandler)
+	http.HandleFunc("/resume.", resumeHandler)
 	http.HandleFunc("/admin", adminHandler)
 }
 

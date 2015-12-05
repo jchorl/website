@@ -54,7 +54,7 @@
   .projects-container {
     .flex;
     .flex-wrap(wrap);
-    .justify-content(space-between);
+    .justify-content(flex-start);
     .align-items(stretch);
 
     .project {
@@ -112,6 +112,12 @@
         text-decoration: none;
       }
 
+      &.craigomation {
+        background: url(/craigomation_thumbnail.jpg);
+        background-size: cover;
+        background-position: center center;
+      }
+
       &.website {
         background: url(/website_thumbnail.jpg);
         background-size: cover;
@@ -120,6 +126,12 @@
 
       &.euler {
         background: url(/euler_thumbnail.jpg);
+        background-size: cover;
+        background-position: center center;
+      }
+
+      &.jaysbot {
+        background: url(/jaysbot_thumbnail.jpg);
         background-size: cover;
         background-position: center center;
       }

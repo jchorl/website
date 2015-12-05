@@ -5,13 +5,12 @@
     <div class="projects-links">Click on the projects below to view the code on Github. All projects and more available at <a target="_blank" href="https://github.com/jchorl">github.com/jchorl</a>.</div>
 </div>
 <div class="container projects-container">
-    <div class="project website">
-        <!-- TODO: make repo and update link -->
-        <a target="_blank" href="https://github.com/jchorl/website">
-            <h3>Personal Website</h3>
+    <div class="project craigomation">
+        <a target="_blank" href="https://github.com/matthewdu/powerplug">
+            <h3>Craig-o-mation</h3>
             <i class="fa fa-github icon"></i>
             <div class="description">
-                I wrote my website from scratch, and the only javascript library I use is jQuery. In fact, the only other library I use is font-awesome. My website is hosted on Google App Engine, from a server I wrote in Go. The single page is actually a few files stitched together using Go's <code>html/template</code> package. The songs and places in the about section are stored in a database and cached server side, retrieved via API call.
+                Craig-o-mation is a webapp that automates Craigslist purchases using the Postmates API for delivery and the Capitol One API for payments. The backend is written in Go and hosted on Google App Engine. There is also a self-hosted python server to scrape Craigslist since App Engine and EC2 are blocked. The only frontend framework used is jQuery. The frontend also makes use of Google Maps API.
             </div>
         </a>
     </div>
@@ -22,6 +21,24 @@
         <div class="description">
             Project Euler is a website that contains many interesting math problems that can be solved computationally. While the first few problems can be brute-forced, many require thinking and are actually quite time consuming. Being in both the engineering and math faculties, I enjoy these challenges. I have solved a bunch of them.
         </div>
+        </a>
+    </div>
+    <div class="project website">
+        <a target="_blank" href="https://github.com/jchorl/website">
+            <h3>Personal Website</h3>
+            <i class="fa fa-github icon"></i>
+            <div class="description">
+                I wrote my website from scratch, and the only javascript library I use is jQuery. In fact, the only other library I use is font-awesome. My website is hosted on Google App Engine, from a server I wrote in Go. The single page is actually a few files stitched together using Go's <code>html/template</code> package. The songs and places in the about section are stored in a database and cached server side, retrieved via API call.
+            </div>
+        </a>
+    </div>
+    <div class="project jaysbot">
+        <a target="_blank" href="https://github.com/jchorl/jaysbot">
+            <h3>JaysBot</h3>
+            <i class="fa fa-github icon"></i>
+            <div class="description">
+                This is a job written in Go that hits mlb.com API for updates on the Toronto Blue Jays and sends the updates to various locations. Currently the updates are POSTed to a HipChat room so I can easily get Jays updates at work.
+            </div>
         </a>
     </div>
     <div class="project minesweeper">

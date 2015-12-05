@@ -1,20 +1,21 @@
 {{define "languages"}}
-<div class="skill" label skills="js">Javascript</div>
-<div class="skill" label skills="sql">SQL</div>
-<div class="skill" label skills="html">HTML5</div>
-<div class="skill" label skills="css">CSS3</div>
-<div class="skill" label skills="java">Java</div>
 <div class="skill" label skills="py">Python</div>
 <div class="skill" label skills="go">Go</div>
+<div class="skill" label skills="sql">SQL</div>
+<div class="skill" label skills="java">Java</div>
+<div class="skill" label skills="js">Javascript</div>
+<div class="skill" label skills="html">HTML5</div>
+<div class="skill" label skills="css">CSS3</div>
 <div class="skill" label skills="less">Less</div>
 {{end}}
 
 {{define "frameworks"}}
+<div class="skill" label skills="fl">Flask</div>
+<div class="skill" label skills="tor">Tornado</div>
+<div class="skill" label skills="thr">Thrift</div>
+<div class="skill" label skills="njs">Node.js</div>
 <div class="skill" label skills="ng">AngularJS</div>
 <div class="skill" label skills="bs">Bootstrap</div>
-<div class="skill" label skills="njs">Node.js</div>
-<div class="skill" label skills="exp">Express</div>
-<div class="skill" label skills="jq">jQuery</div>
 {{end}}
 
 {{define "tools"}}
@@ -102,13 +103,35 @@
             <div class="section section-work">
                 <h2 class="section-title"><i class="fa fa-briefcase"></i> Work Experience</h2>
                 <div class="subsection">
-                    <div class="symphony usage" usage skills="js sql git vi css html java lin ij aws ang bs jq mac less">
+                    <div class="uber usage" usage skills="thr fl tor py sql git lin aws vi mac">
+                        <div class="co-first-row">
+                            <a href="https://www.uber.com" target="_blank" class="company-link">
+                                <span class="company-img-wrapper"><img src="logo_uber.png" class="company-img" alt="uber logo"></span>
+                                <span class="company-name">Uber</span>
+                            </a>
+                            <span class="date">August 2015 &mdash; Current</span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ti-second-row">
+                            <span class="title">Software Engineering Intern</span>
+                            <span class="place">San Francisco, California</span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="indent-image">
+                            <ul class="emp-list">
+                                <li>Implemented promotion redemption, used in all discounted Uber rides globally</li>
+                                <li>Migrated promotions to a service including database queries, business logic and API</li>
+                                <li>Designed job to clean up database, deleting millions of rows without downtime</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="symphony usage" usage skills="js sql git vi css html java lin ij aws ang bs mac less">
                         <div class="co-first-row">
                             <a href="http://www.symphonycommerce.com" target="_blank" class="company-link">
                                 <span class="company-img-wrapper"><img src="logo_symphony.png" class="company-img" alt="symphony logo"></span>
                                 <span class="company-name">Symphony Commerce</span>
                             </a>
-                            <span class="date">January 2015 &mdash; Current</span>
+                            <span class="date">January 2015 &mdash; July 2015</span>
                         </div>
                         <div class="clear"></div>
                         <div class="ti-second-row">
@@ -118,10 +141,9 @@
                         <div class="clear"></div>
                         <div class="indent-image">
                             <ul class="emp-list">
-                                <li>Optimized network calls, speeding up sites by up to 24%</li>
-                                <li>Identified and fixed security risk affecting 68% of clients</li>
                                 <li>Overhauled customer detail page for enhanced customer management</li>
-                                <li>Used Scrum, XP, and OO methodologies</li>
+                                <li>Refactored code to reduce network calls, speeding up sites by up to 24%</li>
+                                <li>Identified and fixed security risk affecting 68% of clients</li>
                             </ul>
                         </div>
                     </div>
@@ -145,14 +167,12 @@
                                 <li>Developed a <a target="_blank" href="http://www.cantechletter.com/2013/11/sap-applies-big-data-university-guelph-green-roof-project1101/">sensor-driven system to optimize performance of green roofs</a></li>
                                 <ul>
                                     <li>Designed database schema with triggers and stored procedures</li>
-                                    <li>Implemented user-friendly web application with SAP UI5</li>
-                                    <li>Wrote JavaScript to interact with database and send email alerts</li>
+                                    <li>Wrote jobs to efficiently query databases and send email alerts</li>
                                 </ul>
-                                <li>Used Scrum, Test Driven Development, XP, and OO methodologies</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="flexserv usage" usage skills="js html css bs ang njs exp git vi aws jq lin mac">
+                    <div class="flexserv usage no-print" usage skills="js html css bs ang njs git vi aws lin mac">
                         <div class="co-first-row">
                             <a href="http://www.flexserv.com" target="_blank" class="company-link">
                                 <span class="company-img-wrapper"><img src="logo_flexserv.png" class="company-img" alt="flexserv logo"></span>
@@ -176,29 +196,36 @@
                     </div>
                 </div>
             </div>
-            <div id="projects-section" class="section">
+            <div id="projects-section" class="section projects-section">
                 <h2 class="section-title"><i class="fa fa-code"></i> Projects</h2>
                 <div class="subsection">
                     <i>More projects at <a href="http://joshchorlton.com/Projects" class="link">joshchorlton.com</a>. All code available at <a class="link" href="http://github.com/jchorl">github.com/jchorl</a>.</i><br>
                     <ul>
-                        <li class="usage" usage skills="html css js bs jq git vi lin mac go appe less"><b>Personal Website</b><span class="date">2014-2015</span>
+                        <li class="usage project" usage skills="html css js bs git vi lin mac go appe py"><b><a target="_blank" href="https://github.com/matthewdu/powerplug">craig-o-mation</a></b> - CalHacks<span class="date">2015</span>
+                            <ul>
+                                <li>Purchase from Craigslist using Postmates for delivery and Capital One for payment</li>
+                                <li>Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist</li>
+                                <li>Winner of <i>Best Use of Capital One API</i></li>
+                            </ul>
+                        </li>
+                        <li class="usage no-print project" usage skills="html css js bs git vi lin mac go appe less"><b><a target="_blank" href="https://github.com/jchorl/website">Personal Website</a></b><span class="date">2014-2015</span>
                             <ul>
                                 <li>Designed to be completely responsive and mobile-friendly</li>
                             </ul>
                         </li>
-                        <li class="usage" usage skills="ecl vi java git lin py"><b>Project Euler</b><span class="date">2014</span>
+                        <li class="usage project" usage skills="ecl vi java git lin py"><b><a target="_blank" href="https://github.com/jchorl/Euler">Project Euler</a></b><span class="date">2014</span>
                             <ul>
-                                <li>Solved 67 problems from <a href="http://projecteuler.com">ProjectEuler.com</a></li>
+                                <li>Solved 69 problems from <a href="http://projecteuler.com">ProjectEuler.com</a></li>
                                 <li>Used a plethora of data structures and parallelization</li>
                             </ul>
                         </li>
-                        <li class="usage no-print" usage skills="java git ecl sql no-print"><b>Three Android apps</b><span class="date">2012 &mdash; 2014</span>
+                        <li class="usage no-print project" usage skills="java git ecl sql no-print"><b>Three Android apps</b><span class="date">2012 &mdash; 2014</span>
                             <ul>
                                 <li>Developed a ToDo List app, Notes app, and Snake game</li>
                                 <li>Used SQLite database and threading</li>
                             </ul>
                         </li>
-                        <li class="usage no-print" usage skills="java ecl mac no-print"><b>Java games</b><span class="date">2011 &mdash; 2013</span>
+                        <li class="usage no-print project" usage skills="java ecl mac no-print"><b>Java games</b><span class="date">2011 &mdash; 2013</span>
                             <ul>
                                 <li>Developed Tetris, Minesweeper, and Snake using Swing</li>
                             </ul>
