@@ -82,10 +82,18 @@ $(function() {
 	// type name
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
 
-	documentEl.scroll(navFade);
-	documentEl.scroll(navActive);
+	// only want this for >= 1024x768 resolutions
+	documentEl = $(document);
+	windowEl = $(window);
+	width = windowEl.width();
+	height = windowEl.outerHeight();
+	if (width >= 1024 && height >= 768) {
+		documentEl.scroll(navFade);
+		documentEl.scroll(navActive);
+
+		setTimeout(navFade, 100);
+	}
+
 	navExpandButton.click(handleExpandButtonClick);
 	navSections.find('a').click(closeNav);
-
-	setTimeout(navFade, 100);
 });

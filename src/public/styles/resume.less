@@ -5,15 +5,20 @@
 @resume-expand-width: 750px;
 
 #resume {
+  display: none;
+
+  @media (min-width: 1024px) and (min-height: 768px) {
+    .flex;
+  }
+
   background-color: @background-gray;
   padding: 20px 20px 80px;
-  .flex;
   .direction(column);
   .justify-content(center);
   .align-items(center);
   position: relative;
 
-  @media(min-width: 2000px) {
+  @media (min-width: 2000px) {
     padding-bottom: 110px;
   }
 
@@ -38,7 +43,7 @@
     #sidebar-container {
       display: none;
 
-      @media(min-width: 1650px) {
+      @media (min-width: 1650px) {
         display: block;
         width: ~"calc((100% - " @container-max-width ~") / 2)";
         position: absolute;
@@ -137,7 +142,7 @@
         }
 
         #resume-header-bar {
-          @media(min-width: @resume-expand-width) {
+          @media (min-width: @resume-expand-width) {
             text-align: right;
             border-bottom: 1px solid black;
           }
@@ -145,7 +150,7 @@
           .contact-info, .name-school {
             text-align: center;
 
-            @media(min-width: @resume-expand-width) {
+            @media (min-width: @resume-expand-width) {
               display: inline-block;
               margin: 20px 0 10px;
             }
@@ -159,26 +164,26 @@
               line-height: 42px;
             }
 
-            @media(min-width: @resume-expand-width) {
+            @media (min-width: @resume-expand-width) {
               text-align: right;
             }
           }
 
           .contact-info {
-            @media(min-width: @resume-expand-width) {
+            @media (min-width: @resume-expand-width) {
               text-align: left;
             }
           }
 
           .contact-info {
-            @media(min-width: @resume-expand-width) {
+            @media (min-width: @resume-expand-width) {
               border-left: 1px solid black;
               padding-left: 10px;
               margin-right: 10px;
               text-align: left;
             }
 
-            @media(min-width: 992px) {
+            @media (min-width: 992px) {
               margin-right: 100px;
             }
 
@@ -228,18 +233,18 @@
                 background-color: @light-gray;
                 width: 90%;
 
-                @media(min-width: 1200px) {
+                @media (min-width: 1200px) {
                   width: 1000px;
                 }
               }
             }
           }
 
-          @media(min-width: @resume-expand-width) {
+          @media (min-width: @resume-expand-width) {
             display: block;
           }
 
-          @media(min-width: 1650px) {
+          @media (min-width: 1650px) {
             display: none;
           }
         }
