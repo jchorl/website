@@ -6,8 +6,9 @@
 
 #resume {
   display: none;
+  font-size: 16px;
 
-  @media (min-width: 1024px) and (min-height: 768px) {
+  @media (min-width: 1024px) and (min-height: 600px) {
     .flex;
   }
 
@@ -157,6 +158,8 @@
           }
 
           .name-school {
+            padding-right: 10px;
+
             .name {
               margin: 0;
               font-size: 40px;
@@ -250,7 +253,7 @@
         }
 
         .section {
-          margin: 10px 30px;
+          margin: 30px 30px;
 
           .date {
             display: block;
@@ -266,8 +269,20 @@
           }
 
           .subsection {
-            margin-left:5%;
+            margin-left:20px;
             padding-top:5px;
+
+            .company:not(:first-child) {
+              padding-top: 5px;
+            }
+
+            #projects-list {
+              list-style-type: none;
+
+              ul {
+                list-style-type: disc;
+              }
+            }
           }
 
           .usage.active {

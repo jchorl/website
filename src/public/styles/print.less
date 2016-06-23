@@ -34,7 +34,7 @@
         .resume-content {
           width: 100%;
           margin: 0;
-          font-size: 14px;
+          font-size: 12px;
 
           #resume-header-bar {
             text-align: right;
@@ -79,20 +79,24 @@
             display: block;
           }
 
-          .section.section-work {
-            margin-top: 0;
+          .section {
+            margin: 25px 30px;
 
-            .section-title {
-              margin-top: 0;
+            &.section-work {
+              margin-top: 10px;
+
+              .section-title {
+                margin-top: 0;
+              }
             }
-          }
 
-          .section.projects-section {
-            ul {
-              padding-left: 20px;
+            &.projects-section {
+              ul {
+                padding-left: 20px;
 
-              .project ul {
-                padding-left: 30px;
+                .project ul {
+                  padding-left: 30px;
+                }
               }
             }
           }

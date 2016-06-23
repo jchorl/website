@@ -1,6 +1,6 @@
 {{define "languages"}}
-<div class="skill" label skills="py">Python</div>
 <div class="skill" label skills="go">Go</div>
+<div class="skill" label skills="py">Python</div>
 <div class="skill" label skills="sql">SQL</div>
 <div class="skill" label skills="java">Java</div>
 <div class="skill" label skills="js">Javascript</div>
@@ -10,15 +10,16 @@
 {{end}}
 
 {{define "frameworks"}}
-<div class="skill" label skills="fl">Flask</div>
+<div class="skill" label skills="react">ReactJS</div>
+<div class="skill" label skills="redux">Redux</div>
 <div class="skill" label skills="tor">Tornado</div>
-<div class="skill" label skills="thr">Thrift</div>
-<div class="skill" label skills="njs">Node.js</div>
+<div class="skill" label skills="fl">Flask</div>
 <div class="skill" label skills="ng">AngularJS</div>
 <div class="skill" label skills="bs">Bootstrap</div>
 {{end}}
 
 {{define "tools"}}
+<div class="skill" label skills="docker">Docker</div>
 <div class="skill" label skills="git">Git</div>
 <div class="skill" label skills="lin">Linux</div>
 <div class="skill" label skills="aws">AWS</div>
@@ -103,13 +104,34 @@
             <div class="section section-work">
                 <h2 class="section-title"><i class="fa fa-briefcase"></i> Work Experience</h2>
                 <div class="subsection">
-                    <div class="uber usage" usage skills="thr fl tor py sql git lin aws vi mac">
+                    <div class="docker usage company" usage skills="go sql js html css react redux docker git lin aws vi ng">
+                        <div class="co-first-row">
+                            <a href="https://www.docker.com" target="_blank" class="company-link">
+                                <span class="company-img-wrapper"><img src="logo_docker.png" class="company-img" alt="docker logo"></span>
+                                <span class="company-name">Docker</span>
+                            </a>
+                            <span class="date">May 2016 &mdash; Present</span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="ti-second-row">
+                            <span class="title">Software Engineer</span>
+                            <span class="place">San Francisco, California</span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="indent-image">
+                            <ul class="emp-list">
+                                <li>Added image signature policy options to ensure only signed images can be executed in Docker Datacenter</li>
+                                <li>Rewrote garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="uber usage company" usage skills="fl tor py sql git lin aws vi mac docker">
                         <div class="co-first-row">
                             <a href="https://www.uber.com" target="_blank" class="company-link">
                                 <span class="company-img-wrapper"><img src="logo_uber.png" class="company-img" alt="uber logo"></span>
                                 <span class="company-name">Uber</span>
                             </a>
-                            <span class="date">August 2015 &mdash; Current</span>
+                            <span class="date">August 2015 &mdash; December 2015</span>
                         </div>
                         <div class="clear"></div>
                         <div class="ti-second-row">
@@ -119,13 +141,15 @@
                         <div class="clear"></div>
                         <div class="indent-image">
                             <ul class="emp-list">
-                                <li>Implemented promotion redemption, used in all discounted Uber rides globally</li>
-                                <li>Migrated promotions to a service including database queries, business logic and API</li>
-                                <li>Designed job to clean up database, deleting millions of rows without downtime</li>
+                                <li>Migrated everything related to promotions to a microservice, including API endpoints and database access</li>
+                                <li>Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply</li>
+                                <li>Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency</li>
+                                <li>Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues</li>
+                                <li>Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="symphony usage" usage skills="js sql git vi css html java lin ij aws ang bs mac less">
+                    <div class="symphony usage company" usage skills="js sql git vi css html java lin ij aws ang bs mac less">
                         <div class="co-first-row">
                             <a href="http://www.symphonycommerce.com" target="_blank" class="company-link">
                                 <span class="company-img-wrapper"><img src="logo_symphony.png" class="company-img" alt="symphony logo"></span>
@@ -141,56 +165,10 @@
                         <div class="clear"></div>
                         <div class="indent-image">
                             <ul class="emp-list">
-                                <li>Overhauled customer detail page for enhanced customer management</li>
-                                <li>Refactored code to reduce network calls, speeding up sites by up to 24%</li>
-                                <li>Identified and fixed security risk affecting 68% of clients</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sap usage" usage skills="js sql p4 vi html ecl java lin">
-                        <div class="co-first-row">
-                            <a href="http://www.sap.com" target="_blank" class="company-link">
-                                <span class="company-img-wrapper"><img src="logo_sap.png" class="company-img" alt="sap logo"></span>
-                                <span class="company-name">SAP</span>
-                            </a>
-                            <span class="date">April 2014 &mdash; August 2014</span>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="ti-second-row">
-                            <span class="title">Application Developer</span>
-                            <span class="place">Waterloo, Ontario</span>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="indent-image">
-
-                            <ul class="emp-list">
-                                <li>Developed a <a target="_blank" href="http://www.cantechletter.com/2013/11/sap-applies-big-data-university-guelph-green-roof-project1101/">sensor-driven system to optimize performance of green roofs</a></li>
-                                <ul>
-                                    <li>Designed database schema with triggers and stored procedures</li>
-                                    <li>Wrote jobs to efficiently query databases and send email alerts</li>
-                                </ul>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="flexserv usage no-print" usage skills="js html css bs ang njs git vi aws lin mac">
-                        <div class="co-first-row">
-                            <a href="http://www.flexserv.com" target="_blank" class="company-link">
-                                <span class="company-img-wrapper"><img src="logo_flexserv.png" class="company-img" alt="flexserv logo"></span>
-                                <span class="company-name">Flexserv</span>
-                            </a>
-                            <span class="date">2014</span>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="ti-second-row">
-                            <span class="title">Full Stack Web Developer</span>
-                            <span class="place">Toronto, Ontario</span>
-                        </div>
-                        <div class="clear"></div>
-                        <div class="indent-image">
-                            <ul class="emp-list">
-                                <li>Independently developed full stack for <a href="http://www.flexserv.com">flexserv.com</a></li>
-                                <li>Wrote server backend with a database, REST API, email and authentication</li>
-                                <li>Created intuitive, dynamic, and responsive web pages</li>
+                                <li>Overhauled customer detail page, drastically improving customer management</li>
+                                <li>Designed and implemented tiered wholesale accounts, enabling storeowners to set limits on wholesalers such as minimum purchase requirements in order to obtain wholesale rates</li>
+                                <li>Refactored key pages like store checkout and product pages to reduce network traffic, seeing speed gains of >24%</li>
+                                <li>Identified and fixed a security risk where data was being sent to services unknowingly</li>
                             </ul>
                         </div>
                     </div>
@@ -200,7 +178,7 @@
                 <h2 class="section-title"><i class="fa fa-code"></i> Projects</h2>
                 <div class="subsection">
                     <i>More projects at <a href="http://joshchorlton.com/Projects" class="link">joshchorlton.com</a>. All code available at <a class="link" href="http://github.com/jchorl">github.com/jchorl</a>.</i><br>
-                    <ul>
+                    <ul id="projects-list">
                         <li class="usage project" usage skills="html css js bs git vi lin mac go appe py"><b><a target="_blank" href="https://github.com/matthewdu/powerplug">craig-o-mation</a></b> - CalHacks<span class="date">2015</span>
                             <ul>
                                 <li>Purchase from Craigslist using Postmates for delivery and Capital One for payment</li>
@@ -215,7 +193,7 @@
                         </li>
                         <li class="usage project" usage skills="ecl vi java git lin py"><b><a target="_blank" href="https://github.com/jchorl/Euler">Project Euler</a></b><span class="date">2014</span>
                             <ul>
-                                <li>Solved 69 problems from <a href="http://projecteuler.com">ProjectEuler.com</a></li>
+                                <li>Solved 71 problems from <a href="http://projecteuler.com">ProjectEuler.com</a></li>
                                 <li>Used a plethora of data structures and parallelization</li>
                             </ul>
                         </li>

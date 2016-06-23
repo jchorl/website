@@ -82,12 +82,12 @@ $(function() {
 	// type name
 	type(firstNameEl, firstName, true, 0, type.bind(undefined, lastNameEl, lastName, false));
 
-	// only want this for >= 1024x768 resolutions
+	// only want this for >= 1024x600 resolutions
 	documentEl = $(document);
 	windowEl = $(window);
 	width = windowEl.width();
 	height = windowEl.outerHeight();
-	if (width >= 1024 && height >= 768) {
+	if (width >= 1024 && height >= 600) {
 		documentEl.scroll(navFade);
 		documentEl.scroll(navActive);
 
