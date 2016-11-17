@@ -1,10 +1,8 @@
 package server
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
-	"strings"
 )
 
 func init() {
@@ -12,7 +10,6 @@ func init() {
 	http.HandleFunc("/resume", resumeHandler)
 	http.HandleFunc("/resume.", resumeHandler)
 	http.HandleFunc("/admin", adminHandler)
-	http.HandleFunc("/.well-known/acme-challenge/", leHandler)
 }
 
 func handleErr(err error, w http.ResponseWriter) {
@@ -24,14 +21,6 @@ func handleErr(err error, w http.ResponseWriter) {
 
 var publicTemplates = template.Must(template.ParseFiles("dest/index.html"))
 var adminTemplates = template.Must(template.ParseFiles("dest/admin.html"))
-
-func leHandler(w http.ResponseWriter, r *http.Request) {
-	if strings.HasPrefix(r.Host, "www") {
-		fmt.Fprint(w, "n_zxMPh1w2t3RseZCu0wgaklnVLHFiCtrBz4A9tsBRo.3UNtpU5LYtfFBh5NIwYhYNjw_Hibn3vf13W9RMwSZAI")
-	} else {
-		fmt.Fprint(w, "i_aLB1OqBA7tdlLIM4vAZlVyIspQ5_32YQJ91HuiWKM.3UNtpU5LYtfFBh5NIwYhYNjw_Hibn3vf13W9RMwSZAI")
-	}
-}
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	_, songs := getSongs(w, r)

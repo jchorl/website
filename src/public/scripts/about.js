@@ -25,8 +25,8 @@ function initMap() {
 		}
 	});
 	var mapOptions = {
-		zoom: 3,
-		center: new google.maps.LatLng(32.937960, -26.239040),
+		zoom: 2,
+		center: new google.maps.LatLng(32.937960, -1.453884),
 		disableDefaultUI: true
 	};
 	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
