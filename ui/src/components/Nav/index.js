@@ -66,6 +66,12 @@ export default class Nav extends Component {
                         { lastName }
                     </div>
                 </div>
+                <div id="links">
+                    <a href="#home">Home</a>
+                    <a href="#resume">Resume</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#about">About</a>
+                </div>
             </div>
         );
     }
