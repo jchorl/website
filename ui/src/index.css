@@ -53,3 +53,9 @@ button:focus {
 .clear {
     clear: both;
 }
+
+@media print {
+    .noPrint {
+        display: none!important;
+    }
+}

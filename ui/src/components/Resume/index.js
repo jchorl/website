@@ -2,11 +2,43 @@ import React, { Component } from 'react';
 
 import './Resume.css';
 
+const langs = [
+    <div class="skill" label skills="go">Go</div>,
+    <div class="skill" label skills="py">Python</div>,
+    <div class="skill" label skills="sql">SQL</div>,
+    <div class="skill" label skills="java">Java</div>,
+    <div class="skill" label skills="js">Javascript</div>,
+    <div class="skill" label skills="html">HTML5</div>,
+    <div class="skill" label skills="css">CSS3</div>,
+    <div class="skill" label skills="less">Less</div>
+]
+
+const frameworks = [
+    <div class="skill" label skills="react">ReactJS</div>,
+    <div class="skill" label skills="redux">Redux</div>,
+    <div class="skill" label skills="tor">Tornado</div>,
+    <div class="skill" label skills="fl">Flask</div>,
+    <div class="skill" label skills="ng">AngularJS</div>,
+    <div class="skill" label skills="bs">Bootstrap</div>
+]
+
+const tools = [
+    <div class="skill" label skills="docker">Docker</div>,
+    <div class="skill" label skills="git">Git</div>,
+    <div class="skill" label skills="lin">Linux</div>,
+    <div class="skill" label skills="aws">AWS</div>,
+    <div class="skill" label skills="vi">Vim</div>,
+    <div class="skill" label skills="appe">App Engine</div>,
+    <div class="skill" label skills="mac">Mac</div>,
+    <div class="skill" label skills="ij">IntelliJ</div>,
+    <div class="skill" label skills="ecl">Eclipse</div>
+]
+
 export default class Resume extends Component {
     render() {
         return (
             <div id="resume">
-                <h1 className="sectionHeading">
+                <h1 className="sectionHeading noPrint">
                     Resume
                 </h1>
                 <a id="pdfButton" href="/resume.pdf" target="_blank">View PDF</a>
@@ -125,7 +157,7 @@ export default class Resume extends Component {
                                 <ul className="projectsList">
                                     <li><a className="projectTitle" href="https://github.com/jchorl/financejc" target="_blank">FinanceJC</a> - <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a><span className="date">2016-2017</span>
                                         <ul>
-                                            <li>Keep track of finances by inputting transactions, with support for templates and recurring transactions</li>
+                                            <li>Keep track of finances with support for templates and recurring transactions</li>
                                             <li>Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch</li>
                                         </ul>
                                     </li>
@@ -134,7 +166,7 @@ export default class Resume extends Component {
                                             <li>Easily embed a picture frame on a website with photos from a Google Photos album</li>
                                         </ul>
                                     </li>
-                                    <li usage skills="html css js bs git vi lin mac go appe py"><a className="projectTitle" target="_blank" href="https://github.com/matthewdu/powerplug">craig-o-mation</a> - CalHacks<span className="date">2015</span>
+                                    <li className="noPrint" usage skills="html css js bs git vi lin mac go appe py"><a className="projectTitle" target="_blank" href="https://github.com/matthewdu/powerplug">craig-o-mation</a> - CalHacks<span className="date">2015</span>
                                         <ul>
                                             <li>Purchase from Craigslist using Postmates for delivery and Capital One for payment</li>
                                             <li>Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist</li>
@@ -144,7 +176,7 @@ export default class Resume extends Component {
                                 </ul>
                             </div>
                         </div>
-                        <div className="section">
+                        <div className="section noPrint">
                             <h2 className="sectionTitle"><i className="fa fa-rocket"></i> Activities and Interests</h2>
                             <div className="subsection">
                                 <ul>

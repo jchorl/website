@@ -57,7 +57,7 @@ export default class Nav extends Component {
         } = this.state;
 
         return (
-            <div id="nav">
+            <div id="nav" className="noPrint">
                 <div id="name">
                     <div id="first-name">
                         { firstName }

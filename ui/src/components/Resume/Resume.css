@@ -23,7 +23,7 @@
     display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px), print {
     #resume #pdfButton {
         display: none;
     }
@@ -65,8 +65,10 @@
     }
 
     #resume .name {
-        font-size: 36px;
+        font-size: 40px;
+        line-height: 42px;
         margin: 0;
+        font-weight: 500;
     }
 
     #resume .contactInfo {
@@ -190,5 +192,26 @@
 
     #resume .contactInfo {
         margin-right: 80px;
+    }
+}
+
+@media print {
+    #resume {
+        background: none;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    #resume #page {
+        border: none;
+    }
+
+    #resume .content {
+        width: 100%;
+        margin: 0;
+    }
+
+    #resume .empList {
+        margin: 5px 0 13px 10px;
     }
 }
