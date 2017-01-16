@@ -2,13 +2,7 @@
     background: #e2e2e2;
     display: flex;
     flex-direction: column;
-}
-
-#resume .sectionHeading {
-    max-width: 1200px;
-}
-
-#resume #pdfButtonWrapper {
+    align-items: center;
     padding: 15px;
 }
 
@@ -25,8 +19,176 @@
     display: block;
 }
 
+#resume #page {
+    display: none;
+}
+
 @media (min-width: 768px) {
-    #resume #pdfButtonWrapper {
+    #resume #pdfButton {
         display: none;
+    }
+
+    #resume a:link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    #resume a:link:hover {
+        text-decoration: underline;
+    }
+
+    #resume #page {
+        display: block;
+        background: #f8f8f8;
+        border: 1px solid #000;
+        padding: 20px 0;
+        max-width: 1200px;
+        width: 100%;
+    }
+
+    #resume .content {
+        width: 88%;
+        margin: 0 auto;
+    }
+
+    #resume #personalInfo {
+        border-bottom: 1px solid #000;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+
+    #resume .nameSchool {
+        text-align: right;
+        padding-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    #resume .name {
+        font-size: 36px;
+        margin: 0;
+    }
+
+    #resume .contactInfo {
+        border-left: 1px solid #000;
+        padding-left: 10px;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    #resume .contactIcon {
+        width: 24px;
+        text-align: center;
+    }
+
+    #resume .section {
+        margin: 30px;
+    }
+
+    #resume .sectionTitle {
+        font-weight: 100;
+        margin-bottom: 0;
+    }
+
+    #resume .subsection {
+        margin-left: 20px;
+        padding-top: 5px;
+    }
+
+    #resume .company {
+        padding-top: 5px;
+    }
+
+    #resume .coFirstRow {
+        margin-right: 0;
+        margin-left: 0;
+        height: 25px;
+    }
+
+    #resume .companyLink {
+        float: left;
+        font-weight:bold;
+        line-height: 25px;
+    }
+
+    #resume .companyName {
+        line-height: 25px;
+        display: block;
+        float: left;
+        padding-left: 5px;
+        text-decoration: inherit;
+    }
+
+    #resume .companyImgWrapper {
+        height: 25px;
+        width: 25px;
+        display: block;
+        float: left;
+    }
+
+    #resume .companyImg {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: initial;
+    }
+
+    #resume .date {
+        display: block;
+        line-height: 25px;
+        float: right;
+        color:#686868;
+    }
+
+    #resume .tiSecondRow {
+        font-style:italic;
+        font-size:0.75em;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #resume .title {
+        margin-left: 30px;
+        float: left;
+    }
+
+    #resume .place {
+        display: block;
+        float: right;
+        color: #686868;
+    }
+
+    #resume .empList {
+        margin: 5px 0 13px 24px;
+    }
+
+    #resume li {
+        margin-top: 5px;
+    }
+
+    #resume .projectsAvailable {
+        font-style: italic;
+    }
+
+    #resume .projectsList {
+        list-style-type: none;
+    }
+
+    #resume .projectsList ul {
+        list-style-type: disc;
+    }
+
+    #resume .projectTitle {
+        font-weight: bold;
+    }
+}
+
+@media (min-width: 992px) {
+    #resume .content {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    #resume .contactInfo {
+        margin-right: 80px;
     }
 }

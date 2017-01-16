@@ -5,7 +5,19 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+a:visited {
+    color: inherit;
+}
+
+a:focus {
+    outline: 0;
 }
 
 button {
@@ -26,6 +38,8 @@ button:focus {
     margin: 0;
     font-size: 30px;
     padding: 20px;
+    width: 100%;
+    max-width: 1200px;
 }
 
 .sectionHeading::before {
@@ -34,4 +48,8 @@ button:focus {
 
 .sectionHeading::after {
     content: " />";
+}
+
+.clear {
+    clear: both;
 }
