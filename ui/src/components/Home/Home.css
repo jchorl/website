@@ -1,0 +1,44 @@
+#home {
+    background: url("/cover.jpg");
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+#home #content {
+    display: flex;
+    flex-direction: column;
+}
+
+#home #intro {
+    border: 1px solid #fff;
+    margin: 0 15px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+#home #game {
+    display: none;
+}
+
+@media(min-width: 768px) {
+    #home #content {
+        margin-top: 20px;
+    }
+
+    #home #intro {
+        padding: 20px;
+    }
+
+    #home #game {
+        display: block;
+        border: 1px solid #fff;
+        background-color: rgba(0, 0, 0, .7);
+        margin: -1px 15px 0;
+        padding: 20px;
+    }
+}
