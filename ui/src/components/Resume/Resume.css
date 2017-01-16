@@ -1,0 +1,32 @@
+#resume {
+    background: #e2e2e2;
+    display: flex;
+    flex-direction: column;
+}
+
+#resume .sectionHeading {
+    max-width: 1200px;
+}
+
+#resume #pdfButtonWrapper {
+    padding: 15px;
+}
+
+#resume #pdfButton {
+    width: 100%;
+    border: 1px solid #000;
+    font-size: 14px;
+    cursor: pointer;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    line-height: 35px;
+    background: #fff;
+    display: block;
+}
+
+@media (min-width: 768px) {
+    #resume #pdfButtonWrapper {
+        display: none;
+    }
+}
