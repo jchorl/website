@@ -25,9 +25,9 @@
     display: none;
 }
 
-@media(min-width: 768px) {
+@media (min-width: 1220px) and (min-height: 648px) {
     #home #content {
-        margin-top: 20px;
+        margin-top: 80px;
     }
 
     #home #intro {
