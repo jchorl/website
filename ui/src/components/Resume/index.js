@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Map, Set } from 'immutable';
+import { Map, List } from 'immutable';
 import classNames from 'classnames';
 
 import './Resume.css';
@@ -8,139 +8,199 @@ export default class Resume extends Component {
     constructor(props) {
         super(props);
 
-        let tags = Map({
-                go: false,
-                py: false,
-                sql: false,
-                java: false,
-                js: false,
-                html: false,
-                css: false,
-                less: false,
-                react: false,
-                redux: false,
-                tor: false,
-                fl: false,
-                ng: false,
-                bs: false,
-                docker: false,
-                git: false,
-                lin: false,
-                aws: false,
-                vi: false,
-                appe: false,
-                mac: false,
-                ij: false,
-                ecl: false
-            });
-        let jobs = Map({
-                snap: Map({
-                    active: false,
-                    associated: Set([])
-                }),
-                dockerj: Map({
-                    active: false,
-                    associated: Set(['go'])
-                }),
-                uber: Map({
-                    active: false,
-                    associated: Set([])
-                }),
-                symph: Map({
-                    active: false,
-                    associated: Set([])
-                }),
-                fjc: Map({
-                    active: false,
-                    associated: Set([])
-                }),
-                framed: Map({
-                    active: false,
-                    associated: Set([])
-                }),
-                com: Map({
-                    active: false,
-                    associated: Set([])
-                })
-        });
+        // each tag/job should have its own key on the root state. if the state mutates too quickly multiple times, sometimes the old
+        // state will get read and clobber some udpates in progress. keeping each tag/job as a key on the root state allows only
+        // updating that key.
+        let state = {
+            go: Map({
+                active: false,
+                associated: List()
+            }),
+            py: Map({
+                active: false,
+                associated: List()
+            }),
+            sql: Map({
+                active: false,
+                associated: List()
+            }),
+            java: Map({
+                active: false,
+                associated: List()
+            }),
+            js: Map({
+                active: false,
+                associated: List()
+            }),
+            html: Map({
+                active: false,
+                associated: List()
+            }),
+            css: Map({
+                active: false,
+                associated: List()
+            }),
+            less: Map({
+                active: false,
+                associated: List()
+            }),
+            react: Map({
+                active: false,
+                associated: List()
+            }),
+            redux: Map({
+                active: false,
+                associated: List()
+            }),
+            tor: Map({
+                active: false,
+                associated: List()
+            }),
+            fl: Map({
+                active: false,
+                associated: List()
+            }),
+            ng: Map({
+                active: false,
+                associated: List()
+            }),
+            bs: Map({
+                active: false,
+                associated: List()
+            }),
+            docker: Map({
+                active: false,
+                associated: List()
+            }),
+            git: Map({
+                active: false,
+                associated: List()
+            }),
+            lin: Map({
+                active: false,
+                associated: List()
+            }),
+            aws: Map({
+                active: false,
+                associated: List()
+            }),
+            vi: Map({
+                active: false,
+                associated: List()
+            }),
+            appe: Map({
+                active: false,
+                associated: List()
+            }),
+            mac: Map({
+                active: false,
+                associated: List()
+            }),
+            ij: Map({
+                active: false,
+                associated: List()
+            }),
+            ecl: Map({
+                active: false,
+                associated: List()
+            }),
 
-        this.state = {
-            tags,
-            jobs
-        }
-    };
+            snap: Map({
+                active: false,
+                associated: List(['java', 'git', 'mac', 'aws', 'appe', 'sql', 'vi', 'ij'])
+            }),
+            dockerj: Map({
+                active: false,
+                associated: List(['go', 'sql', 'js', 'html', 'css', 'react', 'redux', 'docker', 'git', 'lin', 'aws', 'vi', 'ng'])
+            }),
+            uber: Map({
+                active: false,
+                associated: List(['fl', 'tor', 'py', 'sql', 'git', 'lin', 'aws', 'vi', 'mac'])
+            }),
+            symph: Map({
+                active: false,
+                associated: List(['js', 'sql', 'git', 'vi', 'css', 'html', 'java', 'lin', 'ij', 'aws', 'ng', 'bs', 'mac', 'less'])
+            }),
+            fjc: Map({
+                active: false,
+                associated: List(['go', 'sql', 'git', 'vi', 'css', 'less', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
+            }),
+            framed: Map({
+                active: false,
+                associated: List(['py', 'git', 'vi', 'css', 'html', 'js', 'react', 'appe', 'docker'])
+            }),
+            com: Map({
+                active: false,
+                associated: List(['html', 'css', 'js', 'bs', 'git', 'vi', 'lin', 'mac', 'go', 'appe', 'py'])
+            })
+        };
 
-    tagStateChange = (name, activating) => () => {
-        const {
-            tags,
-            jobs
-        } = this.state;
-
-        let updatedJobs = jobs.map((m, name) => {
-            if (m.get('associated').contains(name)) {
-                return m.set('active', activating);
+        let jobKeys = [];
+        for (let key of Object.keys(state)) {
+            if (!state[key].get('associated').isEmpty()) {
+                jobKeys.push(key);
             }
-            return m;
-        });
+        }
+        for (let job of jobKeys) {
+            for (let skill of state[job].get('associated').toArray()) {
+                state[skill] = state[skill].update('associated', associated => associated.push(job));
+            }
+        }
 
-        this.setState({
-            tags: tags.set(name, activating),
-            jobs: updatedJobs
-        });
+        this.state = state;
     }
 
-    jobsStateChange = (name, activating) => () => {
-        const {
-            tags,
-            jobs
-        } = this.state;
+    activeStateChange = (name, activating) => {
+        let newState = {};
+        newState[name] = this.state[name].set('active', activating);
+        this.state[name].get('associated').forEach(k => newState[k] = this.state[k].set('active', activating));
 
-        let associated = jobs.getIn([name, 'associated']);
-        let updatedTags = tags.withMutations(m => {
-            associated.forEach(association => m.set(association, activating));
-        });
+        let updateState = () => {
+            this.setState(newState);
+        };
+        return updateState.bind(this);
+    }
 
-        this.setState({
-            tags: updatedTags,
-            jobs: jobs.setIn([name, 'active'], activating)
-        });
+    shouldComponentUpdate(nextProps, nextState) {
+        for (let k of Object.keys(nextState)) {
+            if (this.state[k].get('active') !== nextState[k].get('active')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     render() {
-        const {
-            tags
-        } = this.state;
-
         const langs = [
-            <Tag key="go" code="go" active={ tags.get('go') } tagStateChange={ this.tagStateChange } text="Go" />,
-            <Tag key="py" code="py" active={ tags.get('py') } tagStateChange={ this.tagStateChange } text="Python" />,
-            <Tag key="sql" code="sql" active={ tags.get('sql') } tagStateChange={ this.tagStateChange } text="SQL" />,
-            <Tag key="java" code="java" active={ tags.get('java') } tagStateChange={ this.tagStateChange } text="Java" />,
-            <Tag key="js" code="js" active={ tags.get('js') } tagStateChange={ this.tagStateChange } text="Javascript" />,
-            <Tag key="html" code="html" active={ tags.get('html') } tagStateChange={ this.tagStateChange } text="HTML5" />,
-            <Tag key="css" code="css" active={ tags.get('css') } tagStateChange={ this.tagStateChange } text="CSS3" />,
-            <Tag key="less" code="less" active={ tags.get('less') } tagStateChange={ this.tagStateChange } text="Less" />
+            <Tag key="go" code="go" active={ this.state.go.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Go" />,
+            <Tag key="py" code="py" active={ this.state.py.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Python" />,
+            <Tag key="sql" code="sql" active={ this.state.sql.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="SQL" />,
+            <Tag key="java" code="java" active={ this.state.java.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Java" />,
+            <Tag key="js" code="js" active={ this.state.js.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Javascript" />,
+            <Tag key="html" code="html" active={ this.state.html.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="HTML5" />,
+            <Tag key="css" code="css" active={ this.state.css.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="CSS3" />,
+            <Tag key="less" code="less" active={ this.state.less.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Less" />
         ]
 
         const frameworks = [
-            <Tag key="react" code="react" active={ tags.get('react') } tagStateChange={ this.tagStateChange } text="ReactJS" />,
-            <Tag key="redux" code="redux" active={ tags.get('redux') } tagStateChange={ this.tagStateChange } text="Redux" />,
-            <Tag key="tor" code="tor" active={ tags.get('tor') } tagStateChange={ this.tagStateChange } text="Tornado" />,
-            <Tag key="fl" code="fl" active={ tags.get('fl') } tagStateChange={ this.tagStateChange } text="Flask" />,
-            <Tag key="ng" code="ng" active={ tags.get('ng') } tagStateChange={ this.tagStateChange } text="AngularJS" />,
-            <Tag key="bs" code="bs" active={ tags.get('bs') } tagStateChange={ this.tagStateChange } text="Bootstrap" />
+            <Tag key="react" code="react" active={ this.state.react.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="ReactJS" />,
+            <Tag key="redux" code="redux" active={ this.state.redux.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Redux" />,
+            <Tag key="tor" code="tor" active={ this.state.tor.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Tornado" />,
+            <Tag key="fl" code="fl" active={ this.state.fl.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Flask" />,
+            <Tag key="ng" code="ng" active={ this.state.ng.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="AngularJS" />,
+            <Tag key="bs" code="bs" active={ this.state.bs.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Bootstrap" />
         ]
 
         const tools = [
-            <Tag key="docker" code="docker" active={ tags.get('docker') } tagStateChange={ this.tagStateChange } text="Docker" />,
-            <Tag key="git" code="git" active={ tags.get('git') } tagStateChange={ this.tagStateChange } text="Git" />,
-            <Tag key="lin" code="lin" active={ tags.get('lin') } tagStateChange={ this.tagStateChange } text="Linux" />,
-            <Tag key="aws" code="aws" active={ tags.get('aws') } tagStateChange={ this.tagStateChange } text="AWS" />,
-            <Tag key="vi" code="vi" active={ tags.get('vi') } tagStateChange={ this.tagStateChange } text="Vim" />,
-            <Tag key="appe" code="appe" active={ tags.get('appe') } tagStateChange={ this.tagStateChange } text="App Engine" />,
-            <Tag key="mac" code="mac" active={ tags.get('mac') } tagStateChange={ this.tagStateChange } text="Mac" />,
-            <Tag key="ij" code="ij" active={ tags.get('ij') } tagStateChange={ this.tagStateChange } text="IntelliJ" />,
-            <Tag key="ecl" code="ecl" active={ tags.get('ecl') } tagStateChange={ this.tagStateChange } text="Eclipse" />
+            <Tag key="docker" code="docker" active={ this.state.docker.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Docker" />,
+            <Tag key="git" code="git" active={ this.state.git.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Git" />,
+            <Tag key="lin" code="lin" active={ this.state.lin.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Linux" />,
+            <Tag key="aws" code="aws" active={ this.state.aws.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="AWS" />,
+            <Tag key="vi" code="vi" active={ this.state.vi.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Vim" />,
+            <Tag key="appe" code="appe" active={ this.state.appe.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="App Engine" />,
+            <Tag key="mac" code="mac" active={ this.state.mac.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Mac" />,
+            <Tag key="ij" code="ij" active={ this.state.ij.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="IntelliJ" />,
+            <Tag key="ecl" code="ecl" active={ this.state.ecl.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Eclipse" />
         ]
 
         return (
@@ -193,87 +253,31 @@ export default class Resume extends Component {
                         <div className="section">
                             <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
                             <div className="subsection">
-                                <div className="company" data-skills="">
-                                    <div className="coFirstRow">
-                                        <a href="https://www.snap.com" target="_blank" className="companyLink">
-                                            <span className="companyImgWrapper"><img src="logo_snapchat.png" className="companyImg" alt="snapchat logo"></img></span>
-                                            <span className="companyName">Snap</span>
-                                        </a>
-                                        <span className="date">January 2017 &mdash; Present</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <div className="tiSecondRow">
-                                        <span className="title">Software Engineer</span>
-                                        <span className="place">Los Angeles, California</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <ul className="empList">
-                                        <li>Implementing caching to improve performance when loading stories</li>
-                                    </ul>
-                                </div>
-                                <div className="company" data-skills="go sql js html css react redux docker git lin aws vi ng">
-                                    <div className="coFirstRow">
-                                        <a href="https://www.docker.com" target="_blank" className="companyLink">
-                                            <span className="companyImgWrapper"><img src="logo_docker.png" className="companyImg" alt="docker logo"></img></span>
-                                            <span className="companyName">Docker</span>
-                                        </a>
-                                        <span className="date">May 2016 &mdash; August 2016</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <div className="tiSecondRow">
-                                        <span className="title">Software Engineer</span>
-                                        <span className="place">San Francisco, California</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <ul className="empList">
-                                        <li>Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security</li>
-                                        <li>Revamped garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers</li>
-                                        <li>Developed activity streams to maintain a searchable, comprehensive history of events</li>
-                                    </ul>
-                                </div>
-                                <div className="company" data-skills="fl tor py sql git lin aws vi mac docker">
-                                    <div className="coFirstRow">
-                                        <a href="https://www.uber.com" target="_blank" className="companyLink">
-                                            <span className="companyImgWrapper"><img src="logo_uber.png" className="companyImg" alt="uber logo"></img></span>
-                                            <span className="companyName">Uber</span>
-                                        </a>
-                                        <span className="date">August 2015 &mdash; December 2015</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <div className="tiSecondRow">
-                                        <span className="title">Software Engineering Intern</span>
-                                        <span className="place">San Francisco, California</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <ul className="empList">
-                                        <li>Migrated everything related to promotions to a microservice, including API endpoints and database access</li>
-                                        <li>Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply</li>
-                                        <li>Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency</li>
-                                        <li>Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues</li>
-                                        <li>Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.</li>
-                                    </ul>
-                                </div>
-                                <div className="company" data-skills="js sql git vi css html java lin ij aws ang bs mac less">
-                                    <div className="coFirstRow">
-                                        <a href="http://www.symphonycommerce.com" target="_blank" className="companyLink">
-                                            <span className="companyImgWrapper"><img src="logo_symphony.png" className="companyImg" alt="symphony logo"></img></span>
-                                            <span className="companyName">Symphony Commerce</span>
-                                        </a>
-                                        <span className="date">January 2015 &mdash; July 2015</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <div className="tiSecondRow">
-                                        <span className="title">Full Stack Software Engineer</span>
-                                        <span className="place">San Francisco, California</span>
-                                    </div>
-                                    <div className="clear"></div>
-                                    <ul className="empList">
-                                        <li>Overhauled customer management pages, drastically improving customer support efficiency</li>
-                                        <li>Introduced tiered wholesale accounts, enabling storeowners to set tiered limits on wholesalers such as minimum purchase requirements</li>
-                                        <li>Refactored store checkout and product pages, reducing network traffic and seeing speed gains of >24%</li>
-                                        <li>Identified and fixed a security vulnerability where data was being sent to external services unknowingly</li>
-                                    </ul>
-                                </div>
+                                <Job active={ this.state.snap.get('active') } bullets={[
+                                    'Implementing caching to improve performance when loading stories'
+                                ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                logoUrl="logo_snapchat.png" name="Snapchat" place="Venice, California" position="Software Engineering Intern" />
+                                <Job active={ this.state.dockerj.get('active') } bullets={[
+                                    'Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security',
+                                    'Revamped garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers',
+                                    'Developed activity streams to maintain a searchable, comprehensive history of events'
+                                ]} code="dockerj" companyUrl="https://docker.com" date="May 2016 &mdash; August 2016" activeStateChange={ this.activeStateChange.bind(this) }
+                                logoUrl="logo_docker.png" name="Docker" place="San Francisco, California" position="Software Engineer" />
+                                <Job active={ this.state.uber.get('active') } bullets={[
+                                    'Migrated everything related to promotions to a microservice, including API endpoints and database access',
+                                    'Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply',
+                                    'Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency',
+                                    'Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues',
+                                    'Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.'
+                                ]} code="uber" companyUrl="https://uber.com" date="August 2015 &mdash; December 2015" activeStateChange={ this.activeStateChange.bind(this) }
+                                logoUrl="logo_uber.png" name="Uber" place="San Francisco, California" position="Software Engineering Intern" />
+                                <Job active={ this.state.symph.get('active') } bullets={[
+                                    'Overhauled customer management pages, drastically improving customer support efficiency',
+                                    'Introduced tiered wholesale accounts, enabling storeowners to set tiered limits on wholesalers such as minimum purchase requirements',
+                                    'Refactored store checkout and product pages, reducing network traffic and seeing speed gains of >24%',
+                                    'Identified and fixed a security vulnerability where data was being sent to external services unknowingly'
+                                ]} code="symph" companyUrl="https://symphonycommerce.com" date="January 2015 &mdash; July 2015" activeStateChange={ this.activeStateChange.bind(this) }
+                                logoUrl="logo_symphony.png" name="Symphony Commerce" place="San Francisco, California" position="Full-Stack Software Engineer" />
                             </div>
                         </div>
                         <div className="section">
@@ -281,24 +285,18 @@ export default class Resume extends Component {
                             <div className="subsection">
                                 <div className="projectsAvailable">More projects at <a href="https://joshchorlton.com" target="_blank">joshchorlton.com</a>, all code available at <a href="https://github.com/jchorl" target="_blank">github.com/jchorl</a>.</div>
                                 <ul className="projectsList">
-                                    <li><a className="projectTitle" href="https://github.com/jchorl/financejc" target="_blank">FinanceJC</a> - <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a><span className="date">2016-2017</span>
-                                        <ul>
-                                            <li>Keep track of finances with support for templates and recurring transactions</li>
-                                            <li>Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch</li>
-                                        </ul>
-                                    </li>
-                                    <li><a className="projectTitle" href="https://github.com/jchorl/framed" target="_blank">Framed</a> - <a href="https://framed.joshchorlton.com" target="_blank">framed.joshchorlton.com</a><span className="date">2016</span>
-                                        <ul>
-                                            <li>Easily embed a picture frame on a website with photos from a Google Photos album</li>
-                                        </ul>
-                                    </li>
-                                    <li className="noPrint" data-skills="html css js bs git vi lin mac go appe py"><a className="projectTitle" target="_blank" href="https://github.com/matthewdu/powerplug">craig-o-mation</a> - CalHacks<span className="date">2015</span>
-                                        <ul>
-                                            <li>Purchase from Craigslist using Postmates for delivery and Capital One for payment</li>
-                                            <li>Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist</li>
-                                            <li>Winner of <i>Best Use of Capital One API</i></li>
-                                        </ul>
-                                    </li>
+                                    <Project active={ this.state.fjc.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                        'Keep track of finances with support for templates and recurring transactions',
+                                        'Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch'
+                                    ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" extra={ <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a> } name="FinanceJC" />
+                                    <Project active={ this.state.framed.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                        'Easily embed a picture frame on a website with photos from a Google Photos album'
+                                    ]} code="framed" codeLink="https://github.com/jchorl/framed" date="2016" extra={ <a href="https://framed.joshchorlton.com" target="_blank">framed.joshchorlton.com</a> } name="Framed" />
+                                    <Project active={ this.state.com.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                            'Purchase from Craigslist using Postmates for delivery and Capital One for payment',
+                                            'Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist',
+                                            'Winner of "Best Use of Capital One API"'
+                                    ]} code="com" codeLink="https://github.com/matthewdu/powerplug" date="2015" extra={ <span>CalHacks</span> } name="craig-o-mation" noPrint={ true }/>
                                 </ul>
                             </div>
                         </div>
@@ -322,8 +320,8 @@ export default class Resume extends Component {
 class Tag extends Component {
     static propTypes = {
         active: PropTypes.bool.isRequired,
+        activeStateChange: PropTypes.func.isRequired,
         code: PropTypes.string.isRequired,
-        tagStateChange: PropTypes.func.isRequired,
         text: PropTypes.string.isRequired
     }
 
@@ -331,12 +329,101 @@ class Tag extends Component {
         const {
             active,
             code,
-            tagStateChange,
+            activeStateChange,
             text
         } = this.props;
 
         return (
-            <div className={ classNames("skill", { active }) } onMouseEnter={ tagStateChange(code, true) } onMouseLeave={ tagStateChange(code, false) }>{ text }</div>
+            <div className={ classNames("skill", { active }) } onMouseEnter={ activeStateChange(code, true) } onMouseLeave={ activeStateChange(code, false) }>{ text }</div>
+        );
+    }
+}
+
+class Job extends Component {
+    static propTypes = {
+        active: PropTypes.bool.isRequired,
+        activeStateChange: PropTypes.func.isRequired,
+        bullets: PropTypes.arrayOf(PropTypes.string).isRequired,
+        code: PropTypes.string.isRequired,
+        companyUrl: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        logoUrl: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        place: PropTypes.string.isRequired,
+        position: PropTypes.string.isRequired
+    }
+
+    render() {
+        const {
+            active,
+            activeStateChange,
+            bullets,
+            code,
+            companyUrl,
+            date,
+            logoUrl,
+            name,
+            place,
+            position
+        } = this.props;
+
+        return (
+            <div className={ classNames('company', { active }) } onMouseEnter={ activeStateChange(code, true) } onMouseLeave={ activeStateChange(code, false) }>
+                <div className="coFirstRow">
+                    <a href={ companyUrl } target="_blank" className="companyLink">
+                        <span className="companyImgWrapper"><img src={ logoUrl } className="companyImg" alt="company logo"></img></span>
+                        <span className="companyName">{ name }</span>
+                    </a>
+                    <span className="date">{ date }</span>
+                </div>
+                <div className="clear"></div>
+                <div className="tiSecondRow">
+                    <span className="title">{ position }</span>
+                    <span className="place">{ place }</span>
+                </div>
+                <div className="clear"></div>
+                <ul className="empList">
+                    { bullets.map((str, i) => <li key={ i }>{ str }</li>) }
+                </ul>
+            </div>
+        );
+    }
+}
+
+class Project extends Component {
+    static propTypes = {
+        active: PropTypes.bool.isRequired,
+        activeStateChange: PropTypes.func.isRequired,
+        bullets: PropTypes.arrayOf(PropTypes.string).isRequired,
+        code: PropTypes.string.isRequired,
+        codeLink: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+        extra: PropTypes.element,
+        name: PropTypes.string.isRequired,
+        noPrint: PropTypes.bool
+    }
+
+    render() {
+        const {
+            active,
+            activeStateChange,
+            bullets,
+            code,
+            codeLink,
+            date,
+            extra,
+            name,
+            noPrint
+        } = this.props;
+
+        return (
+            <li className={ classNames({ active, noPrint }) } onMouseEnter={ activeStateChange(code, true) } onMouseLeave={ activeStateChange(code, false) }>
+                <a className="projectTitle" href={ codeLink } target="_blank">{ name }</a>{ extra ? <span> - { extra }</span> : null }
+                <span className="date">{ date }</span>
+                <ul>
+                    { bullets.map((str, i) => <li key={ i }>{ str }</li>) }
+                </ul>
+            </li>
         );
     }
 }
