@@ -95,6 +95,10 @@
         display: flex;
         justify-content: center;
         margin-top: 30px;
+        position: sticky;
+        top: 80px;
+        background: #f8f8f8;
+        padding-bottom: 5px;
     }
 
     #resume #skillsBar .bracket {
