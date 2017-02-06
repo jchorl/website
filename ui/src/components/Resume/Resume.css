@@ -19,6 +19,10 @@
     display: block;
 }
 
+#resume #sidebarContainerContainer {
+    display: none;
+}
+
 #resume #page {
     display: none;
 }
@@ -126,7 +130,7 @@
         background-color: rgba(91, 192, 222, 0.3);
     }
 
-    #resume #skillsBar .skill {
+    #resume .skill {
         border: 1px solid black;
         margin: 2px 3px;
         padding: 1px 5px;
@@ -134,7 +138,7 @@
         background-color: #8a8a8a;
     }
 
-    #resume #skillsBar .skill.active {
+    #resume .skill.active {
         background-color: #5bc0de;
     }
 
@@ -250,9 +254,61 @@
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1440px) {
+    #resume {
+        padding: 15px 0;
+    }
+
     #resume #skillsBar {
         display: none;
+    }
+
+    #resume #resumeSidebarContainer {
+        position: relative;
+        width: 100%;
+    }
+
+    #resume #sidebarContainerContainer {
+        display: block;
+        position: absolute;
+        left: 0;
+        width: calc((100% - 1200px) / 2);
+        height: 100%;
+    }
+
+    #resume #sidebarContainer {
+        position: absolute;
+        right: 5px;
+        width: 220px;
+        height: 100%;
+    }
+
+    #resume #sidebar {
+        padding: 10px;
+        background: #f8f8f8;
+        border: 1px solid #000;
+        position: sticky;
+        top: 80px;
+    }
+
+    #resume #skillsLabel {
+        font-weight: 500;
+        margin: 0;
+    }
+
+    #resume .skillSectionLabel {
+        font-weight: 500;
+        margin: 0;
+    }
+
+    #resume .skillSection {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    #resume #page {
+        margin: 0 auto;
     }
 }
 

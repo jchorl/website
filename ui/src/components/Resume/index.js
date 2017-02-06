@@ -209,105 +209,126 @@ export default class Resume extends Component {
                     Resume
                 </h1>
                 <a id="pdfButton" href="/joshchorltonresume.pdf" target="_blank">View PDF</a>
-                <div id="page">
-                    <a id="printButton" className="noPrint" href="/joshchorltonresume.pdf" target="_blank"><i className="fa fa-print"></i> Print</a>
-                    <div className="content">
-                        <div id="personalInfo">
-                            <div className="nameSchool">
-                                <h2 className="name">Josh Chorlton</h2>
-                                <div className="school">4A | Software Engineering | University of Waterloo</div>
-                            </div>
-                            <div className="contactInfo">
-                                <div>
-                                    <i className="fa fa-globe contactIcon"></i>
-                                    <a className="link" href="http://joshchorlton.com">joshchorlton.com</a>
-                                </div>
-                                <div>
-                                    <i className="fa fa-envelope contactIcon"></i>
-                                    <a className="link" href="mailto:josh@joshchorlton.com">josh@joshchorlton.com</a>
-                                </div>
-                                <div>
-                                    <i className="fa fa-mobile-phone contactIcon"></i>
-                                    (415) 371-9709
-                                </div>
-                            </div>
-                        </div>
-                        <div id="skillsBar">
-                            <div className="bracket">[</div>
-                            <div className="skillsContainerHolder">
-                                <div className="skillsContainer">
-                                    <h4 className="skillsBarSection">Languages:</h4>
+                <div id="resumeSidebarContainer">
+                    <div id="sidebarContainerContainer">
+                        <div id="sidebarContainer">
+                            <div id="sidebar">
+                                <h2 id="skillsLabel">Skills</h2>
+                                <h3 className="skillSectionLabel">Languages</h3>
+                                <div className="skillSection">
                                     { langs }
                                 </div>
-                                <div className="skillsContainer">
-                                    <h4 className="skillsBarSection">Frameworks:</h4>
+                                <h3 className="skillSectionLabel">Frameworks</h3>
+                                <div className="skillSection">
                                     { frameworks }
                                 </div>
-                                <div className="skillsContainer">
-                                    <h4 className="skillsBarSection">Tools:</h4>
+                                <h3 className="skillSectionLabel">Tools</h3>
+                                <div className="skillSection">
                                     { tools }
                                 </div>
                             </div>
-                            <div className="bracket">]</div>
                         </div>
-                        <div className="section">
-                            <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
-                            <div className="subsection">
-                                <Job active={ this.state.snap.get('active') } bullets={[
-                                    'Implementing caching to improve performance when loading stories'
-                                ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
-                                logoUrl="logo_snapchat.png" name="Snapchat" place="Venice, California" position="Software Engineering Intern" />
-                                <Job active={ this.state.dockerj.get('active') } bullets={[
-                                    'Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security',
-                                    'Revamped garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers',
-                                    'Developed activity streams to maintain a searchable, comprehensive history of events'
-                                ]} code="dockerj" companyUrl="https://docker.com" date="May 2016 &mdash; August 2016" activeStateChange={ this.activeStateChange.bind(this) }
-                                logoUrl="logo_docker.png" name="Docker" place="San Francisco, California" position="Software Engineer" />
-                                <Job active={ this.state.uber.get('active') } bullets={[
-                                    'Migrated everything related to promotions to a microservice, including API endpoints and database access',
-                                    'Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply',
-                                    'Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency',
-                                    'Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues',
-                                    'Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.'
-                                ]} code="uber" companyUrl="https://uber.com" date="August 2015 &mdash; December 2015" activeStateChange={ this.activeStateChange.bind(this) }
-                                logoUrl="logo_uber.png" name="Uber" place="San Francisco, California" position="Software Engineering Intern" />
-                                <Job active={ this.state.symph.get('active') } bullets={[
-                                    'Overhauled customer management pages, drastically improving customer support efficiency',
-                                    'Introduced tiered wholesale accounts, enabling storeowners to set tiered limits on wholesalers such as minimum purchase requirements',
-                                    'Refactored store checkout and product pages, reducing network traffic and seeing speed gains of >24%',
-                                    'Identified and fixed a security vulnerability where data was being sent to external services unknowingly'
-                                ]} code="symph" companyUrl="https://symphonycommerce.com" date="January 2015 &mdash; July 2015" activeStateChange={ this.activeStateChange.bind(this) }
-                                logoUrl="logo_symphony.png" name="Symphony Commerce" place="San Francisco, California" position="Full-Stack Software Engineer" />
+                    </div>
+                    <div id="page">
+                        <a id="printButton" className="noPrint" href="/joshchorltonresume.pdf" target="_blank"><i className="fa fa-print"></i> Print</a>
+                        <div className="content">
+                            <div id="personalInfo">
+                                <div className="nameSchool">
+                                    <h2 className="name">Josh Chorlton</h2>
+                                    <div className="school">4A | Software Engineering | University of Waterloo</div>
+                                </div>
+                                <div className="contactInfo">
+                                    <div>
+                                        <i className="fa fa-globe contactIcon"></i>
+                                        <a className="link" href="http://joshchorlton.com">joshchorlton.com</a>
+                                    </div>
+                                    <div>
+                                        <i className="fa fa-envelope contactIcon"></i>
+                                        <a className="link" href="mailto:josh@joshchorlton.com">josh@joshchorlton.com</a>
+                                    </div>
+                                    <div>
+                                        <i className="fa fa-mobile-phone contactIcon"></i>
+                                        (415) 371-9709
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="section">
-                            <h2 className="sectionTitle"><i className="fa fa-code"></i> Projects</h2>
-                            <div className="subsection">
-                                <div className="projectsAvailable">More projects at <a href="https://joshchorlton.com" target="_blank">joshchorlton.com</a>, all code available at <a href="https://github.com/jchorl" target="_blank">github.com/jchorl</a>.</div>
-                                <ul className="projectsList">
-                                    <Project active={ this.state.fjc.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
-                                        'Keep track of finances with support for templates and recurring transactions',
-                                        'Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch'
-                                    ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" extra={ <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a> } name="FinanceJC" />
-                                    <Project active={ this.state.framed.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
-                                        'Easily embed a picture frame on a website with photos from a Google Photos album'
-                                    ]} code="framed" codeLink="https://github.com/jchorl/framed" date="2016" extra={ <a href="https://framed.joshchorlton.com" target="_blank">framed.joshchorlton.com</a> } name="Framed" />
-                                    <Project active={ this.state.com.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
-                                            'Purchase from Craigslist using Postmates for delivery and Capital One for payment',
-                                            'Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist',
-                                            'Winner of "Best Use of Capital One API"'
-                                    ]} code="com" codeLink="https://github.com/matthewdu/powerplug" date="2015" extra={ <span>CalHacks</span> } name="craig-o-mation" noPrint={ true }/>
-                                </ul>
+                            <div id="skillsBar">
+                                <div className="bracket">[</div>
+                                <div className="skillsContainerHolder">
+                                    <div className="skillsContainer">
+                                        <h4 className="skillsBarSection">Languages:</h4>
+                                        { langs }
+                                    </div>
+                                    <div className="skillsContainer">
+                                        <h4 className="skillsBarSection">Frameworks:</h4>
+                                        { frameworks }
+                                    </div>
+                                    <div className="skillsContainer">
+                                        <h4 className="skillsBarSection">Tools:</h4>
+                                        { tools }
+                                    </div>
+                                </div>
+                                <div className="bracket">]</div>
                             </div>
-                        </div>
-                        <div className="section noPrint">
-                            <h2 className="sectionTitle"><i className="fa fa-rocket"></i> Activities and Interests</h2>
-                            <div className="subsection">
-                                <ul>
-                                    <li>Leafs fan since birth</li>
-                                    <li>Music - Play guitar and am always listening. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
-                                    <li>Travel - Been to 25 countries so far. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
-                                </ul>
+                            <div className="section">
+                                <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
+                                <div className="subsection">
+                                    <Job active={ this.state.snap.get('active') } bullets={[
+                                        'Implementing caching to improve performance when loading stories'
+                                    ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_snapchat.png" name="Snapchat" place="Venice, California" position="Software Engineering Intern" />
+                                    <Job active={ this.state.dockerj.get('active') } bullets={[
+                                        'Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security',
+                                        'Revamped garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers',
+                                        'Developed activity streams to maintain a searchable, comprehensive history of events'
+                                    ]} code="dockerj" companyUrl="https://docker.com" date="May 2016 &mdash; August 2016" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_docker.png" name="Docker" place="San Francisco, California" position="Software Engineer" />
+                                    <Job active={ this.state.uber.get('active') } bullets={[
+                                        'Migrated everything related to promotions to a microservice, including API endpoints and database access',
+                                        'Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply',
+                                        'Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency',
+                                        'Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues',
+                                        'Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.'
+                                    ]} code="uber" companyUrl="https://uber.com" date="August 2015 &mdash; December 2015" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_uber.png" name="Uber" place="San Francisco, California" position="Software Engineering Intern" />
+                                    <Job active={ this.state.symph.get('active') } bullets={[
+                                        'Overhauled customer management pages, drastically improving customer support efficiency',
+                                        'Introduced tiered wholesale accounts, enabling storeowners to set tiered limits on wholesalers such as minimum purchase requirements',
+                                        'Refactored store checkout and product pages, reducing network traffic and seeing speed gains of >24%',
+                                        'Identified and fixed a security vulnerability where data was being sent to external services unknowingly'
+                                    ]} code="symph" companyUrl="https://symphonycommerce.com" date="January 2015 &mdash; July 2015" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_symphony.png" name="Symphony Commerce" place="San Francisco, California" position="Full-Stack Software Engineer" />
+                                </div>
+                            </div>
+                            <div className="section">
+                                <h2 className="sectionTitle"><i className="fa fa-code"></i> Projects</h2>
+                                <div className="subsection">
+                                    <div className="projectsAvailable">More projects at <a href="https://joshchorlton.com" target="_blank">joshchorlton.com</a>, all code available at <a href="https://github.com/jchorl" target="_blank">github.com/jchorl</a>.</div>
+                                    <ul className="projectsList">
+                                        <Project active={ this.state.fjc.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                            'Keep track of finances with support for templates and recurring transactions',
+                                            'Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch'
+                                        ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" extra={ <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a> } name="FinanceJC" />
+                                        <Project active={ this.state.framed.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                            'Easily embed a picture frame on a website with photos from a Google Photos album'
+                                        ]} code="framed" codeLink="https://github.com/jchorl/framed" date="2016" extra={ <a href="https://framed.joshchorlton.com" target="_blank">framed.joshchorlton.com</a> } name="Framed" />
+                                        <Project active={ this.state.com.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                                'Purchase from Craigslist using Postmates for delivery and Capital One for payment',
+                                                'Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist',
+                                                'Winner of "Best Use of Capital One API"'
+                                        ]} code="com" codeLink="https://github.com/matthewdu/powerplug" date="2015" extra={ <span>CalHacks</span> } name="craig-o-mation" noPrint={ true }/>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="section noPrint">
+                                <h2 className="sectionTitle"><i className="fa fa-rocket"></i> Activities and Interests</h2>
+                                <div className="subsection">
+                                    <ul>
+                                        <li>Leafs fan since birth</li>
+                                        <li>Music - Play guitar and am always listening. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
+                                        <li>Travel - Been to 25 countries so far. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
