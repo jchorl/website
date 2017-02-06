@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
 
 import './Projects.css';
 
@@ -8,11 +9,13 @@ export default class Projects extends Component {
 
         const projectInfo = [{
             title: "FinanceJC",
+            code: "financejc",
             description: "FinanceJC is a webapp that I built to keep track of my personal finances. It has support for users using Google as an OAuth provider, recurring transactions and also transaction templates. The front-end is build on React and Redux, while the back-end is a Postgres and Elasticsearch backed Go server behind NGINX.",
             codeLink: "https://github.com/jchorl/financejc"
         },
         {
             title: "Framed",
+            code: "framed",
             description: "Framed allows a user to generate an embeddable picture frame with rotating pictures from a Google Photos album. The front-end is a light React app and the back-end is Python on AppEngine.",
             codeLink: "https://github.com/jchorl/framed"
         },
@@ -37,7 +40,7 @@ export default class Projects extends Component {
             codeLink: "https://github.com/jchorl/euler"
         }];
 
-        this.projects = projectInfo.map(info => <Project key={ info.title } title={ info.title } description={ info.description } codeLink={ info.codeLink } />);
+        this.projects = projectInfo.map(info => <Project key={ info.title } code={ info.code } title={ info.title } description={ info.description } codeLink={ info.codeLink } />);
     }
 
     render() {
@@ -59,6 +62,7 @@ export default class Projects extends Component {
 
 class Project extends Component {
     static propTypes = {
+        code: PropTypes.string,
         codeLink: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired
@@ -66,13 +70,14 @@ class Project extends Component {
 
     render() {
         const {
+            code,
             codeLink,
             description,
             title
         } = this.props;
 
         return (
-            <div className="project">
+            <div className={ classNames("project", code) }>
                 <a target="_blank" href={ codeLink }>
                 <h2>{ title }</h2>
                 <i className="fa fa-github icon"></i>
