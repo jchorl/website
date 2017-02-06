@@ -1,4 +1,10 @@
 #projects {
     background: #43b4dc;
     height: 1000px;
+    color: #fff;
+}
+
+#projects #projectsContent {
+    max-width: 1200px;
+    margin: 0 auto;
 }

@@ -35,7 +35,7 @@ button:focus {
 }
 
 .sectionHeading {
-    margin: 0;
+    margin: 0 auto;
     font-size: 30px;
     padding: 20px;
     width: 100%;
