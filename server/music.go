@@ -3,8 +3,8 @@ package server
 import (
 	"appengine"
 	"appengine/datastore"
+	"encoding/json"
 	"net/http"
-	"strconv"
 )
 
 type Song struct {
@@ -15,49 +15,27 @@ type Song struct {
 }
 
 func init() {
-	http.HandleFunc("/api/music/new", handleNewSong)
-	http.HandleFunc("/api/music/update", handleUpdateSong)
+	http.HandleFunc("/api/songs", songsGetHandler)
 }
 
-func parseSongForm(w http.ResponseWriter, r *http.Request) Song {
-	order, err := strconv.Atoi(r.FormValue("Order"))
-	handleErr(err, w)
-	return Song{r.FormValue("Title"), r.FormValue("Artist"), r.FormValue("Link"), order}
-}
-
-func handleNewSong(w http.ResponseWriter, r *http.Request) {
+func getSongs(r *http.Request) ([]Song, error) {
 	c := appengine.NewContext(r)
-	song := parseSongForm(w, r)
-
-	_, err := datastore.Put(c, datastore.NewIncompleteKey(c, "Song", nil), &song)
-	handleErr(err, w)
-}
-
-func handleUpdateSong(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	keyInt, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
-	key := datastore.NewKey(c, "Song", "", keyInt, nil)
-	handleErr(err, w)
-	if r.FormValue("Action") == "Delete" {
-		err = datastore.Delete(c, key)
-	} else if r.FormValue("Action") == "Update" {
-		song := parseSongForm(w, r)
-		_, err = datastore.Put(c, key, &song)
-	}
-	handleErr(err, w)
-}
-
-func getSongs(w http.ResponseWriter, r *http.Request) ([]int64, []Song) {
-	c := appengine.NewContext(r)
-	query := datastore.NewQuery("Song").Order("-Order")
+	query := datastore.NewQuery("Song").Order("Order")
 
 	var songs []Song
-	keys, err := query.GetAll(c, &songs)
-	handleErr(err, w)
-
-	intKeys := make([]int64, len(keys))
-	for index, elem := range keys {
-		intKeys[index] = elem.IntID()
+	_, err := query.GetAll(c, &songs)
+	if err != nil {
+		return nil, err
 	}
-	return intKeys, songs
+
+	return songs, nil
+}
+
+func songsGetHandler(w http.ResponseWriter, r *http.Request) {
+	songs, err := getSongs(r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+	encoder := json.NewEncoder(w)
+	encoder.Encode(songs)
 }

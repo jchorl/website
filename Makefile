@@ -1,13 +1,14 @@
 serve:
-	docker run --rm -it \
+	docker container run --rm -it \
 		-v $(PWD):/website \
 		-w /website \
 		-p 8080:8080 \
+		--net=host \
 		google/cloud-sdk \
-		dev_appserver.py .
+		dev_appserver.py --host 0.0.0.0 .
 
 ui:
-	docker run --rm -it \
+	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-w /usr/src/app \
 		-p 3000:3000 \
@@ -15,15 +16,16 @@ ui:
 		npm run build
 
 ui-dev:
-	docker run --rm -it \
+	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-w /usr/src/app \
 		-p 3000:3000 \
+		--net=host \
 		node \
 		npm start
 
 node:
-	docker run --rm -it \
+	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-w /usr/src/app \
 		node \

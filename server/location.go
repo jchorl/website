@@ -5,71 +5,38 @@ import (
 	"appengine/datastore"
 	"encoding/json"
 	"net/http"
-	"strconv"
 )
 
 type Location struct {
-	Name  string
-	Lat   float64
-	Long  float64
-	Order int
+	Name  string `json:"name"`
+	Lat   float64 `json:"lat"`
+	Long  float64 `json:"long"`
+	Order int `json:"-"`
 }
 
 func init() {
-	http.HandleFunc("/api/location", handleGetLocations)
-	http.HandleFunc("/api/location/new", handleNewLocation)
-	http.HandleFunc("/api/location/update", handleUpdateLocation)
+	http.HandleFunc("/api/location", locationsGetHandler)
 }
 
-func parseLocationForm(w http.ResponseWriter, r *http.Request) Location {
-	lat, err := strconv.ParseFloat(r.FormValue("Lat"), 64)
-	handleErr(err, w)
-	long, err := strconv.ParseFloat(r.FormValue("Long"), 64)
-	handleErr(err, w)
-	order, err := strconv.Atoi(r.FormValue("Order"))
-	handleErr(err, w)
-	return Location{r.FormValue("Name"), lat, long, order}
-}
-
-func handleNewLocation(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	loc := parseLocationForm(w, r)
-
-	_, err := datastore.Put(c, datastore.NewIncompleteKey(c, "Location", nil), &loc)
-	handleErr(err, w)
-}
-
-func handleUpdateLocation(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	keyInt, err := strconv.ParseInt(r.FormValue("Key"), 10, 64)
-	key := datastore.NewKey(c, "Location", "", keyInt, nil)
-	handleErr(err, w)
-	if r.FormValue("Action") == "Delete" {
-		err = datastore.Delete(c, key)
-	} else if r.FormValue("Action") == "Update" {
-		loc := parseLocationForm(w, r)
-		_, err = datastore.Put(c, key, &loc)
-	}
-	handleErr(err, w)
-}
-
-func getLocations(w http.ResponseWriter, r *http.Request) ([]int64, []Location) {
+func getLocations(r *http.Request) ([]Location, error) {
 	c := appengine.NewContext(r)
 	query := datastore.NewQuery("Location").Order("Order")
 
-	var locations []Location
-	keys, err := query.GetAll(c, &locations)
-	handleErr(err, w)
-
-	intKeys := make([]int64, len(keys))
-	for index, elem := range keys {
-		intKeys[index] = elem.IntID()
+	locations := []Location{}
+	_, err := query.GetAll(c, &locations)
+	if err != nil {
+		return nil, err
 	}
-	return intKeys, locations
+
+	return locations, nil
 }
 
-func handleGetLocations(w http.ResponseWriter, r *http.Request) {
-	_, locations := getLocations(w, r)
+func locationsGetHandler(w http.ResponseWriter, r *http.Request) {
+	locations, err := getLocations(r)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	encoder := json.NewEncoder(w)
 	encoder.Encode(locations)
 }

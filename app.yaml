@@ -13,25 +13,9 @@ handlers:
   script: _go_app
   login: admin
   secure: always
-- url: /admin\.(js|css)$
-  static_files: dest/admin.\1
-  upload: dest/admin\.(css|js)$
-  login: admin
-  secure: always
-- url: /(.*\.(css|js|jpg|png))$
-  static_files: dest/\1
-  upload: dest/.*\.(css|js|jpg|png)$
-  secure: always
-- url: /admin
-  script: _go_app
-  login: admin
-  secure: always
 - url: /.well-known/acme-challenge
   static_dir: .well-known/acme-challenge
   mime_type: text/plain
-- url: /.*
-  script: _go_app
-  secure: always
 
 skip_files:
 - ^(.*/)?\.DS_Store$

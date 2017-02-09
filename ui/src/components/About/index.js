@@ -10,6 +10,12 @@ export default class About extends Component {
             center: new google.maps.LatLng(32.937960, -1.453884)
         };
         this.map = new google.maps.Map(this.refs.mapCanvas, mapOptions);
+
+        fetch('/api/location', { headers: new Headers({ accept: 'application/json' }) })
+        .then(resp => resp.json())
+        .then(json => {
+            debugger;
+        });
     }
 
     render() {
@@ -26,9 +32,9 @@ export default class About extends Component {
                     I grew up in Toronto, Ontario where I completed elementary and high school. Growing up, I was an avid hockey fan. I particularly enjoy playing outdoor games in the winter. 
                     </p>
                     <p>
-                    I also love to travel. I've been to a few different continents and met some really cool people along the way. My travels have brought me on trips ranging from African safari to remote villages in Vietnam to beach parties in the Philippines.<span className="showMap"> Click show places to see all the places I have traveled.</span>
+                    I also love to travel. I've been to a few different continents and met some really cool people along the way. My travels have brought me on trips ranging from African safari to remote villages in Vietnam to beach parties in the Philippines. Check out the places I've been to on the map.
                     </p>
-                    <div id="map" className="showMap" ref="mapCanvas"></div>
+                    <div id="map" ref="mapCanvas"></div>
                 </div>
             </div>
         );
