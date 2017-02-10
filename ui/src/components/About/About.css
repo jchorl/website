@@ -1,6 +1,11 @@
 #about {
     background: #e2e2e2;
+    position: relative;
     padding: 0 15px;
+}
+
+#about .divider {
+    background: #e2e2e2;
 }
 
 #about #aboutContent {

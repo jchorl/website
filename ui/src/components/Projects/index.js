@@ -46,6 +46,7 @@ export default class Projects extends Component {
     render() {
         return (
             <div id="projects" className="noPrint">
+                <div className="divider"></div>
                 <div id="projectsContent">
                     <h1 className="sectionHeading">
                         Projects

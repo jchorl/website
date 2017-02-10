@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 15px;
+    padding: 15px 15px 30px;
 }
 
 #resume #pdfButton {
@@ -256,7 +256,7 @@
 
 @media (min-width: 1440px) {
     #resume {
-        padding: 15px 0;
+        padding: 15px 0 70px;
     }
 
     #resume #skillsBar {

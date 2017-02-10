@@ -27,6 +27,7 @@ export default class About extends Component {
     render() {
         return (
             <div id="about" className="noPrint">
+                <div className="divider"></div>
                 <div id="aboutContent">
                     <h1 className="sectionHeading">
                         About Me

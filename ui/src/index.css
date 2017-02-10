@@ -50,6 +50,15 @@ button:focus {
     content: " />";
 }
 
+.divider {
+    height: 50px;
+    transform: rotate(1deg);
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 120%;
+}
+
 .clear {
     clear: both;
 }
