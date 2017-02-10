@@ -1,8 +1,8 @@
 package server
 
 import (
-	"appengine"
-	"appengine/datastore"
+	_ "appengine"
+	_ "appengine/datastore"
 	"encoding/json"
 	"net/http"
 )
@@ -10,7 +10,7 @@ import (
 type Location struct {
 	Name  string `json:"name"`
 	Lat   float64 `json:"lat"`
-	Long  float64 `json:"long"`
+	Lng  float64 `json:"lng"`
 	Order int `json:"-"`
 }
 
@@ -19,16 +19,29 @@ func init() {
 }
 
 func getLocations(r *http.Request) ([]Location, error) {
-	c := appengine.NewContext(r)
-	query := datastore.NewQuery("Location").Order("Order")
+	// c := appengine.NewContext(r)
+	// query := datastore.NewQuery("Location").Order("Order")
 
-	locations := []Location{}
-	_, err := query.GetAll(c, &locations)
-	if err != nil {
-		return nil, err
-	}
+	// locations := []Location{}
+	// _, err := query.GetAll(c, &locations)
+	// if err != nil {
+	// 	return nil, err // }
 
-	return locations, nil
+	// return locations, nil
+	return []Location{
+		Location{
+			"Toronto",
+			43.762175,
+			-79.423025,
+			1,
+		},
+		Location{
+			"Israel",
+			31.127667,
+			34.834623,
+			2,
+		},
+	}, nil
 }
 
 func locationsGetHandler(w http.ResponseWriter, r *http.Request) {

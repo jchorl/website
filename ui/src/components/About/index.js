@@ -9,12 +9,18 @@ export default class About extends Component {
             zoom: 2,
             center: new google.maps.LatLng(32.937960, -1.453884)
         };
-        this.map = new google.maps.Map(this.refs.mapCanvas, mapOptions);
+        let map = new google.maps.Map(this.refs.mapCanvas, mapOptions);
 
         fetch('/api/location', { headers: new Headers({ accept: 'application/json' }) })
         .then(resp => resp.json())
-        .then(json => {
-            debugger;
+        .then(places => {
+            for (let place of places) {
+                new google.maps.Marker({
+                    position: place,
+                    map: map,
+                    title: place.name
+                });
+            }
         });
     }
 
