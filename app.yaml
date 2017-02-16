@@ -9,6 +9,9 @@ handlers:
 - url: /api/location
   script: _go_app
   secure: always
+- url: /api/music
+  script: _go_app
+  secure: always
 - url: /api/music/(new|update)
   script: _go_app
   login: admin
@@ -16,12 +19,18 @@ handlers:
 - url: /.well-known/acme-challenge
   static_dir: .well-known/acme-challenge
   mime_type: text/plain
+- url: /(.*\.(png|jpg|pdf|js|css))$
+  static_files: ui/build/\1
+  upload: ui/build/.*\.(png|jpg|pdf|js|css)$
+- url: .*
+  static_files: ui/build/index.html
+  upload: ui/build/index.html
 
 skip_files:
 - ^(.*/)?\.DS_Store$
-- ^node_modules/(.*)
 - ^letsencrypt/(.*)
-- ^gulpfile\.js$
-- ^package\.json$
-- ^src/(.*)
 - ^.git/(.*)
+- ^ui/node_modules
+- ^ui/package.json
+- ^ui/src
+- ^ui/public
