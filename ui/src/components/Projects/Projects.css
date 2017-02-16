@@ -19,6 +19,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: stretch;
+    margin-top: 20px;
 }
 
 #projects .project {
