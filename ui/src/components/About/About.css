@@ -17,3 +17,9 @@
     height: 400px;
     width: 100%;
 }
+
+@media(min-width: 1200px) {
+    #about {
+        padding: 30px 15px;
+    }
+}
