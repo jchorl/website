@@ -1,5 +1,7 @@
 .DS_Store
-dest/
-node_modules/
+ui/build/
+ui/node_modules/
+adminui/build/
+adminui/node_modules/
 letsencrypt/
 .well-known/
