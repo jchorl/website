@@ -17,12 +17,13 @@ type Location struct {
 	Lat   float64 `json:"lat"`
 	Lng   float64 `json:"lng"`
 	Key   string  `json:"key",datastore:"-"`
-	Order int     `json:"-"`
+	Order int     `json:"order"`
 }
 
 func init() {
 	http.HandleFunc("/api/location", locationsGetHandler)
 	http.HandleFunc("/api/location/new", locationsPostHandler)
+	http.HandleFunc("/api/location/update", locationsPutHandler)
 }
 
 func addLocation(c context.Context, loc Location) (Location, error) {
@@ -30,6 +31,21 @@ func addLocation(c context.Context, loc Location) (Location, error) {
 	if err != nil {
 		return loc, err
 	}
+	loc.Key = key.Encode()
+	return loc, nil
+}
+
+func updateLocation(c context.Context, loc Location) (Location, error) {
+	key, err := datastore.DecodeKey(loc.Key)
+	if err != nil {
+		return loc, err
+	}
+
+	key, err = datastore.Put(c, key, &loc)
+	if err != nil {
+		return loc, err
+	}
+
 	loc.Key = key.Encode()
 	return loc, nil
 }
@@ -71,6 +87,25 @@ func locationsPostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	location, err = addLocation(c, location)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	encoder := json.NewEncoder(w)
+	encoder.Encode(location)
+}
+
+func locationsPutHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	var location Location
+	err := json.NewDecoder(r.Body).Decode(&location)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	location, err = updateLocation(c, location)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
