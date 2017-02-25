@@ -1,10 +1,11 @@
 package server
 
 import (
-	"appengine"
-	"appengine/datastore"
 	"encoding/json"
 	"net/http"
+
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
 )
 
 type Song struct {
