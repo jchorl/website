@@ -1,6 +1,7 @@
 serve:
 	docker container run --rm -it \
 		-v $(PWD):/website \
+		-v $$GOPATH:/google-cloud-sdk/platform/google_appengine/gopath:ro \
 		-w /website \
 		-p 8080:8080 \
 		--net=host \
