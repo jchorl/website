@@ -22,6 +22,7 @@ type Location struct {
 
 func init() {
 	http.HandleFunc("/api/location", locationsGetHandler)
+	http.HandleFunc("/api/location/new", locationsPostHandler)
 }
 
 func addLocation(c context.Context, loc Location) (Location, error) {
