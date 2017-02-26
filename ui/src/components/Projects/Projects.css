@@ -5,10 +5,6 @@
     padding: 0 15px 70px;
 }
 
-#projects .divider {
-    background: #43b4dc;
-}
-
 #projects #projectsContent {
     max-width: 1200px;
     margin: 0 auto;

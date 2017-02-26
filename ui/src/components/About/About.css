@@ -4,10 +4,6 @@
     padding: 0 15px;
 }
 
-#about .divider {
-    background: #e2e2e2;
-}
-
 #about #aboutContent {
     max-width: 1200px;
     margin: 0 auto;
