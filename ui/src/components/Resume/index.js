@@ -40,15 +40,15 @@ export default class Resume extends Component {
                 active: false,
                 associated: List()
             }),
-            less: Map({
-                active: false,
-                associated: List()
-            }),
             react: Map({
                 active: false,
                 associated: List()
             }),
             redux: Map({
+                active: false,
+                associated: List()
+            }),
+            guava: Map({
                 active: false,
                 associated: List()
             }),
@@ -61,10 +61,6 @@ export default class Resume extends Component {
                 associated: List()
             }),
             ng: Map({
-                active: false,
-                associated: List()
-            }),
-            bs: Map({
                 active: false,
                 associated: List()
             }),
@@ -107,7 +103,7 @@ export default class Resume extends Component {
 
             snap: Map({
                 active: false,
-                associated: List(['java', 'git', 'mac', 'aws', 'appe', 'sql', 'vi', 'ij'])
+                associated: List(['java', 'guava', 'git', 'mac', 'aws', 'appe', 'sql', 'vi', 'ij'])
             }),
             dockerj: Map({
                 active: false,
@@ -119,11 +115,11 @@ export default class Resume extends Component {
             }),
             symph: Map({
                 active: false,
-                associated: List(['js', 'sql', 'git', 'vi', 'css', 'html', 'java', 'lin', 'ij', 'aws', 'ng', 'bs', 'mac', 'less'])
+                associated: List(['js', 'sql', 'git', 'vi', 'css', 'html', 'java', 'lin', 'ij', 'aws', 'ng', 'mac'])
             }),
             fjc: Map({
                 active: false,
-                associated: List(['go', 'sql', 'git', 'vi', 'css', 'less', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
+                associated: List(['go', 'sql', 'git', 'vi', 'css', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
             }),
             framed: Map({
                 active: false,
@@ -131,7 +127,7 @@ export default class Resume extends Component {
             }),
             com: Map({
                 active: false,
-                associated: List(['html', 'css', 'js', 'bs', 'git', 'vi', 'lin', 'mac', 'go', 'appe', 'py'])
+                associated: List(['html', 'css', 'js', 'git', 'vi', 'lin', 'mac', 'go', 'appe', 'py'])
             })
         };
 
@@ -173,22 +169,21 @@ export default class Resume extends Component {
     render() {
         const langs = [
             <Tag key="go" code="go" active={ this.state.go.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Go" />,
-            <Tag key="py" code="py" active={ this.state.py.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Python" />,
-            <Tag key="sql" code="sql" active={ this.state.sql.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="SQL" />,
             <Tag key="java" code="java" active={ this.state.java.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Java" />,
             <Tag key="js" code="js" active={ this.state.js.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Javascript" />,
             <Tag key="html" code="html" active={ this.state.html.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="HTML5" />,
             <Tag key="css" code="css" active={ this.state.css.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="CSS3" />,
-            <Tag key="less" code="less" active={ this.state.less.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Less" />
+            <Tag key="py" code="py" active={ this.state.py.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Python" />,
+            <Tag key="sql" code="sql" active={ this.state.sql.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="SQL" />
         ]
 
         const frameworks = [
             <Tag key="react" code="react" active={ this.state.react.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="ReactJS" />,
             <Tag key="redux" code="redux" active={ this.state.redux.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Redux" />,
+            <Tag key="guava" code="guava" active={ this.state.guava.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Guava" />,
             <Tag key="tor" code="tor" active={ this.state.tor.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Tornado" />,
             <Tag key="fl" code="fl" active={ this.state.fl.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Flask" />,
-            <Tag key="ng" code="ng" active={ this.state.ng.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="AngularJS" />,
-            <Tag key="bs" code="bs" active={ this.state.bs.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Bootstrap" />
+            <Tag key="ng" code="ng" active={ this.state.ng.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="AngularJS" />
         ]
 
         const tools = [
