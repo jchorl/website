@@ -7,6 +7,7 @@ export default class About extends Component {
     componentDidMount() {
         let mapOptions = {
             zoom: 2,
+            scrollwheel: false,
             center: new google.maps.LatLng(32.937960, -1.453884)
         };
         let map = new google.maps.Map(this.refs.mapCanvas, mapOptions);
