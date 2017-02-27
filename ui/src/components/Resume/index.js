@@ -12,95 +12,6 @@ export default class Resume extends Component {
         // state will get read and clobber some udpates in progress. keeping each tag/job as a key on the root state allows only
         // updating that key.
         let state = {
-            go: Map({
-                active: false,
-                associated: List()
-            }),
-            py: Map({
-                active: false,
-                associated: List()
-            }),
-            sql: Map({
-                active: false,
-                associated: List()
-            }),
-            java: Map({
-                active: false,
-                associated: List()
-            }),
-            js: Map({
-                active: false,
-                associated: List()
-            }),
-            html: Map({
-                active: false,
-                associated: List()
-            }),
-            css: Map({
-                active: false,
-                associated: List()
-            }),
-            react: Map({
-                active: false,
-                associated: List()
-            }),
-            redux: Map({
-                active: false,
-                associated: List()
-            }),
-            guava: Map({
-                active: false,
-                associated: List()
-            }),
-            tor: Map({
-                active: false,
-                associated: List()
-            }),
-            fl: Map({
-                active: false,
-                associated: List()
-            }),
-            ng: Map({
-                active: false,
-                associated: List()
-            }),
-            docker: Map({
-                active: false,
-                associated: List()
-            }),
-            git: Map({
-                active: false,
-                associated: List()
-            }),
-            lin: Map({
-                active: false,
-                associated: List()
-            }),
-            aws: Map({
-                active: false,
-                associated: List()
-            }),
-            vi: Map({
-                active: false,
-                associated: List()
-            }),
-            appe: Map({
-                active: false,
-                associated: List()
-            }),
-            mac: Map({
-                active: false,
-                associated: List()
-            }),
-            ij: Map({
-                active: false,
-                associated: List()
-            }),
-            ecl: Map({
-                active: false,
-                associated: List()
-            }),
-
             snap: Map({
                 active: false,
                 associated: List(['java', 'guava', 'git', 'mac', 'aws', 'appe', 'sql', 'vi', 'ij'])
@@ -131,14 +42,16 @@ export default class Resume extends Component {
             })
         };
 
-        let jobKeys = [];
-        for (let key of Object.keys(state)) {
-            if (!state[key].get('associated').isEmpty()) {
-                jobKeys.push(key);
-            }
-        }
+        // generate the skills and associations
+        let jobKeys = Object.keys(state);
         for (let job of jobKeys) {
             for (let skill of state[job].get('associated').toArray()) {
+                if (!state[skill]) {
+                    state[skill] = Map({
+                        active: false,
+                        associated: List()
+                    });
+                }
                 state[skill] = state[skill].update('associated', associated => associated.push(job));
             }
         }
@@ -195,7 +108,6 @@ export default class Resume extends Component {
             <Tag key="appe" code="appe" active={ this.state.appe.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="App Engine" />,
             <Tag key="mac" code="mac" active={ this.state.mac.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Mac" />,
             <Tag key="ij" code="ij" active={ this.state.ij.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="IntelliJ" />,
-            <Tag key="ecl" code="ecl" active={ this.state.ecl.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Eclipse" />
         ]
 
         return (
