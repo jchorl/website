@@ -21,22 +21,26 @@ export default class Projects extends Component {
         },
         {
             title: "Personal Website",
-            description: "This is my personal website! The front-end is built with pre-rendered React, with a light Go back-end running on AppEngine.",
+            description: "This is my personal website! The front-end is built with React, with a light Go back-end running on AppEngine that uses Datastore for storing locations.",
+            code: "website",
             codeLink: "https://github.com/jchorl/website"
         },
         {
             title: "Craig-o-mation",
             description: "Craig-o-mation is a webapp that automates Craigslist purchases using the Postmates API for delivery and the Capitol One API for payments. The back-end is written in Go and hosted on AppEngine. There is also a self-hosted python server to scrape Craigslist since they block AppEngine and EC2. The front-end is built with jQuery and makes use of Google Maps API.",
+            code: "craigslist",
             codeLink: "https://github.com/matthewdu/powerplug"
         },
         {
             title: "JaysBot",
             description: "This is a job written in Go that hits mlb.com API for updates on the Toronto Blue Jays and sends the updates to various locations. Currently the updates are POSTed to a Slack or HipChat room so I can easily get Jays updates at work.",
+            code: "jays",
             codeLink: "https://github.com/jchorl/jaysbot"
         },
         {
             title: "Project Euler",
             description: "Project Euler is a website that contains many interesting math problems that can be solved computationally. Being in both the engineering and math faculties, I enjoy these challenges. I have solved a bunch of them.",
+            code: "euler",
             codeLink: "https://github.com/jchorl/euler"
         }];
 

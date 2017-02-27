@@ -36,6 +36,22 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/framed.png");
 }
 
+#projects .project.website {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/website.png");
+}
+
+#projects .project.craigslist {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/craigslist.png");
+}
+
+#projects .project.euler {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/euler.png");
+}
+
+#projects .project.jays {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/jays.png");
+}
+
 #projects .project a {
     color: #fff;
     text-decoration: none;
