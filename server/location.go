@@ -66,6 +66,15 @@ func getLocations(c context.Context) ([]Location, error) {
 	return locations, nil
 }
 
+func deleteLocation(c context.Context, loc Location) error {
+	key, err := datastore.DecodeKey(loc.Key)
+	if err != nil {
+		return err
+	}
+
+	return datastore.Delete(c, key)
+}
+
 func locationsGetHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	locations, err := getLocations(c)
@@ -113,4 +122,18 @@ func locationsPutHandler(w http.ResponseWriter, r *http.Request) {
 
 	encoder := json.NewEncoder(w)
 	encoder.Encode(location)
+}
+
+func locationsDeleteHandler(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	var location Location
+	err := json.NewDecoder(r.Body).Decode(&location)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err = deleteLocation(c, location); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }

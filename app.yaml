@@ -2,12 +2,12 @@ runtime: go
 api_version: go1
 
 handlers:
-- url: /api/location/(new|update)
-  script: _go_app
-  login: admin
-  secure: always
 - url: /api/location
   script: _go_app
+  secure: always
+- url: /api/location/(new|update|delete)
+  script: _go_app
+  login: admin
   secure: always
 - url: /api/music
   script: _go_app
@@ -22,6 +22,13 @@ handlers:
 - url: /(.*\.(png|jpg|pdf|js|css))$
   static_files: ui/build/\1
   upload: ui/build/.*\.(png|jpg|pdf|js|css)$
+- url: /admin$
+  static_files: adminui/build/index.html
+  upload: adminui/build/index.html
+- url: /(.*\.(js|css))$
+  static_files: adminui/build/\1
+  upload: adminui/build/.*\.(js|css)$
+  login: admin
 - url: .*
   static_files: ui/build/index.html
   upload: ui/build/index.html
@@ -34,3 +41,7 @@ skip_files:
 - ^ui/package.json
 - ^ui/src
 - ^ui/public
+- ^adminui/node_modules
+- ^adminui/package.json
+- ^adminui/src
+- ^adminui/public

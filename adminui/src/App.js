@@ -40,13 +40,22 @@ export default class App extends Component {
         this.setState({ places });
     }
 
+    deletePlace = key => {
+        let places = this.state.places.slice(0);
+        let index = places.findIndex(place => place.key === key);
+        if (index > -1) {
+            places.splice(index, -1);
+        }
+        this.setState({ places });
+    }
+
     render() {
         let { places } = this.state;
         return (
                 <div>
                     <h1>Places</h1>
-                    { places.map(place => <PlaceForm key={ place.key } place={ place } updatePlaces={ this.updatePlaces } />) }
-                    <PlaceForm updatePlaces={ this.updatePlaces } />
+                    { places.map(place => <PlaceForm key={ place.key } place={ place } updatePlaces={ this.updatePlaces } deletePlace={ this.deletePlace } />) }
+                    <PlaceForm updatePlaces={ this.updatePlaces } deletePlace={ this.deletePlace } />
                 </div>
                 );
     }
@@ -54,6 +63,7 @@ export default class App extends Component {
 
 class PlaceForm extends Component {
     static propTypes = {
+        deletePlace: PropTypes.func.isRequired,
         place: PropTypes.object,
         updatePlaces: PropTypes.func.isRequired
     }
@@ -103,9 +113,25 @@ class PlaceForm extends Component {
         event.preventDefault();
     }
 
+    deletePlace = event => {
+        fetch('/api/location/delete', {
+            headers: new Headers({ accept: 'application/json' }),
+            method: 'POST',
+            body: JSON.stringify(this.state.place)
+        })
+        .then(resp => resp.json())
+            .then(updatedPlace => {
+                let {
+                    deletePlace
+                } = this.props;
+
+                deletePlace(this.state.place.key);
+            });
+    }
+
     render() {
         return (
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={ this.handleSubmit }>
                     <label>
                         Name:
                         <input type="text" value={ this.state.place.name } onChange={ this.handleChange("name") } />
@@ -122,6 +148,7 @@ class PlaceForm extends Component {
                         Order:
                         <input type="number" value={ this.state.place.order } onChange={ this.handleChange("order") } />
                     </label>
+                    <button onClick={ this.deletePlace }>Delete</button>
                     <input type="submit" value="Submit" />
                 </form>
                 );
