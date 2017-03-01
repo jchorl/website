@@ -40,7 +40,7 @@ adminui-dev:
 
 node:
 	docker container run --rm -it \
-		-v $(PWD)/adminui:/usr/src/app \
+		-v $(PWD):/usr/src/app \
 		-w /usr/src/app \
 		node \
 		bash

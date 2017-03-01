@@ -19,15 +19,16 @@ handlers:
 - url: /.well-known/acme-challenge
   static_dir: .well-known/acme-challenge
   mime_type: text/plain
+- url: /admin/(.*\.(js|css))$
+  static_files: adminui/build/\1
+  upload: adminui/build/.*\.(js|css)$
+  login: admin
 - url: /(.*\.(png|jpg|pdf|js|css))$
   static_files: ui/build/\1
   upload: ui/build/.*\.(png|jpg|pdf|js|css)$
 - url: /admin$
   static_files: adminui/build/index.html
   upload: adminui/build/index.html
-- url: /(.*\.(js|css))$
-  static_files: adminui/build/\1
-  upload: adminui/build/.*\.(js|css)$
   login: admin
 - url: .*
   static_files: ui/build/index.html

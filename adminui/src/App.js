@@ -44,7 +44,7 @@ export default class App extends Component {
         let places = this.state.places.slice(0);
         let index = places.findIndex(place => place.key === key);
         if (index > -1) {
-            places.splice(index, -1);
+            places.splice(index, 1);
         }
         this.setState({ places });
     }
@@ -89,6 +89,7 @@ class PlaceForm extends Component {
     }
 
     handleSubmit = event => {
+        event.preventDefault();
         let isUpdate = !!this.state.place.key;
         let url = isUpdate
             ? '/api/location/update'
@@ -110,23 +111,22 @@ class PlaceForm extends Component {
                     this.setState({ place: emptyPlace() });
                 }
             });
-        event.preventDefault();
     }
 
     deletePlace = event => {
+        event.preventDefault();
         fetch('/api/location/delete', {
             headers: new Headers({ accept: 'application/json' }),
             method: 'POST',
             body: JSON.stringify(this.state.place)
         })
-        .then(resp => resp.json())
-            .then(updatedPlace => {
-                let {
-                    deletePlace
-                } = this.props;
+        .then(updatedPlace => {
+            let {
+                deletePlace
+            } = this.props;
 
-                deletePlace(this.state.place.key);
-            });
+            deletePlace(this.state.place.key);
+        });
     }
 
     render() {
@@ -148,7 +148,7 @@ class PlaceForm extends Component {
                         Order:
                         <input type="number" value={ this.state.place.order } onChange={ this.handleChange("order") } />
                     </label>
-                    <button onClick={ this.deletePlace }>Delete</button>
+                    { this.state.place.key ? <button onClick={ this.deletePlace }>Delete</button> : null }
                     <input type="submit" value="Submit" />
                 </form>
                 );

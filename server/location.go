@@ -24,6 +24,7 @@ func init() {
 	http.HandleFunc("/api/location", locationsGetHandler)
 	http.HandleFunc("/api/location/new", locationsPostHandler)
 	http.HandleFunc("/api/location/update", locationsPutHandler)
+	http.HandleFunc("/api/location/delete", locationsDeleteHandler)
 }
 
 func addLocation(c context.Context, loc Location) (Location, error) {
