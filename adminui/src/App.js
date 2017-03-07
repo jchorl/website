@@ -19,7 +19,9 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/location', { headers: new Headers({ accept: 'application/json' }) })
+        fetch('/api/location', {
+            headers: new Headers({ accept: 'application/json' })
+        })
             .then(resp => resp.json())
             .then(places => {
                 this.setState({ places });
@@ -97,6 +99,7 @@ class PlaceForm extends Component {
         fetch(url, {
             headers: new Headers({ accept: 'application/json' }),
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(this.state.place)
         })
         .then(resp => resp.json())
@@ -118,6 +121,7 @@ class PlaceForm extends Component {
         fetch('/api/location/delete', {
             headers: new Headers({ accept: 'application/json' }),
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(this.state.place)
         })
         .then(updatedPlace => {

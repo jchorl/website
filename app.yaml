@@ -24,16 +24,20 @@ handlers:
   static_files: adminui/build/\1
   upload: adminui/build/.*\.(js|css)$
   login: admin
+  secure: always
 - url: /(.*\.(png|jpg|pdf|js|css))$
   static_files: ui/build/\1
   upload: ui/build/.*\.(png|jpg|pdf|js|css)$
+  secure: always
 - url: /admin$
   static_files: adminui/build/index.html
   upload: adminui/build/index.html
   login: admin
+  secure: always
 - url: .*
   static_files: ui/build/index.html
   upload: ui/build/index.html
+  secure: always
 
 skip_files:
 - ^(.*/)?\.DS_Store$
