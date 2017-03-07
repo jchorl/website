@@ -20,9 +20,9 @@ handlers:
 - url: /.well-known/acme-challenge
   static_dir: .well-known/acme-challenge
   mime_type: text/plain
-- url: /admin/(.*\.(js|css))$
+- url: /admin/(.*\.(png|js|css))$
   static_files: adminui/build/\1
-  upload: adminui/build/.*\.(js|css)$
+  upload: adminui/build/.*\.(png|js|css)$
   login: admin
   secure: always
 - url: /(.*\.(png|jpg|pdf|js|css))$
