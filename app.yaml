@@ -34,6 +34,9 @@ handlers:
   upload: adminui/build/index.html
   login: admin
   secure: always
+- url: /resume$
+  script: _go_app
+  secure: always
 - url: .*
   static_files: ui/build/index.html
   upload: ui/build/index.html
