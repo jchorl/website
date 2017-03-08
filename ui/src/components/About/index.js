@@ -23,6 +23,10 @@ export default class About extends Component {
                     });
                 }
             });
+
+        setInterval(() => {
+            document.getElementById('framed').src = 'https://framed.joshchorlton.com/api/photo/93b34e?' + new Date().getTime()
+        }, 10000);
     }
 
     render() {
@@ -42,6 +46,10 @@ export default class About extends Component {
                             I also love to travel. I've been to a few different continents and met some really cool people along the way. My travels have brought me on trips ranging from African safari to remote villages in Vietnam to beach parties in the Philippines. Check out the places I've been to on the map.
                         </p>
                         <div id="map" ref="mapCanvas"></div>
+                        <p>
+                            Here are some of my favourite photos from these trips:
+                        </p>
+                        <img id="framed" src="https://framed.joshchorlton.com/api/photo/93b34e" alt="Travel" />
                     </div>
                 </div>
                 );
