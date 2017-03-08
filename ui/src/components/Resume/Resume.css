@@ -103,6 +103,7 @@
         top: 80px;
         background: #f8f8f8;
         padding-bottom: 5px;
+        overflow: hidden;
     }
 
     #resume #skillsBar .bracket {
