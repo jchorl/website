@@ -274,6 +274,7 @@
         position: absolute;
         left: 0;
         width: calc((100% - 1200px) / 2);
+        min-width: 225px;
         height: 100%;
     }
 
@@ -308,6 +309,12 @@
         margin-bottom: 10px;
     }
 
+    #resume #page {
+        margin: 0 0 0 225px;
+    }
+}
+
+@media (min-width: 1655px) {
     #resume #page {
         margin: 0 auto;
     }
