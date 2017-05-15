@@ -53,4 +53,13 @@ deploy:
 		google/cloud-sdk \
 		/google-cloud-sdk/platform/google_appengine/appcfg.py -A gold-summer-17 --noauth_local_webserver update .
 
+certs:
+	# openssl rsa -in letsencrypt/etc/archive/joshchorlton.com-0001/privkey2.pem > letsencrypt/etc/archive/joshchorlton.com-0001/privkey-rsa2.pem
+	docker container run -it --rm \
+		--name certbot \
+		-v /home/j/Documents/Programming/website4.0/letsencrypt/etc:/etc/letsencrypt \
+		-v /home/j/Documents/Programming/website4.0/letsencrypt/varlib:/var/lib/letsencrypt \
+		quay.io/letsencrypt/letsencrypt:latest \
+		certonly --agree-tos --keep --expand --manual --preferred-challenges=http -d www.joshchorlton.com -d joshchorlton.com --email=josh@joshchorlton.com
+
 .PHONY: ui
