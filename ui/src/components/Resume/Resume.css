@@ -107,9 +107,11 @@
     }
 
     #resume #skillsBar .bracket {
-        line-height: 110px;
+        line-height: 120px;
         font-size: 120px;
         margin: 0 10px;
+        position: relative;
+        top: -5px;
     }
 
     #resume #skillsBar .skillsContainerHolder {
@@ -336,11 +338,19 @@
     }
 
     #resume .section {
-        margin: 15px 30px;
+        margin: 5px 30px;
+    }
+
+    #resume .sectionTitle {
+        margin-top: 0;
+    }
+
+    #resume .company {
+        padding-top: 2px;
     }
 
     #resume #skillsBar {
-        margin-top: 15px;
+        margin-top: 5px;
     }
 
     #resume #skillsBar .skill {

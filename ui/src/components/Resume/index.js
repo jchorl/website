@@ -181,7 +181,9 @@ export default class Resume extends Component {
                                 <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
                                 <div className="subsection">
                                     <Job active={ this.state.snap.get('active') } bullets={[
-                                        'Implementing caching to improve performance when loading stories'
+                                        'Migrated Stories feature from all-or-nothing caching approach to use stale cache values with updates fetched from a database, saving the company millions of dollars annually and reducing latency by up to 30%',
+                                        'Designed and implemented intelligent compression/reconstruction algorithm, reducing client state sizes 100x',
+                                        'Shifted Stories client state from server to client, reducing latency and cutting costs on billions of requests daily'
                                     ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
                                     logoUrl="logo_snapchat.png" name="Snapchat" place="Venice, California" position="Software Engineering Intern" />
                                     <Job active={ this.state.dockerj.get('active') } bullets={[
@@ -214,7 +216,7 @@ export default class Resume extends Component {
                                     <ul className="projectsList">
                                         <Project active={ this.state.fjc.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
                                             'Keep track of finances with support for templates and recurring transactions',
-                                            'Hosted on EC2 with Go server, Postgres database, nginx and elasticsearch'
+                                            'Hosted on Google Compute Engine with Go server, Postgres database, nginx and elasticsearch'
                                         ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" extra={ <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a> } name="FinanceJC" />
                                         <Project active={ this.state.framed.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
                                             'Easily embed a picture frame on a website with photos from a Google Photos album'

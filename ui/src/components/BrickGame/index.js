@@ -121,10 +121,10 @@ export default class BrickGame extends Component {
 
     drawText = () => {
 		this.canvas.fillStyle = "#fff";
-		this.canvas.font = "30px Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+		this.canvas.font = "30px Nunito, sans-serif"
 		this.canvas.textAlign = 'center';
 		this.canvas.fillText("Instructions:", this.canvas.w / 2, this.canvas.h / 2 + 50);
-		this.canvas.font = "20px Avenir, 'Helvetica Neue', Helvetica, Arial, sans-serif"
+		this.canvas.font = "20px Nunito, sans-serif"
 		this.canvas.fillText("Move with the mouse or arrow keys", this.canvas.w / 2, this.canvas.h / 2 + 80);
 		this.canvas.fillText("Pause with P or the pause button", this.canvas.w / 2, this.canvas.h / 2 + 110);
 	}
