@@ -8,6 +8,14 @@ serve:
 		google/cloud-sdk \
 		dev_appserver.py --host 0.0.0.0 .
 
+pdfgenbuild:
+	docker build -t jchorl/pdfgen -f pdfgen/Dockerfile.chrome ./pdfgen
+
+pdfgen: ui
+	docker run --init -it --rm \
+		-v $(PWD)/ui/build:/out \
+		jchorl/pdfgen
+
 ui:
 	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
@@ -62,4 +70,4 @@ certs:
 		quay.io/letsencrypt/letsencrypt:latest \
 		certonly --agree-tos --keep --expand --manual --preferred-challenges=http -d www.joshchorlton.com -d joshchorlton.com --email=josh@joshchorlton.com
 
-.PHONY: ui
+.PHONY: ui pdfgen

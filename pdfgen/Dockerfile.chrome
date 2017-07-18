@@ -1,0 +1,10 @@
+FROM yukinying/chrome-headless-browser
+
+RUN apt-get update && apt-get install -y curl python3 && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get install -y nodejs && \
+    npm install chrome-launcher chrome-remote-interface
+
+ADD sh.js /script/sh.js
+WORKDIR /out
+ENTRYPOINT sh -c 'python3 -m http.server 8000 & node /script/sh.js'
