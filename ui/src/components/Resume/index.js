@@ -12,33 +12,33 @@ export default class Resume extends Component {
         // state will get read and clobber some udpates in progress. keeping each tag/job as a key on the root state allows only
         // updating that key.
         let state = {
+            stripe: Map({
+                active: false,
+                associated: List(['puppet', 'aws', 'git', 'sql', 'go', 'py', 'docker', 'kubernetes', 'lin'])
+            }),
             snap: Map({
                 active: false,
-                associated: List(['java', 'guava', 'git', 'mac', 'aws', 'appe', 'sql', 'vi', 'ij'])
+                associated: List(['java', 'guava', 'git', 'aws', 'appe', 'sql'])
             }),
             dockerj: Map({
                 active: false,
-                associated: List(['go', 'sql', 'js', 'html', 'css', 'react', 'redux', 'docker', 'git', 'lin', 'aws', 'vi', 'ng'])
+                associated: List(['go', 'sql', 'js', 'html', 'css', 'react', 'redux', 'docker', 'git', 'lin', 'aws', 'ng'])
             }),
             uber: Map({
                 active: false,
-                associated: List(['fl', 'tor', 'py', 'sql', 'git', 'lin', 'aws', 'vi', 'mac'])
-            }),
-            symph: Map({
-                active: false,
-                associated: List(['js', 'sql', 'git', 'vi', 'css', 'html', 'java', 'lin', 'ij', 'aws', 'ng', 'mac'])
+                associated: List(['fl', 'tor', 'py', 'sql', 'git', 'lin', 'aws'])
             }),
             fjc: Map({
                 active: false,
-                associated: List(['go', 'sql', 'git', 'vi', 'css', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
+                associated: List(['go', 'sql', 'git', 'css', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
             }),
             framed: Map({
                 active: false,
-                associated: List(['py', 'git', 'vi', 'css', 'html', 'js', 'react', 'appe', 'docker'])
+                associated: List(['py', 'git', 'css', 'html', 'js', 'react', 'appe', 'docker'])
             }),
             com: Map({
                 active: false,
-                associated: List(['html', 'css', 'js', 'git', 'vi', 'lin', 'mac', 'go', 'appe', 'py'])
+                associated: List(['html', 'css', 'js', 'git', 'lin', 'go', 'appe', 'py'])
             })
         };
 
@@ -101,13 +101,12 @@ export default class Resume extends Component {
 
         const tools = [
             <Tag key="docker" code="docker" active={ this.state.docker.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Docker" />,
+            <Tag key="kubernetes" code="kubernetes" active={ this.state.kubernetes.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Kubernetes" />,
             <Tag key="git" code="git" active={ this.state.git.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Git" />,
             <Tag key="lin" code="lin" active={ this.state.lin.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Linux" />,
             <Tag key="aws" code="aws" active={ this.state.aws.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="AWS" />,
-            <Tag key="vi" code="vi" active={ this.state.vi.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Vim" />,
             <Tag key="appe" code="appe" active={ this.state.appe.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="App Engine" />,
-            <Tag key="mac" code="mac" active={ this.state.mac.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Mac" />,
-            <Tag key="ij" code="ij" active={ this.state.ij.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="IntelliJ" />,
+            <Tag key="puppet" code="puppet" active={ this.state.puppet.get('active') } activeStateChange={ this.activeStateChange.bind(this) } text="Puppet" />,
         ]
 
         return (
@@ -142,7 +141,7 @@ export default class Resume extends Component {
                             <div id="personalInfo">
                                 <div className="nameSchool">
                                     <h2 className="name">Josh Chorlton</h2>
-                                    <div className="school">4A | Software Engineering | University of Waterloo</div>
+                                    <div className="school">Software Engineering 2018 | University of Waterloo</div>
                                 </div>
                                 <div className="contactInfo">
                                     <div>
@@ -180,6 +179,12 @@ export default class Resume extends Component {
                             <div className="section">
                                 <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
                                 <div className="subsection">
+                                    <Job active={ this.state.stripe.get('active') } bullets={[
+                                        'Created Kubernetes cluster from scratch to train ML models, drastically increasing ML scalability at Stripe',
+                                        'Enabled hosts and users to securely access the cluster using mTLS, AWS security groups, and RBAC',
+                                        'Implemented alerting and monitoring for Kubernetes at Stripe, enabling critical jobs to run on Kubernetes'
+                                    ]} code="stripe" companyUrl="https://stripe.com" date="September 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_stripe.png" name="Stripe" place="San Francisco, California" position="Infrastructure Intern" />
                                     <Job active={ this.state.snap.get('active') } bullets={[
                                         'Migrated Stories feature from all-or-nothing caching approach to use stale cache values with updates fetched from a database, saving the company millions of dollars annually and reducing latency by up to 30%',
                                         'Designed and implemented intelligent compression/reconstruction algorithm, reducing client state sizes 100x',
@@ -200,13 +205,6 @@ export default class Resume extends Component {
                                         'Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.'
                                     ]} code="uber" companyUrl="https://uber.com" date="August 2015 &mdash; December 2015" activeStateChange={ this.activeStateChange.bind(this) }
                                     logoUrl="logo_uber.png" name="Uber" place="San Francisco, California" position="Software Engineering Intern" />
-                                    <Job active={ this.state.symph.get('active') } bullets={[
-                                        'Overhauled customer management pages, drastically improving customer support efficiency',
-                                        'Introduced tiered wholesale accounts, enabling storeowners to set tiered limits on wholesalers such as minimum purchase requirements',
-                                        'Refactored store checkout and product pages, reducing network traffic and seeing speed gains of >24%',
-                                        'Identified and fixed a security vulnerability where data was being sent to external services unknowingly'
-                                    ]} code="symph" companyUrl="https://symphonycommerce.com" date="January 2015 &mdash; July 2015" activeStateChange={ this.activeStateChange.bind(this) }
-                                    logoUrl="logo_symphony.png" name="Symphony Commerce" place="San Francisco, California" position="Full-Stack Software Engineer" />
                                 </div>
                             </div>
                             <div className="section">
