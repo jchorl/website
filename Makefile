@@ -59,6 +59,6 @@ deploy:
 		-v $$GOPATH:/usr/lib/google-cloud-sdk/platform/google_appengine/gopath:ro \
 		-w /website \
 		google/cloud-sdk \
-		/usr/lib/google-cloud-sdk/platform/google_appengine/appcfg.py -A gold-summer-17 --noauth_local_webserver update .
+		python /usr/lib/google-cloud-sdk/platform/google_appengine/appcfg.py -A gold-summer-17 --noauth_local_webserver update .
 
 .PHONY: ui pdfgen
