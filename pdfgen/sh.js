@@ -1,46 +1,10 @@
-const chromeLauncher = require('chrome-launcher');
-const CDP = require('chrome-remote-interface');
-const fs = require('fs');
+const puppeteer = require('puppeteer');
 
-/**
- * Launches a debugging instance of Chrome.
- * @param {boolean=} headless True (default) launches Chrome in headless mode.
- *     False launches a full version of Chrome.
- * @return {Promise<ChromeLauncher>}
- */
-function launchChrome() {
-    return chromeLauncher.launch({
-        chromeFlags: [
-            '--disable-gpu',
-            '--no-sandbox',
-            '--headless',
-        ]
-    });
-}
+(async () => {
+  const browser = await puppeteer.launch({args: ['--no-sandbox']});
+  const page = await browser.newPage();
+  await page.goto('http://0.0.0.0:8000', {waitUntil: 'networkidle2'});
+  await page.pdf({path: '/out/joshchorltonresume.pdf', margin: {top: '30px', bottom: '30px', left: '30px', right: '30px'}});
 
-(async function() {
-
-    const chrome = await launchChrome();
-    const protocol = await CDP({port: chrome.port});
-
-    // Extract the DevTools protocol domains we need and enable them.
-    // See API docs: https://chromedevtools.github.io/devtools-protocol/
-    const {Page, Runtime} = protocol;
-    await Promise.all([Page.enable(), Runtime.enable()]);
-
-    Page.navigate({url: 'http://localhost:8000'});
-
-    // Wait for window.onload before doing stuff.
-    Page.loadEventFired(async () => {
-        const pdf = await Page.printToPDF({displayHeaderFooter: 'false', printBackground: 'false', pageRanges: "1"});
-        fs.writeFile("/out/joshchorltonresume.pdf", Buffer.from(pdf.data, 'base64'), { flag: 'w' }, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-
-            console.log("The file was saved!");
-            protocol.close();
-            chrome.kill(); // Kill Chrome.
-        });
-    });
+  await browser.close();
 })();
