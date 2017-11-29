@@ -1,2 +1,0 @@
-1. docker run -it --rm -v "$PWD"/letsencrypt/etc:/etc/letsencrypt -v "$PWD"/letsencrypt/varlib:/var/lib/letsencrypt quay.io/letsencrypt/letsencrypt certonly -t -a manual -d joshchorlton.com -d www.joshchorlton.com --agree-tos -m 'josh@joshchorlton.com'
-2. openssl rsa -inform pem -in letsencrypt/etc/archive/joshchorlton.com/privkey1.pem -outform pem > letsencrypt/etc/archive/joshchorlton.com/privkey1RSA.pem
