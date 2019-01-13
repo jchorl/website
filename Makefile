@@ -5,8 +5,8 @@ serve:
 		-w /website \
 		-p 8080:8080 \
 		--net=host \
-		google/cloud-sdk \
-		dev_appserver.py --host 0.0.0.0 .
+		jchorl/appengine-go:latest \
+		sh -c "go get ./... && dev_appserver.py --port=8080 --host=0.0.0.0 --admin_host=0.0.0.0 \$$(pwd)"
 
 pdfgenbuild:
 	docker build -t jchorl/pdfgen -f pdfgen/Dockerfile.chrome ./pdfgen

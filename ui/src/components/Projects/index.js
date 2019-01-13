@@ -7,7 +7,38 @@ export default class Projects extends Component {
     constructor() {
         super();
 
-        const projectInfo = [{
+        const projectInfo = [
+        {
+            title: "Auditor",
+            code: "auditor",
+            description: "Auditor allows a user to define flexible queries over bank accounts and transactions. They link their bank account and when any of the query conditions are met, a webhook is fired. It has eliminated the need for me to monitor my bank accounts.",
+            codeLink: "https://github.com/jchorl/auditor"
+        },
+        {
+            title: "Waker",
+            code: "waker",
+            description: "Waker is an alarm clock that runs on a Raspberry Pi. It allows a user to select a Spotify playlist/song to wake them up. It will then read out the weather and upcoming calendar events for the day. The main server is written in Flask, with an accompanying React-Native app to set alarms.",
+            codeLink: "https://github.com/jchorl/waker"
+        },
+        {
+            title: "NasBlaze",
+            code: "nasblaze",
+            description: "NasBlaze runs on a Rasberry Pi connected to a RAID system. It uses rclone to periodically mount the RAID drives, rsync them up to Backblaze B2, and then unmount the storage. I use it to back up all my files.",
+            codeLink: "https://github.com/jchorl/nasblaze"
+        },
+        {
+            title: "DNSServ",
+            code: "dnsserv",
+            description: "DNSServ is a dynamic DNS server. It runs on GCP, with a client library that I run on a Raspberry Pi. It allows me to access my RAID system from anywhere.",
+            codeLink: "https://github.com/jchorl/dnsserv"
+        },
+        {
+            title: "Watchdog",
+            code: "watchdog",
+            description: "Watchdog notifies me when any of my services go down (think Pagerduty). There is a CLI and client libraries so it can be easily integrated into any service. Services register their check-in cadence and if they fail to check-in, I get emails.",
+            codeLink: "https://github.com/jchorl/watchdog"
+        },
+        {
             title: "FinanceJC",
             code: "financejc",
             description: "FinanceJC is a webapp that I built to keep track of my personal finances. It has support for users using Google as an OAuth provider, recurring transactions and also transaction templates. The front-end is build on React and Redux, while the back-end is a Postgres and Elasticsearch backed Go server behind NGINX.",
@@ -20,28 +51,16 @@ export default class Projects extends Component {
             codeLink: "https://github.com/jchorl/framed"
         },
         {
-            title: "Personal Website",
-            description: "This is my personal website! The front-end is built with React, with a light Go back-end running on AppEngine that uses Datastore for storing locations.",
-            code: "website",
-            codeLink: "https://github.com/jchorl/website"
+            title: "Boys-In-Blue",
+            code: "boysinblue",
+            description: "Boys-In-Blue is a Facebook Messenger bot. It uses the Reddit API to grab links for Leafs games and sends them 3 minutes before gametime.",
+            codeLink: "https://github.com/jchorl/boysinblue"
         },
         {
             title: "Craig-o-mation",
             description: "Craig-o-mation is a webapp that automates Craigslist purchases using the Postmates API for delivery and the Capitol One API for payments. The back-end is written in Go and hosted on AppEngine. There is also a self-hosted python server to scrape Craigslist since they block AppEngine and EC2. The front-end is built with jQuery and makes use of Google Maps API.",
             code: "craigslist",
             codeLink: "https://github.com/matthewdu/powerplug"
-        },
-        {
-            title: "JaysBot",
-            description: "This is a job written in Go that hits mlb.com API for updates on the Toronto Blue Jays and sends the updates to various locations. Currently the updates are POSTed to a Slack or HipChat room so I can easily get Jays updates at work.",
-            code: "jays",
-            codeLink: "https://github.com/jchorl/jaysbot"
-        },
-        {
-            title: "Project Euler",
-            description: "Project Euler is a website that contains many interesting math problems that can be solved computationally. Being in both the engineering and math faculties, I enjoy these challenges. I have solved a bunch of them.",
-            code: "euler",
-            codeLink: "https://github.com/jchorl/euler"
         }];
 
         this.projects = projectInfo.map(info => <Project key={ info.title } code={ info.code } title={ info.title } description={ info.description } codeLink={ info.codeLink } />);
@@ -54,7 +73,7 @@ export default class Projects extends Component {
                     <h1 className="sectionHeading">
                         Projects
                     </h1>
-                    <div>Click on the projects below to view the code on Github. All projects and more available at <a href="https://github.com/jchorl" target="_blank">github.com/jchorl</a>.</div>
+                    <div>Click on the projects below to view the code on Github. All projects and more available at <a href="https://github.com/jchorl" target="_blank" rel="noopener noreferrer">github.com/jchorl</a>.</div>
                     <div id="projectsContainer">
                         { this.projects }
                     </div>
@@ -82,7 +101,7 @@ class Project extends Component {
 
         return (
             <div className={ classNames("project", code) }>
-                <a target="_blank" href={ codeLink }>
+                <a target="_blank" rel="noopener noreferrer" href={ codeLink }>
                 <h2>{ title }</h2>
                 <i className="fa fa-github icon"></i>
                 <div className="description">{ description }</div>

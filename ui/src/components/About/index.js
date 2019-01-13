@@ -25,7 +25,7 @@ export default class About extends Component {
             });
 
         setInterval(() => {
-            document.getElementById('framed').src = 'https://framed.joshchorlton.com/api/photo/93b34e?' + new Date().getTime()
+            document.getElementById('framed').src = 'https://framed.joshchorlton.com/api/photo/dd91d6?' + new Date().getTime()
         }, 10000);
     }
 
@@ -37,10 +37,10 @@ export default class About extends Component {
                             About Me
                         </h1>
                         <p>
-                            I am currently a student at the University of Waterloo in Canada. I've done a few internships in USA and an exchange semester in Hong Kong.
+                            I'm currently employed as a Software Engineer at Stripe. I studied at the University of Waterloo in Canada. I've been around the world for school, work and pleasure.
                         </p>
                         <p>
-                            I grew up in Toronto, Ontario where I completed elementary and high school. Growing up, I was an avid hockey fan. I particularly enjoy playing outdoor games in the winter. 
+                            I grew up in Toronto, Ontario where I completed elementary and high school. Growing up, I was an avid hockey fan. I particularly enjoy playing outdoor games in the winter.
                         </p>
                         <p>
                             I also love to travel. I've been to a few different continents and met some really cool people along the way. My travels have brought me on trips ranging from African safari to remote villages in Vietnam to beach parties in the Philippines. Check out the places I've been to on the map.

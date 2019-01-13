@@ -28,6 +28,14 @@ export default class Resume extends Component {
                 active: false,
                 associated: List(['fl', 'tor', 'py', 'sql', 'git', 'lin', 'aws'])
             }),
+            auditor: Map({
+                active: false,
+                associated: List(['go', 'git', 'css', 'html', 'js', 'react', 'redux', 'lin', 'appe', 'docker'])
+            }),
+            waker: Map({
+                active: false,
+                associated: List(['py', 'fl', 'git', 'react', 'lin', 'docker', 'sql'])
+            }),
             fjc: Map({
                 active: false,
                 associated: List(['go', 'sql', 'git', 'css', 'html', 'js', 'react', 'redux', 'lin', 'aws', 'docker'])
@@ -114,7 +122,7 @@ export default class Resume extends Component {
                 <h1 className="sectionHeading noPrint">
                     Resume
                 </h1>
-                <a id="pdfButton" href="/joshchorltonresume.pdf" target="_blank">View PDF</a>
+                <a id="pdfButton" href="/joshchorltonresume.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
                 <div id="resumeSidebarContainer">
                     <div id="sidebarContainerContainer">
                         <div id="sidebarContainer">
@@ -136,7 +144,7 @@ export default class Resume extends Component {
                         </div>
                     </div>
                     <div id="page">
-                        <a id="printButton" className="noPrint" href="/joshchorltonresume.pdf" target="_blank"><i className="fa fa-print"></i> Print</a>
+                        <a id="printButton" className="noPrint" href="/joshchorltonresume.pdf" target="_blank" rel="noopener noreferrer"><i className="fa fa-print"></i> Print</a>
                         <div className="content">
                             <div id="personalInfo">
                                 <div className="nameSchool">
@@ -180,16 +188,20 @@ export default class Resume extends Component {
                                 <h2 className="sectionTitle"><i className="fa fa-briefcase"></i> Work Experience</h2>
                                 <div className="subsection">
                                     <Job active={ this.state.stripe.get('active') } bullets={[
+                                        'Designed and implemented authentication for Kubernetes, allowing for easy, secure and audited cluster access',
+                                        'Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets'
+                                    ]} code="stripe" companyUrl="https://stripe.com" date="August 2018 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                    logoUrl="logo_stripe.png" name="Stripe" place="San Francisco, California" position="Infrastructure Engineer" />
+                                    <Job active={ this.state.stripe.get('active') } bullets={[
                                         'Created Kubernetes cluster from scratch to train ML models, drastically increasing ML scalability at Stripe',
                                         'Enabled hosts and users to securely access the cluster using mTLS, AWS security groups, and RBAC',
-                                        'Implemented alerting and monitoring for Kubernetes at Stripe, enabling critical jobs to run on Kubernetes'
-                                    ]} code="stripe" companyUrl="https://stripe.com" date="September 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                    ]} code="stripe" companyUrl="https://stripe.com" date="September 2017 &mdash; December 2017" activeStateChange={ this.activeStateChange.bind(this) }
                                     logoUrl="logo_stripe.png" name="Stripe" place="San Francisco, California" position="Infrastructure Intern" />
                                     <Job active={ this.state.snap.get('active') } bullets={[
                                         'Migrated Stories feature from all-or-nothing caching approach to use stale cache values with updates fetched from a database, saving the company millions of dollars annually and reducing latency by up to 30%',
                                         'Designed and implemented intelligent compression/reconstruction algorithm, reducing client state sizes 100x',
                                         'Shifted Stories client state from server to client, reducing latency and cutting costs on billions of requests daily'
-                                    ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; Present" activeStateChange={ this.activeStateChange.bind(this) }
+                                    ]} code="snap" companyUrl="https://snap.com" date="January 2017 &mdash; April 2017" activeStateChange={ this.activeStateChange.bind(this) }
                                     logoUrl="logo_snapchat.png" name="Snapchat" place="Venice, California" position="Software Engineering Intern" />
                                     <Job active={ this.state.dockerj.get('active') } bullets={[
                                         'Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security',
@@ -202,7 +214,6 @@ export default class Resume extends Component {
                                         'Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply',
                                         'Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency',
                                         'Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues',
-                                        'Dealt with insane scaling issues every day using tactics like caching, indexes, code optimizations, etc.'
                                     ]} code="uber" companyUrl="https://uber.com" date="August 2015 &mdash; December 2015" activeStateChange={ this.activeStateChange.bind(this) }
                                     logoUrl="logo_uber.png" name="Uber" place="San Francisco, California" position="Software Engineering Intern" />
                                 </div>
@@ -210,15 +221,23 @@ export default class Resume extends Component {
                             <div className="section">
                                 <h2 className="sectionTitle"><i className="fa fa-code"></i> Projects</h2>
                                 <div className="subsection">
-                                    <div className="projectsAvailable">More projects at <a href="https://joshchorlton.com" target="_blank">joshchorlton.com</a>, all code available at <a href="https://github.com/jchorl" target="_blank">github.com/jchorl</a>.</div>
+                                    <div className="projectsAvailable">More projects at <a href="https://joshchorlton.com" target="_blank" rel="noopener noreferrer">joshchorlton.com</a>, all code available at <a href="https://github.com/jchorl" target="_blank" rel="noopener noreferrer">github.com/jchorl</a>.</div>
                                     <ul className="projectsList">
+                                        <Project active={ this.state.auditor.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                            'Monitors bank accounts and transactions, sending webhooks when predefined conditions are met',
+                                            'Uses Plaid to access bank accounts, hosted on Google App Engine, with React query builder frontend'
+                                        ]} code="auditor" codeLink="https://github.com/jchorl/auditor" date="2018" extra={ <a href="https://auditor.joshchorlton.com" target="_blank" rel="noopener noreferrer">auditor.joshchorlton.com</a> } name="Auditor" />
+                                        <Project active={ this.state.waker.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
+                                            'Alarm clock that allows song selection for wakeup, with plugins to read weather and calendar events',
+                                            'Built on a collection of toys I picked up in Shenzhen, using Google text-to-speech API'
+                                        ]} code="waker" codeLink="https://github.com/jchorl/waker" date="2018" name="Waker" />
                                         <Project active={ this.state.fjc.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
                                             'Keep track of finances with support for templates and recurring transactions',
                                             'Hosted on Google Compute Engine with Go server, Postgres database, nginx and elasticsearch'
-                                        ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" extra={ <a href="https://finance.joshchorlton.com" target="_blank">finance.joshchorlton.com</a> } name="FinanceJC" />
+                                        ]} code="fjc" codeLink="https://github.com/jchorl/financejc" date="2016 &mdash; 2017" name="FinanceJC" />
                                         <Project active={ this.state.framed.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
                                             'Easily embed a picture frame on a website with photos from a Google Photos album'
-                                        ]} code="framed" codeLink="https://github.com/jchorl/framed" date="2016" extra={ <a href="https://framed.joshchorlton.com" target="_blank">framed.joshchorlton.com</a> } name="Framed" />
+                                        ]} code="framed" codeLink="https://github.com/jchorl/framed" date="2016" extra={ <a href="https://framed.joshchorlton.com" target="_blank" rel="noopener noreferrer">framed.joshchorlton.com</a> } name="Framed" />
                                         <Project active={ this.state.com.get('active') } activeStateChange={ this.activeStateChange.bind(this) } bullets={[
                                                 'Purchase from Craigslist using Postmates for delivery and Capital One for payment',
                                                 'Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist',
@@ -227,13 +246,24 @@ export default class Resume extends Component {
                                     </ul>
                                 </div>
                             </div>
+                            <div className="section">
+                                <h2 className="sectionTitle"><i className="fa fa-graduation-cap"></i> Education</h2>
+                                <div className="subsection">
+                                    <ul>
+                                        <li>Bachelor's of Software Engineering - University of Waterloo (2018)</li>
+                                        <li>Albert Sherwood Barber Medal for best overall work term and academic performance in the faculty of Engineering</li>
+                                        <li>Dean's Honour List</li>
+                                        <li>President's Scholarship of Distinction</li>
+                                    </ul>
+                                </div>
+                            </div>
                             <div className="section noPrint">
                                 <h2 className="sectionTitle"><i className="fa fa-rocket"></i> Activities and Interests</h2>
                                 <div className="subsection">
                                     <ul>
                                         <li>Leafs fan since birth</li>
-                                        <li>Music - Play guitar and am always listening. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
-                                        <li>Travel - Been to 25 countries so far. See <a href="https://joshchorlton.com#about" target="_blank">joshchorlton.com#about</a>.</li>
+                                        <li>Music - Play guitar and am always listening. See <a href="https://joshchorlton.com#about" target="_blank" rel="noopener noreferrer">joshchorlton.com#about</a>.</li>
+                                        <li>Travel - Been to 30 countries so far. See <a href="https://joshchorlton.com#about" target="_blank" rel="noopener noreferrer">joshchorlton.com#about</a>.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -298,7 +328,7 @@ class Job extends Component {
         return (
             <div className={ classNames('company', { active }) } onMouseEnter={ activeStateChange(code, true) } onMouseLeave={ activeStateChange(code, false) }>
                 <div className="coFirstRow">
-                    <a href={ companyUrl } target="_blank" className="companyLink">
+                    <a href={ companyUrl } target="_blank" rel="noopener noreferrer" className="companyLink">
                         <span className="companyImgWrapper"><img src={ logoUrl } className="companyImg" alt="company logo"></img></span>
                         <span className="companyName">{ name }</span>
                     </a>
@@ -346,7 +376,7 @@ class Project extends Component {
 
         return (
             <li className={ classNames({ active, noPrint }) } onMouseEnter={ activeStateChange(code, true) } onMouseLeave={ activeStateChange(code, false) }>
-                <a className="projectTitle" href={ codeLink } target="_blank">{ name }</a>{ extra ? <span> - { extra }</span> : null }
+                <a className="projectTitle" href={ codeLink } target="_blank" rel="noopener noreferrer">{ name }</a>{ extra ? <span> - { extra }</span> : null }
                 <span className="date">{ date }</span>
                 <ul>
                     { bullets.map((str, i) => <li key={ i }>{ str }</li>) }

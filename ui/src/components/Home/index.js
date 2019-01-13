@@ -9,7 +9,7 @@ export default class Home extends Component {
             <div id="home" className="noPrint">
                 <div id="content">
                     <div id="intro">
-                        Hi! I'm Josh, a software engineering student at the University of Waterloo. I enjoy hacking on cool things, sports, travel and music.
+                        Hi! I'm Josh, a software engineer at Stripe. I enjoy hacking on cool things, sports, travel and music.
                     </div>
                     <div id="game">
                         <BrickGame />

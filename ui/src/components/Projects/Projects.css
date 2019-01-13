@@ -28,6 +28,30 @@
     width: 100%;
 }
 
+#projects .project.auditor {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/auditor.png");
+}
+
+#projects .project.waker {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/waker.png");
+}
+
+#projects .project.nasblaze {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/nasblaze.png");
+}
+
+#projects .project.dnsserv {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/dnsserv.png");
+}
+
+#projects .project.watchdog {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/watchdog.png");
+}
+
+#projects .project.boysinblue {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/boysinblue.png");
+}
+
 #projects .project.financejc {
     background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("/financejc.png");
 }
