@@ -1,3 +1,6 @@
+UID=$(shell id -u)
+GID=$(shell id -g)
+
 serve:
 	docker container run --rm -it \
 		-v $(PWD):/website \
@@ -31,6 +34,7 @@ ui:
 ui-dev:
 	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
+		-u $(UID):$(GID) \
 		-w /usr/src/app \
 		-p 3000:3000 \
 		--net=host \
@@ -50,6 +54,7 @@ node:
 	docker container run --rm -it \
 		-v $(PWD):/usr/src/app \
 		-w /usr/src/app \
+		-u $(UID):$(GID) \
 		node \
 		bash
 
@@ -60,5 +65,13 @@ deploy:
 		-w /website \
 		google/cloud-sdk \
 		python /usr/lib/google-cloud-sdk/platform/google_appengine/appcfg.py -A gold-summer-17 --noauth_local_webserver update .
+
+prettier:
+	docker run -it --rm \
+		-v "$(PWD)"/ui:/usr/src/app \
+		-w /usr/src/app \
+		-u $(UID):$(GID) \
+		node:latest \
+		sh -c "node node_modules/prettier/bin-prettier.js --write src/**/*.js"
 
 .PHONY: ui pdfgen
