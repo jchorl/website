@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"cloud.google.com/go/datastore"
 	"golang.org/x/net/context"
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/datastore"
+
+	"github.com/jchorl/website/db"
 )
 
 const datastoreType = "Location"
@@ -21,7 +22,8 @@ type Location struct {
 }
 
 func addLocation(c context.Context, loc Location) (Location, error) {
-	key, err := datastore.Put(c, datastore.NewIncompleteKey(c, datastoreType, nil), &loc)
+	dbClient := db.NewClient(c)
+	key, err := dbClient.Put(c, datastore.IncompleteKey(datastoreType, nil), &loc)
 	if err != nil {
 		return loc, err
 	}
@@ -30,12 +32,13 @@ func addLocation(c context.Context, loc Location) (Location, error) {
 }
 
 func updateLocation(c context.Context, loc Location) (Location, error) {
+	dbClient := db.NewClient(c)
 	key, err := datastore.DecodeKey(loc.Key)
 	if err != nil {
 		return loc, err
 	}
 
-	key, err = datastore.Put(c, key, &loc)
+	key, err = dbClient.Put(c, key, &loc)
 	if err != nil {
 		return loc, err
 	}
@@ -45,10 +48,11 @@ func updateLocation(c context.Context, loc Location) (Location, error) {
 }
 
 func getLocations(c context.Context) ([]Location, error) {
+	dbClient := db.NewClient(c)
 	query := datastore.NewQuery(datastoreType).Order("Order")
 
 	locations := []Location{}
-	keys, err := query.GetAll(c, &locations)
+	keys, err := dbClient.GetAll(c, query, &locations)
 	if err != nil {
 		return nil, err
 	}
@@ -61,17 +65,17 @@ func getLocations(c context.Context) ([]Location, error) {
 }
 
 func deleteLocation(c context.Context, loc Location) error {
+	dbClient := db.NewClient(c)
 	key, err := datastore.DecodeKey(loc.Key)
 	if err != nil {
 		return err
 	}
 
-	return datastore.Delete(c, key)
+	return dbClient.Delete(c, key)
 }
 
 func GetHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	locations, err := getLocations(c)
+	locations, err := getLocations(r.Context())
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -81,7 +85,6 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)
 	if err != nil {
@@ -89,7 +92,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	location, err = addLocation(c, location)
+	location, err = addLocation(r.Context(), location)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -100,7 +103,6 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func PutHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)
 	if err != nil {
@@ -108,7 +110,7 @@ func PutHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	location, err = updateLocation(c, location)
+	location, err = updateLocation(r.Context(), location)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -119,7 +121,6 @@ func PutHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteHandler(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)
 	if err != nil {
@@ -127,7 +128,7 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err = deleteLocation(c, location); err != nil {
+	if err = deleteLocation(r.Context(), location); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }

@@ -32,6 +32,9 @@ handlers:
 - url: /resume$
   script: auto
   secure: always
+- url: /joshchorltonresume.pdf$
+  static_files: ui/build/joshchorltonresume.pdf
+  upload: ui/build/joshchorltonresume.pdf
 - url: .*
   static_files: ui/build/index.html
   upload: ui/build/index.html

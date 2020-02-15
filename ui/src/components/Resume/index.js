@@ -377,6 +377,7 @@ export default class Resume extends Component {
                   <Job
                     active={this.state.stripe.get("active")}
                     bullets={[
+                      "Built container monitoring solution for auditable logs of workloads running on the cluster",
                       "Designed and implemented authentication for Kubernetes, allowing for easy, secure and audited cluster access",
                       "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets"
                     ]}
