@@ -9,18 +9,11 @@ export default class Projects extends Component {
 
     const projectInfo = [
       {
-        title: "Auditor",
-        code: "auditor",
+        title: "BankHooks",
+        code: "bankhooks",
         description:
-          "Auditor allows a user to define flexible queries over bank accounts and transactions. They link their bank account and when any of the query conditions are met, a webhook is fired. It has eliminated the need for me to monitor my bank accounts.",
-        codeLink: "https://github.com/jchorl/auditor"
-      },
-      {
-        title: "Waker",
-        code: "waker",
-        description:
-          "Waker is an alarm clock that runs on a Raspberry Pi. It allows a user to select a Spotify playlist/song to wake them up. It will then read out the weather and upcoming calendar events for the day. The main server is written in Flask, with an accompanying React-Native app to set alarms.",
-        codeLink: "https://github.com/jchorl/waker"
+          "BankHooks allows a user to define flexible queries over bank accounts and transactions. They link their bank account and when any of the query conditions are met, a webhook is fired. It has eliminated the need for me to monitor my bank accounts.",
+        codeLink: "https://bankhooks.com"
       },
       {
         title: "NasBlaze",
@@ -44,11 +37,11 @@ export default class Projects extends Component {
         codeLink: "https://github.com/jchorl/watchdog"
       },
       {
-        title: "FinanceJC",
-        code: "financejc",
+        title: "Waker",
+        code: "waker",
         description:
-          "FinanceJC is a webapp that I built to keep track of my personal finances. It has support for users using Google as an OAuth provider, recurring transactions and also transaction templates. The front-end is build on React and Redux, while the back-end is a Postgres and Elasticsearch backed Go server behind NGINX.",
-        codeLink: "https://github.com/jchorl/financejc"
+          "Waker is an alarm clock that runs on a Raspberry Pi. It allows a user to select a Spotify playlist/song to wake them up. It will then read out the weather and upcoming calendar events for the day. The main server is written in Flask, with an accompanying React-Native app to set alarms.",
+        codeLink: "https://github.com/jchorl/waker"
       },
       {
         title: "Framed",

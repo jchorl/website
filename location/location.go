@@ -20,13 +20,6 @@ type Location struct {
 	Order int     `json:"order"`
 }
 
-func init() {
-	http.HandleFunc("/api/location", locationsGetHandler)
-	http.HandleFunc("/api/location/new", locationsPostHandler)
-	http.HandleFunc("/api/location/update", locationsPutHandler)
-	http.HandleFunc("/api/location/delete", locationsDeleteHandler)
-}
-
 func addLocation(c context.Context, loc Location) (Location, error) {
 	key, err := datastore.Put(c, datastore.NewIncompleteKey(c, datastoreType, nil), &loc)
 	if err != nil {
@@ -76,7 +69,7 @@ func deleteLocation(c context.Context, loc Location) error {
 	return datastore.Delete(c, key)
 }
 
-func locationsGetHandler(w http.ResponseWriter, r *http.Request) {
+func GetHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	locations, err := getLocations(c)
 	if err != nil {
@@ -87,7 +80,7 @@ func locationsGetHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(locations)
 }
 
-func locationsPostHandler(w http.ResponseWriter, r *http.Request) {
+func PostHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)
@@ -106,7 +99,7 @@ func locationsPostHandler(w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(location)
 }
 
-func locationsPutHandler(w http.ResponseWriter, r *http.Request) {
+func PutHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)
@@ -125,7 +118,7 @@ func locationsPutHandler(w http.ResponseWriter, r *http.Request) {
 	encoder.Encode(location)
 }
 
-func locationsDeleteHandler(w http.ResponseWriter, r *http.Request) {
+func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	var location Location
 	err := json.NewDecoder(r.Body).Decode(&location)

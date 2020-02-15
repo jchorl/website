@@ -1,0 +1,10 @@
+.DS_Store
+.git
+ui/node_modules
+ui/package.json
+ui/src
+ui/public
+adminui/node_modules
+adminui/package.json
+adminui/src
+adminui/public

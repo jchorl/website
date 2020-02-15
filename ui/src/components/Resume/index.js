@@ -51,7 +51,7 @@ export default class Resume extends Component {
         active: false,
         associated: List(["fl", "tor", "py", "sql", "git", "lin", "aws"])
       }),
-      auditor: Map({
+      bankhooks: Map({
         active: false,
         associated: List([
           "go",
@@ -69,22 +69,6 @@ export default class Resume extends Component {
       waker: Map({
         active: false,
         associated: List(["py", "fl", "git", "react", "lin", "docker", "sql"])
-      }),
-      fjc: Map({
-        active: false,
-        associated: List([
-          "go",
-          "sql",
-          "git",
-          "css",
-          "html",
-          "js",
-          "react",
-          "redux",
-          "lin",
-          "aws",
-          "docker"
-        ])
       }),
       framed: Map({
         active: false,
@@ -497,25 +481,25 @@ export default class Resume extends Component {
                   </div>
                   <ul className="projectsList">
                     <Project
-                      active={this.state.auditor.get("active")}
+                      active={this.state.bankhooks.get("active")}
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
                         "Monitors bank accounts and transactions, sending webhooks when predefined conditions are met",
                         "Uses Plaid to access bank accounts, hosted on Google App Engine, with React query builder frontend"
                       ]}
-                      code="auditor"
+                      code="bankhooks"
                       codeLink="https://github.com/jchorl/auditor"
-                      date="2018"
+                      date="2018-2020"
                       extra={
                         <a
-                          href="https://auditor.joshchorlton.com"
+                          href="https://bankhooks.com"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          auditor.joshchorlton.com
+                          bankhooks.com
                         </a>
                       }
-                      name="Auditor"
+                      name="BankHooks"
                     />
                     <Project
                       active={this.state.waker.get("active")}
@@ -528,18 +512,6 @@ export default class Resume extends Component {
                       codeLink="https://github.com/jchorl/waker"
                       date="2018"
                       name="Waker"
-                    />
-                    <Project
-                      active={this.state.fjc.get("active")}
-                      activeStateChange={this.activeStateChange.bind(this)}
-                      bullets={[
-                        "Keep track of finances with support for templates and recurring transactions",
-                        "Hosted on Google Compute Engine with Go server, Postgres database, nginx and elasticsearch"
-                      ]}
-                      code="fjc"
-                      codeLink="https://github.com/jchorl/financejc"
-                      date="2016 &mdash; 2017"
-                      name="FinanceJC"
                     />
                     <Project
                       active={this.state.framed.get("active")}

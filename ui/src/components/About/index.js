@@ -25,12 +25,6 @@ export default class About extends Component {
           });
         }
       });
-
-    setInterval(() => {
-      document.getElementById("framed").src =
-        "https://framed.joshchorlton.com/api/photo/dd91d6?" +
-        new Date().getTime();
-    }, 10000);
   }
 
   render() {
@@ -56,12 +50,6 @@ export default class About extends Component {
             I've been to on the map.
           </p>
           <div id="map" ref="mapCanvas" />
-          <p>Here are some of my favourite photos from these trips:</p>
-          <img
-            id="framed"
-            src="https://framed.joshchorlton.com/api/photo/93b34e"
-            alt="Travel"
-          />
         </div>
       </div>
     );
