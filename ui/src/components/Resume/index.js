@@ -27,7 +27,7 @@ export default class Resume extends Component {
           "html",
           "css",
           "react",
-          "terraform",
+          "terraform"
         ])
       }),
       snap: Map({
@@ -49,7 +49,7 @@ export default class Resume extends Component {
           "lin",
           "aws",
           "ng",
-          "terraform",
+          "terraform"
         ])
       }),
       uber: Map({
@@ -73,18 +73,22 @@ export default class Resume extends Component {
       }),
       sendfiles: Map({
         active: false,
-        associated: List(["rust", "git", "react", "lin", "aws", "sql", "js", "html", "css", "terraform"])
+        associated: List([
+          "rust",
+          "git",
+          "react",
+          "lin",
+          "aws",
+          "sql",
+          "js",
+          "html",
+          "css",
+          "terraform"
+        ])
       }),
       mtls: Map({
         active: false,
-        associated: List([
-          "go",
-          "git",
-          "css",
-          "html",
-          "js",
-          "react"
-        ])
+        associated: List(["go", "git", "css", "html", "js", "react"])
       })
     };
 
@@ -380,7 +384,7 @@ export default class Resume extends Component {
                       "Simplified infrastructure provisioning by automating AWS resource creation and adding secure defaults",
                       "Built secure container monitoring solution for auditable logs of workloads running on the cluster",
                       "Designed and implemented authentication for Kubernetes, allowing for easy, secure and audited cluster access",
-                      "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets",
+                      "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets"
                     ]}
                     code="stripe"
                     companyUrl="https://stripe.com"
@@ -493,7 +497,7 @@ export default class Resume extends Component {
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
                         "Secure p2p transmission of files from browser-to-browser, using WebRTC and Web Crypto",
-                        "Utilizes websockets, AWS Lambda and Dynamo to initiate connections between clients",
+                        "Utilizes websockets, AWS Lambda and Dynamo to initiate connections between clients"
                       ]}
                       code="sendfiles"
                       codeLink="https://github.com/jchorl/sendfiles"
@@ -514,7 +518,7 @@ export default class Resume extends Component {
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
                         "Generate client, server and CA certs using Cloudflare's cfssl",
-                        "Runs entirely in-browser under WebAssembly",
+                        "Runs entirely in-browser under WebAssembly"
                       ]}
                       code="mtls"
                       codeLink="https://github.com/jchorl/tlscerts"
