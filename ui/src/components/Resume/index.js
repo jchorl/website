@@ -15,7 +15,6 @@ export default class Resume extends Component {
       stripe: Map({
         active: false,
         associated: List([
-          "puppet",
           "aws",
           "git",
           "sql",
@@ -23,12 +22,17 @@ export default class Resume extends Component {
           "py",
           "docker",
           "kubernetes",
-          "lin"
+          "lin",
+          "js",
+          "html",
+          "css",
+          "react",
+          "terraform",
         ])
       }),
       snap: Map({
         active: false,
-        associated: List(["java", "guava", "git", "aws", "appe", "sql"])
+        associated: List(["java", "guava", "git", "aws", "gcp", "sql"])
       }),
       dockerj: Map({
         active: false,
@@ -44,7 +48,8 @@ export default class Resume extends Component {
           "git",
           "lin",
           "aws",
-          "ng"
+          "ng",
+          "terraform",
         ])
       }),
       uber: Map({
@@ -62,38 +67,23 @@ export default class Resume extends Component {
           "react",
           "redux",
           "lin",
-          "appe",
+          "gcp",
           "docker"
         ])
       }),
-      waker: Map({
+      sendfiles: Map({
         active: false,
-        associated: List(["py", "fl", "git", "react", "lin", "docker", "sql"])
+        associated: List(["rust", "git", "react", "lin", "aws", "sql", "js", "html", "css", "terraform"])
       }),
-      framed: Map({
+      mtls: Map({
         active: false,
         associated: List([
-          "py",
-          "git",
-          "css",
-          "html",
-          "js",
-          "react",
-          "appe",
-          "docker"
-        ])
-      }),
-      com: Map({
-        active: false,
-        associated: List([
-          "html",
-          "css",
-          "js",
-          "git",
-          "lin",
           "go",
-          "appe",
-          "py"
+          "git",
+          "css",
+          "html",
+          "js",
+          "react"
         ])
       })
     };
@@ -156,11 +146,18 @@ export default class Resume extends Component {
         text="Java"
       />,
       <Tag
+        key="rust"
+        code="rust"
+        active={this.state.rust.get("active")}
+        activeStateChange={this.activeStateChange.bind(this)}
+        text="Rust"
+      />,
+      <Tag
         key="js"
         code="js"
         active={this.state.js.get("active")}
         activeStateChange={this.activeStateChange.bind(this)}
-        text="Javascript"
+        text="JS"
       />,
       <Tag
         key="html"
@@ -253,6 +250,13 @@ export default class Resume extends Component {
         text="Kubernetes"
       />,
       <Tag
+        key="terraform"
+        code="terraform"
+        active={this.state.terraform.get("active")}
+        activeStateChange={this.activeStateChange.bind(this)}
+        text="Terraform"
+      />,
+      <Tag
         key="git"
         code="git"
         active={this.state.git.get("active")}
@@ -274,18 +278,11 @@ export default class Resume extends Component {
         text="AWS"
       />,
       <Tag
-        key="appe"
-        code="appe"
-        active={this.state.appe.get("active")}
+        key="gcp"
+        code="gcp"
+        active={this.state.gcp.get("active")}
         activeStateChange={this.activeStateChange.bind(this)}
-        text="App Engine"
-      />,
-      <Tag
-        key="puppet"
-        code="puppet"
-        active={this.state.puppet.get("active")}
-        activeStateChange={this.activeStateChange.bind(this)}
-        text="Puppet"
+        text="GCP"
       />
     ];
 
@@ -377,9 +374,13 @@ export default class Resume extends Component {
                   <Job
                     active={this.state.stripe.get("active")}
                     bullets={[
-                      "Built container monitoring solution for auditable logs of workloads running on the cluster",
+                      "Led migration of Stripe's queueing system to Kubernetes (30k+ rps), including design, testing and implementation, drastically expanding platform capabilities and improving reliability, while also decreasing costs",
+                      "Provisioned ML Kubernetes cluster supporting a diverse set of workloads, including autoscaling, powering all model training for fraud and risk",
+                      "Improved reliability by adding blue/green deploys and proper request draining during deploys on Kubernetes",
+                      "Simplified infrastructure provisioning by automating AWS resource creation and adding secure defaults",
+                      "Built secure container monitoring solution for auditable logs of workloads running on the cluster",
                       "Designed and implemented authentication for Kubernetes, allowing for easy, secure and audited cluster access",
-                      "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets"
+                      "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets",
                     ]}
                     code="stripe"
                     companyUrl="https://stripe.com"
@@ -391,24 +392,9 @@ export default class Resume extends Component {
                     position="Infrastructure Engineer"
                   />
                   <Job
-                    active={this.state.stripe.get("active")}
-                    bullets={[
-                      "Created Kubernetes cluster from scratch to train ML models, drastically increasing ML scalability at Stripe",
-                      "Enabled hosts and users to securely access the cluster using mTLS, AWS security groups, and RBAC"
-                    ]}
-                    code="stripe"
-                    companyUrl="https://stripe.com"
-                    date="September 2017 &mdash; December 2017"
-                    activeStateChange={this.activeStateChange.bind(this)}
-                    logoUrl="logo_stripe.png"
-                    name="Stripe"
-                    place="San Francisco, California"
-                    position="Infrastructure Intern"
-                  />
-                  <Job
                     active={this.state.snap.get("active")}
                     bullets={[
-                      "Migrated Stories feature from all-or-nothing caching approach to use stale cache values with updates fetched from a database, saving the company millions of dollars annually and reducing latency by up to 30%",
+                      "Migrated Stories feature from all-or-nothing caching approach to leveraging partial caching with incremental updates backed by a database, saving the company $5MM/yr and reducing latency by up to 30%",
                       "Designed and implemented intelligent compression/reconstruction algorithm, reducing client state sizes 100x",
                       "Shifted Stories client state from server to client, reducing latency and cutting costs on billions of requests daily"
                     ]}
@@ -424,9 +410,9 @@ export default class Resume extends Component {
                   <Job
                     active={this.state.dockerj.get("active")}
                     bullets={[
-                      "Instituted policies ensuring only signed images can be used in Docker Datacenter, yielding end-to-end security",
+                      "Added support for configurable policies to ensure only signed images can be executed in Docker Datacenter",
                       "Revamped garbage collection in Docker Trusted Registry, allowing Docker to scale to its biggest customers",
-                      "Developed activity streams to maintain a searchable, comprehensive history of events"
+                      "Developed activity streams to maintain a searchable, comprehensive history of events in enterprise offerings"
                     ]}
                     code="dockerj"
                     companyUrl="https://docker.com"
@@ -440,10 +426,10 @@ export default class Resume extends Component {
                   <Job
                     active={this.state.uber.get("active")}
                     bullets={[
-                      "Migrated everything related to promotions to a microservice, including API endpoints and database access",
                       "Wrote promotion redemption flow executed by all rides to find the most suitable promotion to apply",
+                      "Contributed to migrating promotions to a microservice, including API endpoints and database access",
                       "Implemented ETL monitoring to measure and alert based on data transfer speeds and consistency",
-                      "Wrote a job to periodically delete millions of unneeded database rows to deal with scaling issues"
+                      "Wrote a database garbage-collection job to clear out delete millions of database rows, relieving scaling issues"
                     ]}
                     code="uber"
                     companyUrl="https://uber.com"
@@ -490,7 +476,7 @@ export default class Resume extends Component {
                       ]}
                       code="bankhooks"
                       codeLink="https://github.com/jchorl/auditor"
-                      date="2018-2020"
+                      date="2018-2021"
                       extra={
                         <a
                           href="https://bankhooks.com"
@@ -503,51 +489,46 @@ export default class Resume extends Component {
                       name="BankHooks"
                     />
                     <Project
-                      active={this.state.waker.get("active")}
+                      active={this.state.sendfiles.get("active")}
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
-                        "Alarm clock that allows song selection for wakeup, with plugins to read weather and calendar events",
-                        "Built on a collection of toys I picked up in Shenzhen, using Google text-to-speech API"
+                        "Secure p2p transmission of files from browser-to-browser, using WebRTC and Web Crypto",
+                        "Utilizes websockets, AWS Lambda and Dynamo to initiate connections between clients",
                       ]}
-                      code="waker"
-                      codeLink="https://github.com/jchorl/waker"
-                      date="2018"
-                      name="Waker"
-                    />
-                    <Project
-                      active={this.state.framed.get("active")}
-                      activeStateChange={this.activeStateChange.bind(this)}
-                      bullets={[
-                        "Easily embed a picture frame on a website with photos from a Google Photos album"
-                      ]}
-                      code="framed"
-                      codeLink="https://github.com/jchorl/framed"
-                      date="2016"
+                      code="sendfiles"
+                      codeLink="https://github.com/jchorl/sendfiles"
+                      date="2021"
                       extra={
                         <a
-                          href="https://framed.joshchorlton.com"
+                          href="https://sendfiles.dev"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          framed.joshchorlton.com
+                          sendfiles.dev
                         </a>
                       }
-                      name="Framed"
+                      name="sendfiles.dev"
                     />
                     <Project
-                      active={this.state.com.get("active")}
+                      active={this.state.mtls.get("active")}
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
-                        "Purchase from Craigslist using Postmates for delivery and Capital One for payment",
-                        "Hosted on App Engine with self-hosted Python proxy server to scrape Craigslist",
-                        'Winner of "Best Use of Capital One API"'
+                        "Generate client, server and CA certs using Cloudflare's cfssl",
+                        "Runs entirely in-browser under WebAssembly",
                       ]}
-                      code="com"
-                      codeLink="https://github.com/matthewdu/powerplug"
-                      date="2015"
-                      extra={<span>CalHacks</span>}
-                      name="craig-o-mation"
-                      noPrint={true}
+                      code="mtls"
+                      codeLink="https://github.com/jchorl/tlscerts"
+                      date="2020"
+                      extra={
+                        <a
+                          href="https://mtls.dev"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          mtls.dev
+                        </a>
+                      }
+                      name="mtls.dev"
                     />
                   </ul>
                 </div>

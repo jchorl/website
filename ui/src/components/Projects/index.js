@@ -16,6 +16,20 @@ export default class Projects extends Component {
         codeLink: "https://bankhooks.com"
       },
       {
+        title: "mtls.dev",
+        code: "mtls",
+        description:
+          "mtls.dev runs Cloudflare's cfssl Go library in browser using WebAssembly to enable secure generation of client, server and CA certificates/keys. It is primarily used for generating test certificates, with CI-tested example snippets in many languages.",
+        codeLink: "https://github.com/jchorl/tlscerts"
+      },
+      {
+        title: "sendfiles.dev",
+        code: "sendfiles",
+        description:
+          "sendfiles.dev enables secure p2p transmission of files from browser-to-browser. It utilizes WebRTC, Web Crypto and Dynamo TTLs to provide guarantees on encryption, access and lifespan.",
+        codeLink: "https://github.com/jchorl/sendfiles"
+      },
+      {
         title: "NasBlaze",
         code: "nasblaze",
         description:
@@ -49,13 +63,6 @@ export default class Projects extends Component {
         description:
           "Framed allows a user to generate an embeddable picture frame with rotating pictures from a Google Photos album. The front-end is a light React app and the back-end is Python on AppEngine.",
         codeLink: "https://github.com/jchorl/framed"
-      },
-      {
-        title: "Boys-In-Blue",
-        code: "boysinblue",
-        description:
-          "Boys-In-Blue is a Facebook Messenger bot. It uses the Reddit API to grab links for Leafs games and sends them 3 minutes before gametime.",
-        codeLink: "https://github.com/jchorl/boysinblue"
       },
       {
         title: "Craig-o-mation",
