@@ -7,7 +7,7 @@ serve:
 		-v $(PWD):/website \
 		-w /website \
 		--net=host \
-		golang:1.13.5 \
+		golang:1.20.2 \
 		go run .
 
 pdfgenbuild:
