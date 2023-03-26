@@ -378,6 +378,8 @@ export default class Resume extends Component {
                   <Job
                     active={this.state.stripe.get("active")}
                     bullets={[
+                      "Tech lead for caching and consensus. I was responsible for roadmap/direction, budgeting, hiring, and project management. Over a period of 2 years, my org went from zero to 30 people. Dozens of internal memcached clusters could serve sub-ms responses. The clusters saved $10MM+/yr on database costs and managed alternatives. The etcd clusters were resilient to a full-region outage and underpinned Stripe's multi-region strategy. Every cluster operated at >5 9's.",
+                      "Managed adoption of AWS Aurora internally, leading a team of 10 developers. This was a multi-year cross-functional effort that involved securing data access, client libraries, proxies, observability, scalability/load-testing, and developer tooling.",
                       "Led migration of Stripe's queueing system to Kubernetes (30k+ rps), including design, testing and implementation, drastically expanding platform capabilities and improving reliability, while also decreasing costs",
                       "Provisioned ML Kubernetes cluster supporting a diverse set of workloads, including autoscaling, powering all model training for fraud and risk",
                       "Improved reliability by adding blue/green deploys and proper request draining during deploys on Kubernetes",
@@ -393,7 +395,7 @@ export default class Resume extends Component {
                     logoUrl="logo_stripe.png"
                     name="Stripe"
                     place="San Francisco, California"
-                    position="Infrastructure Engineer"
+                    position="Tech Lead, Distributed Systems"
                   />
                   <Job
                     active={this.state.snap.get("active")}
