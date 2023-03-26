@@ -34,6 +34,7 @@ ui-dev:
 	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-u $(UID):$(GID) \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		-w /usr/src/app \
 		-p 3000:3000 \
 		--net=host \
