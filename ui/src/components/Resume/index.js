@@ -330,7 +330,7 @@ export default class Resume extends Component {
                 <div className="nameSchool">
                   <h2 className="name">Josh Chorlton</h2>
                   <div className="school">
-                    Software Engineering 2018 | University of Waterloo
+                    Software Engineering | University of Waterloo
                   </div>
                 </div>
                 <div className="contactInfo">
@@ -422,7 +422,7 @@ export default class Resume extends Component {
                     ]}
                     code="dockerj"
                     companyUrl="https://docker.com"
-                    date="May 2016 &mdash; August 2016"
+                    date="2016"
                     activeStateChange={this.activeStateChange.bind(this)}
                     logoUrl="logo_docker.png"
                     name="Docker"
@@ -439,7 +439,7 @@ export default class Resume extends Component {
                     ]}
                     code="uber"
                     companyUrl="https://uber.com"
-                    date="August 2015 &mdash; December 2015"
+                    date="2015"
                     activeStateChange={this.activeStateChange.bind(this)}
                     logoUrl="logo_uber.png"
                     name="Uber"
@@ -477,8 +477,22 @@ export default class Resume extends Component {
                       active={this.state.bankhooks.get("active")}
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
+                        "Contributed to many open-source projects including Docker, Kubernetes, Nextflow, MultiQC, MySQL and more",
+                        "Contributions range from bugfixes to full features",
+                        "Maintainers regularly consult me for architectural advice",
+                      ]}
+                      code="bankhooks"
+                      codeLink="https://github.com/jchorl"
+                      date="2014-"
+                      name="Open-Source Contributions"
+                    />
+                    <Project
+                      active={this.state.bankhooks.get("active")}
+                      activeStateChange={this.activeStateChange.bind(this)}
+                      bullets={[
                         "Monitors bank accounts and transactions, sending webhooks when predefined conditions are met",
-                        "Uses Plaid to access bank accounts, hosted on Google App Engine, with React query builder frontend"
+                        "Uses Plaid to access bank accounts, hosted on Google App Engine, with React query builder frontend",
+                        "Strong cohort of paying users",
                       ]}
                       code="bankhooks"
                       codeLink="https://github.com/jchorl/auditor"
@@ -499,7 +513,7 @@ export default class Resume extends Component {
                       activeStateChange={this.activeStateChange.bind(this)}
                       bullets={[
                         "Secure p2p transmission of files from browser-to-browser, using WebRTC and Web Crypto",
-                        "Utilizes websockets, AWS Lambda and Dynamo to initiate connections between clients"
+                        "Utilizes websockets, AWS Lambda and Dynamo to initiate connections between clients",
                       ]}
                       code="sendfiles"
                       codeLink="https://github.com/jchorl/sendfiles"

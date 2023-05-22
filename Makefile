@@ -13,7 +13,7 @@ serve:
 pdfgenbuild:
 	docker build -t jchorl/pdfgen -f pdfgen/Dockerfile.chrome ./pdfgen
 
-pdfgen: pdfgenbuild ui
+pdfgen: ui
 	docker run --init -it --rm \
 		-v $(PWD)/ui/build:/out \
 		jchorl/pdfgen
@@ -22,11 +22,13 @@ ui:
 	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-w /usr/src/app \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		node \
 		npm run build
 	docker container run --rm -it \
 		-v $(PWD)/adminui:/usr/src/app \
 		-w /usr/src/app \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		node \
 		npm run build
 
