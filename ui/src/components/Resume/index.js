@@ -12,6 +12,23 @@ export default class Resume extends Component {
     // state will get read and clobber some udpates in progress. keeping each tag/job as a key on the root state allows only
     // updating that key.
     let state = {
+      bugseq: Map({
+        active: false,
+        associated: List([
+          "aws",
+          "git",
+          "sql",
+          "go",
+          "rust",
+          "py",
+          "docker",
+          "lin",
+          "js",
+          "html",
+          "css",
+          "terraform"
+        ])
+      }),
       stripe: Map({
         active: false,
         associated: List([
@@ -330,7 +347,7 @@ export default class Resume extends Component {
                 <div className="nameSchool">
                   <h2 className="name">Josh Chorlton</h2>
                   <div className="school">
-                    Software Engineering 2018 | University of Waterloo
+                    Problem Solver & Software Engineer
                   </div>
                 </div>
                 <div className="contactInfo">
@@ -376,26 +393,43 @@ export default class Resume extends Component {
                 </h2>
                 <div className="subsection">
                   <Job
+                    active={this.state.bugseq.get("active")}
+                    bullets={[
+                      "Leading engineering to deliver performant and efficient pipelines that serve hundreds of labs around the world",
+                      "Architected and deployed analysis platform that processes thousands of samples per-month. Platform is comprised of an online component handling uploads and visualization, as well as offline batch analysis computation.",
+                      "End-to-end analysis is fully automated, from data upload to notifying users that their results are ready for access",
+                      "Devised engineering developer processes, including developer tooling and access controls to empower rapid pipeline development and deployment",
+                      "Conducted rigorous security audits and pen-testing to satisfy Government and Public Health Lab requirements",
+                      "Wrote a concurrent, multi-part uploader for users to securely upload data from their browser to S3. It has processed petabytes of uploaded data.",
+                      "Built out an API for enterprise customers to submit data programmatically",
+                    ]}
+                    code="bugseq"
+                    companyUrl="https://bugseq.com"
+                    date="2023 &mdash; Present"
+                    activeStateChange={this.activeStateChange.bind(this)}
+                    logoUrl="logo_bugseq.png"
+                    name="BugSeq"
+                    place="San Francisco, California"
+                    position="CTO"
+                  />
+                  <Job
                     active={this.state.stripe.get("active")}
                     bullets={[
-                      "Tech lead for caching and consensus. I was responsible for roadmap/direction, budgeting, hiring, and project management. Over a period of 2 years, my org went from zero to 30 people. Dozens of internal memcached clusters could serve sub-ms responses. The clusters saved $10MM+/yr on database costs and managed alternatives. The etcd clusters were resilient to a full-region outage and underpinned Stripe's multi-region strategy. Every cluster operated at >5 9's.",
+                      "Chief of staff for caching and distributed-consensus. I was responsible for roadmap/direction, budgeting, hiring, and project management. Over a period of 2 years, my org went from zero to 30 people. Dozens of internal memcached clusters could serve sub-ms responses. The clusters saved $10MM+/yr on database costs and managed alternatives. The etcd clusters were resilient to a full-region outage and underpinned Stripe's multi-region strategy. Every cluster operated at >5 9's.",
                       "Managed adoption of AWS Aurora internally, leading a team of 10 developers. This was a multi-year cross-functional effort that involved securing data access, client libraries, proxies, observability, scalability/load-testing, and developer tooling.",
+                      "Tech lead for Stripe's migration to relational databases. Bootstrapped multi-thousand node distributed, sharded MySQL clusters. Managed $50MM/yr budget, led org of 30 developers. Led regular syncs with key customers to drive project success. The project powers Stripe's core payments stack.",
                       "Led migration of Stripe's queueing system to Kubernetes (30k+ rps), including design, testing and implementation, drastically expanding platform capabilities and improving reliability, while also decreasing costs",
                       "Provisioned ML Kubernetes cluster supporting a diverse set of workloads, including autoscaling, powering all model training for fraud and risk",
-                      "Improved reliability by adding blue/green deploys and proper request draining during deploys on Kubernetes",
-                      "Simplified infrastructure provisioning by automating AWS resource creation and adding secure defaults",
-                      "Built secure container monitoring solution for auditable logs of workloads running on the cluster",
                       "Designed and implemented authentication for Kubernetes, allowing for easy, secure and audited cluster access",
-                      "Overhauled secrets management for Kubernetes, providing easy interfaces for services to securely access secrets"
                     ]}
                     code="stripe"
                     companyUrl="https://stripe.com"
-                    date="August 2018 &mdash; Present"
+                    date="2018 &mdash; 2023"
                     activeStateChange={this.activeStateChange.bind(this)}
                     logoUrl="logo_stripe.png"
                     name="Stripe"
                     place="San Francisco, California"
-                    position="Tech Lead, Distributed Systems"
+                    position="Chief of Staff, Caching + Distributed Consensus (previous: Tech Lead, Relational Databases)"
                   />
                   <Job
                     active={this.state.snap.get("active")}

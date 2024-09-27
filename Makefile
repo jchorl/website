@@ -7,7 +7,7 @@ serve:
 		-v $(PWD):/website \
 		-w /website \
 		--net=host \
-		golang:1.20.2 \
+		golang:1.21 \
 		go run .
 
 pdfgenbuild:
@@ -22,11 +22,13 @@ ui:
 	docker container run --rm -it \
 		-v $(PWD)/ui:/usr/src/app \
 		-w /usr/src/app \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		node \
 		npm run build
 	docker container run --rm -it \
 		-v $(PWD)/adminui:/usr/src/app \
 		-w /usr/src/app \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		node \
 		npm run build
 
@@ -36,7 +38,6 @@ ui-dev:
 		-u $(UID):$(GID) \
 		-e NODE_OPTIONS=--openssl-legacy-provider \
 		-w /usr/src/app \
-		-p 3000:3000 \
 		--net=host \
 		node \
 		npm start
@@ -45,7 +46,7 @@ adminui-dev:
 	docker container run --rm -it \
 		-v $(PWD)/adminui:/usr/src/app \
 		-w /usr/src/app \
-		-p 3000:3000 \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		--net=host \
 		node \
 		npm start
@@ -55,6 +56,7 @@ node:
 		-v $(PWD):/usr/src/app \
 		-w /usr/src/app \
 		-u $(UID):$(GID) \
+		-e NODE_OPTIONS=--openssl-legacy-provider \
 		node \
 		bash
 
